@@ -12,19 +12,27 @@ Provides:
 from __future__ import annotations
 
 import json
+import os
+import sys
 from pathlib import Path
 from typing import Any
 
+from dotenv import load_dotenv
+from github import Auth, Github
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
 # Ensure project root is in sys.path
-import sys
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+# Load environment variables from .env
+for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
+    if p.exists():
+        load_dotenv(p, override=True)
 
 from src.collector.github_fetcher import GitHubChangeFetcher
 from src.explainability.shap_explainer import FEATURE_DESCRIPTIONS, ModelExplainer
@@ -74,11 +82,24 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-def get_github_fetcher() -> tuple[GitHubChangeFetcher | None, str | None]:
+def get_env_token() -> str:
+    for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
+        if p.exists():
+            load_dotenv(p, override=True)
+            tok = os.getenv("GITHUB_TOKEN", "").strip()
+            if tok:
+                return tok
+    return os.getenv("GITHUB_TOKEN", "").strip()
+
+
+def get_github_fetcher(token: str | None = None) -> tuple[GitHubChangeFetcher | None, str | None]:
     try:
-        from dotenv import load_dotenv
-        load_dotenv(PROJECT_ROOT / ".env", override=True)
-        return GitHubChangeFetcher(), None
+        active_token = (token or get_env_token()).strip()
+        if not active_token:
+            return None, "GITHUB_TOKEN is missing. Please enter your token in the sidebar or in your .env file."
+        auth = Auth.Token(active_token)
+        client = Github(auth=auth, per_page=100)
+        return GitHubChangeFetcher(github_client=client), None
     except Exception as exc:
         return None, str(exc)
 
@@ -143,7 +164,7 @@ def render_shap_chart(contributions: list[dict[str, Any]]):
         height=400,
         margin=dict(l=10, r=10, t=40, b=30),
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
 def render_metrics_cards(old_m: dict[str, Any], new_m: dict[str, Any], delta_m: dict[str, Any]):
@@ -177,10 +198,26 @@ def render_metrics_cards(old_m: dict[str, Any], new_m: dict[str, Any], delta_m: 
 
 
 # --------------------------------------------------------------------------
-# Sidebar Navigation
+# Sidebar Navigation & Authentication
 # --------------------------------------------------------------------------
 st.sidebar.title("🛡️ Code Quality AI")
 st.sidebar.markdown("Predict and explain code maintainability impact.")
+
+initial_token = get_env_token()
+st.sidebar.markdown("---")
+st.sidebar.subheader("🔑 Authentication")
+user_token = st.sidebar.text_input(
+    "GitHub Token",
+    value=initial_token,
+    type="password",
+    help="Loaded automatically from .env or paste your Personal Access Token here.",
+)
+if user_token:
+    os.environ["GITHUB_TOKEN"] = user_token.strip()
+    st.sidebar.success("GitHub Token Active ✅")
+else:
+    st.sidebar.warning("No GitHub Token detected ⚠️")
+st.sidebar.markdown("---")
 
 mode = st.sidebar.radio(
     "Choose Analysis Mode:",
@@ -214,9 +251,9 @@ if mode == "GitHub Commit / PR":
             target_id = st.text_input("Pull Request #", value="5000")
 
     if st.button("🚀 Analyze GitHub Change", type="primary"):
-        active_fetcher, fetcher_err = get_github_fetcher()
+        active_fetcher, fetcher_err = get_github_fetcher(token=user_token)
         if not active_fetcher:
-            st.error(f"GitHub client is not configured: {fetcher_err}. Check your .env file.")
+            st.error(f"GitHub client is not configured: {fetcher_err}")
         elif not predictor:
             st.error("Model is not trained yet. Run the training pipeline first.")
         else:
@@ -268,7 +305,7 @@ if mode == "GitHub Commit / PR":
                             }
                             for f in py_files
                         ])
-                        st.dataframe(files_df, use_container_width=True)
+                        st.dataframe(files_df, width="stretch")
 
                 except Exception as exc:
                     st.error(f"Failed to analyze GitHub change: {exc}")
@@ -438,4 +475,4 @@ elif mode == "Model Performance":
         val_data = report.get("candidate_val_metrics", {})
         if val_data:
             val_df = pd.DataFrame(val_data).T
-            st.dataframe(val_df, use_container_width=True)
+            st.dataframe(val_df, width="stretch")
