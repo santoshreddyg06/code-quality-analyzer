@@ -14,6 +14,12 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel, Field
 
+# Ensure project root is in sys.path
+import sys
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 from src.collector.github_fetcher import GitHubChangeFetcher
 from src.explainability.shap_explainer import ModelExplainer
 from src.features.feature_extractor import extract_features_from_files
