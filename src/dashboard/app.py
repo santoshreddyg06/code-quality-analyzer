@@ -82,21 +82,34 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-def get_env_token() -> str:
+def get_server_token() -> str:
+    """Retrieve backend GITHUB_TOKEN securely without exposing it to the UI client."""
+    # 1. Streamlit Community Cloud secrets
+    try:
+        if "GITHUB_TOKEN" in st.secrets:
+            tok = str(st.secrets["GITHUB_TOKEN"]).strip()
+            if tok:
+                return tok
+    except Exception:
+        pass
+
+    # 2. Local or Docker .env file
     for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
         if p.exists():
             load_dotenv(p, override=True)
             tok = os.getenv("GITHUB_TOKEN", "").strip()
             if tok:
                 return tok
+
+    # 3. Process environment variable
     return os.getenv("GITHUB_TOKEN", "").strip()
 
 
 def get_github_fetcher(token: str | None = None) -> tuple[GitHubChangeFetcher | None, str | None]:
     try:
-        active_token = (token or get_env_token()).strip()
+        active_token = (token.strip() if token and token.strip() else get_server_token())
         if not active_token:
-            return None, "GITHUB_TOKEN is missing. Please enter your token in the sidebar or in your .env file."
+            return None, "GITHUB_TOKEN is missing. Please set GITHUB_TOKEN on the server or provide one in the sidebar."
         auth = Auth.Token(active_token)
         client = Github(auth=auth, per_page=100)
         return GitHubChangeFetcher(github_client=client), None
@@ -203,20 +216,24 @@ def render_metrics_cards(old_m: dict[str, Any], new_m: dict[str, Any], delta_m: 
 st.sidebar.title("🛡️ Code Quality AI")
 st.sidebar.markdown("Predict and explain code maintainability impact.")
 
-initial_token = get_env_token()
+server_token_present = bool(get_server_token())
 st.sidebar.markdown("---")
-st.sidebar.subheader("🔑 Authentication")
-user_token = st.sidebar.text_input(
-    "GitHub Token",
-    value=initial_token,
-    type="password",
-    help="Loaded automatically from .env or paste your Personal Access Token here.",
-)
-if user_token:
-    os.environ["GITHUB_TOKEN"] = user_token.strip()
-    st.sidebar.success("GitHub Token Active ✅")
+st.sidebar.subheader("🔒 Authentication")
+
+if server_token_present:
+    st.sidebar.success("Server Token: Configured Securely ✅")
+    st.sidebar.caption("The backend server token is active and hidden. You may optionally enter a personal token below to override it.")
 else:
-    st.sidebar.warning("No GitHub Token detected ⚠️")
+    st.sidebar.warning("No Server Token Detected ⚠️")
+    st.sidebar.caption("Please enter your Personal Access Token below to analyze GitHub repositories.")
+
+custom_token = st.sidebar.text_input(
+    "Custom GitHub Token (Optional)",
+    value="",
+    type="password",
+    placeholder="Leave blank to use server token...",
+    help="Your token is kept strictly in-memory during this session and never stored.",
+)
 st.sidebar.markdown("---")
 
 mode = st.sidebar.radio(
@@ -251,7 +268,7 @@ if mode == "GitHub Commit / PR":
             target_id = st.text_input("Pull Request #", value="5000")
 
     if st.button("🚀 Analyze GitHub Change", type="primary"):
-        active_fetcher, fetcher_err = get_github_fetcher(token=user_token)
+        active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
         if not active_fetcher:
             st.error(f"GitHub client is not configured: {fetcher_err}")
         elif not predictor:
