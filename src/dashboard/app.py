@@ -728,24 +728,7 @@ if nav_selection == "📊 Dashboard":
         st.markdown('<div style="height: 28px;"></div>', unsafe_allow_html=True)
         analyze_clicked = st.button("⚡ Analyze Changes", type="primary", use_container_width=True)
 
-    # Quick presets
-    st.markdown('<div style="font-size: 0.8rem; color: #94A3B8; margin-top: 8px;"><b>Quick Presets:</b></div>', unsafe_allow_html=True)
-    p1, p2, p3 = st.columns(3)
-    with p1:
-        if st.button("pallets/flask @ d086db8 (Python 3.12 Refactor)"):
-            st.session_state["active_repo"] = "pallets/flask"
-            st.session_state["active_sha"] = "d086db8"
-            analyze_clicked = True
-    with p2:
-        if st.button("psf/requests @ c8a4087 (Response Header Fix)"):
-            st.session_state["active_repo"] = "psf/requests"
-            st.session_state["active_sha"] = "c8a4087"
-            analyze_clicked = True
-    with p3:
-        if st.button("pallets/flask @ HEAD~1 (Latest Master Commit)"):
-            st.session_state["active_repo"] = "pallets/flask"
-            st.session_state["active_sha"] = "HEAD~1"
-            analyze_clicked = True
+
     st.markdown("</div>", unsafe_allow_html=True)
 
     # 4 Key Metric Cards
@@ -762,8 +745,8 @@ if nav_selection == "📊 Dashboard":
     st.markdown('<div style="height: 20px;"></div>', unsafe_allow_html=True)
 
     # Quick Inspection Section if clicked
-    target_repo = st.session_state.get("active_repo", dash_repo)
-    target_sha = st.session_state.get("active_sha", dash_target)
+    target_repo = dash_repo.strip()
+    target_sha = dash_target.strip()
 
     if analyze_clicked:
         active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
