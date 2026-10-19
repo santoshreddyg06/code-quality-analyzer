@@ -74,6 +74,15 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
+def get_github_fetcher() -> tuple[GitHubChangeFetcher | None, str | None]:
+    try:
+        from dotenv import load_dotenv
+        load_dotenv(PROJECT_ROOT / ".env", override=True)
+        return GitHubChangeFetcher(), None
+    except Exception as exc:
+        return None, str(exc)
+
+
 @st.cache_resource
 def load_ml_services():
     try:
@@ -86,15 +95,10 @@ def load_ml_services():
     except Exception:
         exp = None
 
-    try:
-        fetch = GitHubChangeFetcher()
-    except Exception:
-        fetch = None
-
-    return pred, exp, fetch
+    return pred, exp
 
 
-predictor, explainer, fetcher = load_ml_services()
+predictor, explainer = load_ml_services()
 
 
 # --------------------------------------------------------------------------
@@ -210,21 +214,28 @@ if mode == "GitHub Commit / PR":
             target_id = st.text_input("Pull Request #", value="5000")
 
     if st.button("🚀 Analyze GitHub Change", type="primary"):
-        if not fetcher:
-            st.error("GitHub client is not configured. Check your .env file.")
+        active_fetcher, fetcher_err = get_github_fetcher()
+        if not active_fetcher:
+            st.error(f"GitHub client is not configured: {fetcher_err}. Check your .env file.")
         elif not predictor:
             st.error("Model is not trained yet. Run the training pipeline first.")
         else:
             with st.spinner("Fetching changes and computing metrics..."):
                 try:
+                    repo_clean = repo_input.strip()
+                    target_clean = target_id.strip()
                     if target_type == "Commit SHA":
-                        change_data = fetcher.fetch_commit(repo_input.strip(), target_id.strip())
+                        change_data = active_fetcher.fetch_commit(repo_clean, target_clean)
                     else:
-                        change_data = fetcher.fetch_pull_request(repo_input.strip(), int(target_id.strip()))
+                        change_data = active_fetcher.fetch_pull_request(repo_clean, int(target_clean))
 
                     py_files = change_data.get("files", [])
                     if not py_files:
-                        st.warning("No modified Python (.py) files found in this change.")
+                        sha_short = change_data.get("sha", "")[:7] if change_data.get("sha") else target_clean
+                        st.info(
+                            f"Commit `{sha_short}` was retrieved successfully, but no Python (.py) files were modified in this change "
+                            f"(only documentation, markdown, or configs were touched). Try a commit that touches Python files, such as `42dc739`!"
+                        )
                     else:
                         st.success(f"Retrieved {len(py_files)} modified Python file(s).")
                         features = extract_features_from_files(py_files)
