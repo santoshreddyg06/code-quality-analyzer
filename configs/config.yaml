@@ -1,0 +1,47 @@
+# Project-level configuration for the AI Code Quality Analyzer
+# Sensitive values (tokens, keys) must go in .env, NOT here.
+
+github:
+  # Maximum number of commits to collect per repository during data collection
+  max_commits_per_repo: 500
+  # Request timeout in seconds
+  request_timeout: 30
+
+data_collection:
+  # Repositories to collect historical data from.
+  # These must be public Python repositories with a meaningful commit history.
+  target_repos:
+    - "pallets/flask"
+    - "psf/requests"
+    - "django/django"
+    - "scikit-learn/scikit-learn"
+    - "pandas-dev/pandas"
+  # Minimum number of changed Python files per commit (filters trivial commits)
+  min_changed_files: 1
+  # Maximum files changed per commit (filters massive refactors)
+  max_changed_files: 20
+  # Look-ahead window (days) used for label generation
+  labeling_window_days: 90
+
+metrics:
+  # Radon complexity thresholds (for reference; not enforced in features)
+  complexity_thresholds:
+    low: 5
+    medium: 10
+    high: 20
+
+models:
+  # Fraction of data to hold out for final testing (time-based split)
+  test_size: 0.15
+  # Fraction of training data to use for validation
+  val_size: 0.15
+  # Random state for reproducibility
+  random_state: 42
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+  reload: true
+
+dashboard:
+  api_base_url: "http://localhost:8000"

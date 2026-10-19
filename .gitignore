@@ -1,0 +1,53 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+
+# Secrets and credentials
+.env
+.env.*
+secrets.toml
+*.key
+*.pem
+service_account.json
+
+# Data files (raw data can be large)
+data/raw/*.json
+data/raw/*.csv
+data/raw/*.parquet
+
+# Trained models
+data/models/*.pkl
+data/models/*.joblib
+data/models/*.bin
+
+# Jupyter
+.ipynb_checkpoints/
+notebooks/.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Coverage
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Streamlit
+.streamlit/secrets.toml
