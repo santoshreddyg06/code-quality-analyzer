@@ -18,7 +18,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values, load_dotenv
 from github import Auth, Github
 import pandas as pd
 import plotly.express as px
@@ -363,7 +363,7 @@ st.markdown("""
 # --------------------------------------------------------------------------
 def get_server_token() -> str:
     """Safely resolve GITHUB_TOKEN on backend server without DOM exposure."""
-    # 1. Streamlit secrets (.streamlit/secrets.toml or Streamlit Cloud Secrets)
+    # 1. Streamlit Cloud Secrets / .streamlit/secrets.toml
     try:
         if "GITHUB_TOKEN" in st.secrets:
             tok = str(st.secrets["GITHUB_TOKEN"]).strip()
@@ -372,12 +372,12 @@ def get_server_token() -> str:
     except Exception:
         pass
 
-    # 2. Check active environment variable
+    # 2. Check active process environment variable
     tok = os.getenv("GITHUB_TOKEN", "").strip()
     if tok:
         return tok
 
-    # 3. Explicitly search .env files
+    # 3. Explicitly search and parse .env files directly with dotenv_values
     env_paths = [
         PROJECT_ROOT / ".env",
         Path.cwd() / ".env",
@@ -385,10 +385,21 @@ def get_server_token() -> str:
     ]
     for p in env_paths:
         if p.exists():
-            load_dotenv(p, override=True)
-            tok = os.getenv("GITHUB_TOKEN", "").strip()
-            if tok:
-                return tok
+            try:
+                vals = dotenv_values(p)
+                if vals.get("GITHUB_TOKEN"):
+                    tok = str(vals["GITHUB_TOKEN"]).strip()
+                    if tok:
+                        return tok
+            except Exception:
+                pass
+            try:
+                load_dotenv(p, override=True)
+                tok = os.getenv("GITHUB_TOKEN", "").strip()
+                if tok:
+                    return tok
+            except Exception:
+                pass
 
     return ""
 
@@ -757,7 +768,13 @@ if nav_selection == "📊 Dashboard":
     if analyze_clicked:
         active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
         if not active_fetcher:
-            st.error(f"GitHub client error: {fetcher_err}")
+            st.error(f"**GitHub Token Missing:** {fetcher_err}")
+            st.info(
+                "💡 **How to solve this:**\n"
+                "- **In this browser:** Enter your Personal Access Token in the **Personal Token (Optional)** box in the left sidebar.\n"
+                "- **On Streamlit Cloud:** Add `GITHUB_TOKEN = \"your_token\"` under **App Settings → Secrets**.\n"
+                "- **Locally:** Verify that `GITHUB_TOKEN=...` is present in your `.env` or `.streamlit/secrets.toml` file."
+            )
         elif not predictor:
             st.error("Predictor model is not initialized.")
         else:
