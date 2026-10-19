@@ -363,6 +363,7 @@ st.markdown("""
 # --------------------------------------------------------------------------
 def get_server_token() -> str:
     """Safely resolve GITHUB_TOKEN on backend server without DOM exposure."""
+    # 1. Streamlit secrets (.streamlit/secrets.toml or Streamlit Cloud Secrets)
     try:
         if "GITHUB_TOKEN" in st.secrets:
             tok = str(st.secrets["GITHUB_TOKEN"]).strip()
@@ -371,14 +372,25 @@ def get_server_token() -> str:
     except Exception:
         pass
 
-    for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
+    # 2. Check active environment variable
+    tok = os.getenv("GITHUB_TOKEN", "").strip()
+    if tok:
+        return tok
+
+    # 3. Explicitly search .env files
+    env_paths = [
+        PROJECT_ROOT / ".env",
+        Path.cwd() / ".env",
+        Path("c:/Users/santo/OneDrive/Desktop/code_quality_analyzer/.env"),
+    ]
+    for p in env_paths:
         if p.exists():
             load_dotenv(p, override=True)
             tok = os.getenv("GITHUB_TOKEN", "").strip()
             if tok:
                 return tok
 
-    return os.getenv("GITHUB_TOKEN", "").strip()
+    return ""
 
 
 def get_github_fetcher(token: str | None = None) -> tuple[GitHubChangeFetcher | None, str | None]:
@@ -417,7 +429,7 @@ predictor, explainer = load_ml_services()
 if "analysis_history" not in st.session_state:
     st.session_state["analysis_history"] = [
         {
-            "commit_hash": "42dc739",
+            "commit_hash": "d086db8",
             "repo": "pallets/flask",
             "date": "2026-10-19 21:15",
             "files_changed": 1,
@@ -700,7 +712,7 @@ if nav_selection == "📊 Dashboard":
     with col_input:
         dash_repo = st.text_input("GitHub Repository URL or owner/repo", value="pallets/flask", placeholder="e.g. pallets/flask")
     with col_target:
-        dash_target = st.text_input("Commit SHA or PR #", value="42dc739", placeholder="e.g. 42dc739")
+        dash_target = st.text_input("Commit SHA or PR #", value="d086db8", placeholder="e.g. d086db8")
     with col_btn:
         st.markdown('<div style="height: 28px;"></div>', unsafe_allow_html=True)
         analyze_clicked = st.button("⚡ Analyze Changes", type="primary", use_container_width=True)
@@ -709,9 +721,9 @@ if nav_selection == "📊 Dashboard":
     st.markdown('<div style="font-size: 0.8rem; color: #94A3B8; margin-top: 8px;"><b>Quick Presets:</b></div>', unsafe_allow_html=True)
     p1, p2, p3 = st.columns(3)
     with p1:
-        if st.button("pallets/flask @ 42dc739 (Python 3.12 Refactor)"):
+        if st.button("pallets/flask @ d086db8 (Python 3.12 Refactor)"):
             st.session_state["active_repo"] = "pallets/flask"
-            st.session_state["active_sha"] = "42dc739"
+            st.session_state["active_sha"] = "d086db8"
             analyze_clicked = True
     with p2:
         if st.button("psf/requests @ c8a4087 (Response Header Fix)"):
@@ -830,7 +842,7 @@ elif nav_selection == "🔍 Analyze Changes":
         with col_t:
             gh_type = st.selectbox("Target Type", ["Commit SHA", "Pull Request #"], key="gh_in_type")
         with col_s:
-            gh_id = st.text_input("Target Hash / PR #", value="42dc739", key="gh_in_id")
+            gh_id = st.text_input("Target Hash / PR #", value="d086db8", key="gh_in_id")
 
         if st.button("Run Code Change Analysis", type="primary", key="btn_run_gh"):
             active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
@@ -1036,7 +1048,7 @@ elif nav_selection == "📜 Analysis History":
     # Search & Filter Controls
     col_search, col_filter = st.columns([3, 1])
     with col_search:
-        search_query = st.text_input("Search commits by hash or repository name", placeholder="e.g. flask or 42dc739")
+        search_query = st.text_input("Search commits by hash or repository name", placeholder="e.g. flask or d086db8")
     with col_filter:
         risk_filter = st.selectbox("Filter Risk Level", ["All Levels", "Low Risk", "Medium Risk", "High Risk"])
 
