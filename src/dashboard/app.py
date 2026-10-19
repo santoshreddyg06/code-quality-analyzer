@@ -1,7 +1,7 @@
 """
 src/dashboard/app.py
 ====================
-CodeGuard AI — AI-Powered Code Change Quality Analyzer
+CodeSage — Code Quality Analyzer
 Production-grade developer dashboard combining:
 1. Modern dark-themed SaaS design (#0B1120 / #151E32 / #1E293B / #6366F1).
 2. GitHub-style code review interface with side-by-side diff highlighting.
@@ -47,7 +47,7 @@ from src.models.predictor import QualityPredictor
 # Page configuration
 # --------------------------------------------------------------------------
 st.set_page_config(
-    page_title="CodeGuard AI — Code Change Quality Analyzer",
+    page_title="CodeSage — Code Quality Analyzer",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -641,8 +641,8 @@ with st.sidebar:
     <div class="sidebar-brand-container">
         <div class="brand-logo-icon">⚡</div>
         <div>
-            <div class="brand-text-title">CodeGuard AI</div>
-            <div class="brand-text-subtitle">AI Code Change Quality Analyzer</div>
+            <div class="brand-text-title">CodeSage</div>
+            <div class="brand-text-subtitle">Code Quality Analyzer</div>
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -1201,7 +1201,7 @@ elif nav_selection == "📈 Model Performance":
 elif nav_selection == "ℹ️ About":
     st.markdown("""
     <div class="page-header-container">
-        <div class="page-title">About CodeGuard AI</div>
+        <div class="page-title">About CodeSage</div>
         <div class="page-subtitle">Architectural design, metric definitions, and technology stack.</div>
     </div>
     """, unsafe_allow_html=True)
@@ -1212,8 +1212,8 @@ elif nav_selection == "ℹ️ About":
         <div style="background: #151E32; border: 1px solid #334155; border-radius: 12px; padding: 22px; margin-bottom: 20px;">
             <div style="font-size: 1.1rem; font-weight: 700; color: #F8FAFC; margin-bottom: 8px;">System Objective & Core Value</div>
             <div style="font-size: 0.9rem; color: #94A3B8; line-height: 1.6;">
-                CodeGuard AI is an automated code review intelligence tool designed to halt technical debt accumulation before pull requests reach production.
-                Traditional linters only verify surface styling (PEP 8). CodeGuard AI assesses deep cognitive complexity and architectural maintainability shifts using structural AST analysis paired with explainable machine learning.
+                CodeSage is an automated code review intelligence tool designed to halt technical debt accumulation before pull requests reach production.
+                Traditional linters only verify surface styling (PEP 8). CodeSage assesses deep cognitive complexity and architectural maintainability shifts using structural AST analysis paired with explainable machine learning.
             </div>
             <div style="margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap;">
                 <span style="background: #1E293B; border: 1px solid #334155; padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-family: 'JetBrains Mono';">Python AST Parser</span>
