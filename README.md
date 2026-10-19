@@ -20,14 +20,14 @@ Given any GitHub repository and a commit SHA or Pull Request number (or direct c
 
 ```mermaid
 flowchart LR
-    A["GitHub Commit / PR / Code Input"] --> B["Metrics Engine (Radon, Lizard, AST)"]
-    B --> C["25 Quantitative Delta Features"]
-    C --> D["Trained ML Model (XGBoost)"]
-    D --> E["Prediction: Likely Improvement vs Potential Degradation"]
-    D --> F["SHAP TreeExplainer (Feature Contributions & Narrative)"]
-    E --> G["FastAPI Backend (Port 8000)"]
+    A[GitHub Commit or PR] --> B[Metrics Engine - Radon, Lizard, AST]
+    B --> C[25 Quantitative Delta Features]
+    C --> D[Trained XGBoost Classifier]
+    D --> E[Prediction - Likely Improvement vs Potential Degradation]
+    D --> F[SHAP TreeExplainer - Feature Attributions]
+    E --> G[FastAPI Backend - Port 8000]
     F --> G
-    G --> H["Streamlit Dashboard (Port 8501)"]
+    G --> H[Streamlit Dashboard - Port 8501]
 ```
 
 ---
