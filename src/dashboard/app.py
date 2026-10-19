@@ -2,7 +2,14 @@
 src/dashboard/app.py
 ====================
 Production-grade developer dashboard for the AI Code Change Quality Analyzer.
-Crafted with high data density, minimal marketing fluff, and developer-first aesthetics.
+Provides:
+1. Clear Project Objective & 3-Step Quick Start
+2. Comprehensive User Guide & Metric Interpretation
+3. Live GitHub Commit / Pull Request Inspector (with 1-click Quick Presets)
+4. Side-by-Side Code Comparison Sandbox
+5. Unified Git Diff / Patch Quality Inspector
+6. Offline Model Benchmarks & Validation Reports
+7. Technical Metric Specifications
 """
 
 from __future__ import annotations
@@ -74,7 +81,7 @@ st.markdown("""
         background: #ffffff;
         border: 1px solid #e4e4e7;
         border-radius: 8px;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
     }
 
     .brand-title {
@@ -113,6 +120,67 @@ st.markdown("""
         border-radius: 50%;
         background: #10b981;
         margin-right: 6px;
+    }
+
+    /* Objective & Quickstart Container */
+    .objective-container {
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 8px;
+        padding: 18px 22px;
+        margin-bottom: 18px;
+    }
+
+    .objective-badge {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: #4f46e5;
+        background: #eef2ff;
+        border: 1px solid #c7d2fe;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+    }
+
+    .objective-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #09090b;
+        letter-spacing: -0.01em;
+        margin-bottom: 6px;
+    }
+
+    .objective-desc {
+        font-size: 0.88rem;
+        color: #52525b;
+        line-height: 1.5;
+    }
+
+    .how-to-use-box {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 12px 16px;
+        height: 100%;
+    }
+
+    .how-to-use-title {
+        font-size: 0.76rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: #64748b;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+    }
+
+    .how-to-use-step {
+        font-size: 0.82rem;
+        color: #334155;
+        line-height: 1.55;
+        margin-bottom: 4px;
     }
 
     /* Metric Cards */
@@ -192,16 +260,6 @@ st.markdown("""
         margin-top: 8px;
         font-family: 'JetBrains Mono', monospace;
     }
-
-    /* Preset Buttons */
-    .preset-chip {
-        font-size: 0.8rem;
-        color: #3f3f46;
-        border: 1px solid #e4e4e7;
-        border-radius: 6px;
-        padding: 4px 10px;
-        background: #fafafa;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -277,6 +335,67 @@ def render_navbar(token_configured: bool):
         </div>
     </div>
     """, unsafe_allow_html=True)
+
+
+def render_project_overview():
+    st.markdown("""
+    <div class="objective-container">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; flex-wrap: wrap;">
+            <div style="flex: 1.4; min-width: 320px;">
+                <span class="objective-badge">Project Objective</span>
+                <div class="objective-title">
+                    Predictive Code Quality & Maintainability Guardrail
+                </div>
+                <div class="objective-desc">
+                    <b>Core Goal:</b> Prevent technical debt and architectural erosion <i>before</i> code is merged into production.
+                    <br><br>
+                    <b>How It Works:</b> When a code change (commit, pull request, or diff) occurs, the analyzer parses the Abstract Syntax Tree (AST), 
+                    Radon cyclomatic complexity, and diff churn to extract <b>25 delta features</b>. A trained <b>XGBoost ML model (98.5% accuracy)</b> 
+                    classifies whether the change preserves healthy maintainability or introduces defect-prone degradation, while <b>SHAP TreeExplainer</b> 
+                    pinpoints the exact structural reasons behind the verdict.
+                </div>
+            </div>
+            <div style="flex: 1; min-width: 280px;">
+                <div class="how-to-use-box">
+                    <div class="how-to-use-title">How to Use This Application</div>
+                    <div class="how-to-use-step">
+                        <b>1. Select an Inspector Tab:</b> Choose <b>GitHub Inspector</b> (live commits), <b>Code Sandbox</b> (side-by-side editing), or <b>Patch Inspector</b> (git diffs).
+                    </div>
+                    <div class="how-to-use-step">
+                        <b>2. Load or Enter Code:</b> Click any <b>Quick Preset</b> button for an instant 1-click demo, or paste your own repository/code.
+                    </div>
+                    <div class="how-to-use-step">
+                        <b>3. Run Analysis:</b> Click the blue <b>Analyze</b> button to inspect the Maintainability Verdict, Metric Shifts, and SHAP Explainability.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+def render_user_walkthrough_expander():
+    with st.expander("📖 Complete User Walkthrough & Feature Guide (Click to expand)", expanded=False):
+        c1, c2, c3 = st.columns(3)
+        with c1:
+            st.markdown("""
+            **1. What are "Quick Presets"?**
+            - **Quick Presets** are 1-click shortcut buttons located above the input fields.
+            - Instead of searching GitHub for commit hashes, clicking a preset (like `pallets/flask @ 42dc739`) automatically fills in the repository and commit SHA so you can test the system in 2 seconds.
+            """)
+        with c2:
+            st.markdown("""
+            **2. How to Read the Verdict:**
+            - **✓ No Degradation Detected (Green):** The commit preserves or improves software maintainability (low complexity, clean control flow, healthy documentation density).
+            - **▲ Degradation Risk Detected (Red):** The commit increases cyclomatic complexity, deeply nested logic, or high churn beyond safe engineering thresholds.
+            """)
+        with c3:
+            st.markdown("""
+            **3. How to Read SHAP Decision Factors:**
+            - **SHAP (SHapley Additive exPlanations)** decomposes the AI verdict into feature-level impacts:
+              - **Red Bars (+):** Features that increased degradation risk.
+              - **Green Bars (-):** Features that supported healthy code quality.
+            """)
 
 
 def render_verdict(pred_label: str, prob_deg: float, risk_level: str):
@@ -391,10 +510,12 @@ def render_shap_figure(contributions: list[dict[str, Any]]):
 
 
 # --------------------------------------------------------------------------
-# Main Top Navbar
+# Main Top Navbar & Project Objective
 # --------------------------------------------------------------------------
 server_token_present = bool(get_server_token())
 render_navbar(server_token_present)
+render_project_overview()
+render_user_walkthrough_expander()
 
 # --------------------------------------------------------------------------
 # Minimalist Sidebar (Strictly Developer Controls & Auth)
@@ -445,23 +566,23 @@ tab_github, tab_compare, tab_patch, tab_metrics, tab_docs = st.tabs([
 # ==========================================================================
 with tab_github:
     st.markdown("#### Inspect Live GitHub Commit or Pull Request")
-    st.caption("Fetches unified diffs, reconstructs file ASTs, and calculates code quality deltas.")
+    st.caption("Fetches unified diffs directly from GitHub API, reconstructs file ASTs, and calculates code quality deltas.")
 
-    # Inline Quick Presets
-    st.markdown("**Quick Presets:**")
+    # Inline Quick Presets with clear instruction
+    st.markdown("**Quick Presets (1-Click Demos):**")
     p1, p2, p3 = st.columns(3)
     with p1:
-        if st.button("pallets/flask @ 42dc739", help="Python 3.12 AST refactor"):
+        if st.button("pallets/flask @ 42dc739", help="1-Click: Load Python 3.12 AST refactor in Flask"):
             st.session_state["gh_repo"] = "pallets/flask"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "42dc739"
     with p2:
-        if st.button("psf/requests @ c8a4087", help="Bugfix commit in Requests"):
+        if st.button("psf/requests @ c8a4087", help="1-Click: Load real bugfix commit in Requests"):
             st.session_state["gh_repo"] = "psf/requests"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "c8a4087"
     with p3:
-        if st.button("pallets/flask @ HEAD~1", help="Recent Flask repository commit"):
+        if st.button("pallets/flask @ HEAD~1", help="1-Click: Load recent Flask commit"):
             st.session_state["gh_repo"] = "pallets/flask"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "HEAD~1"
@@ -472,12 +593,12 @@ with tab_github:
 
     col_repo, col_type, col_id = st.columns([3, 2, 3])
     with col_repo:
-        repo_input = st.text_input("Repository (owner/repo)", value=init_repo)
+        repo_input = st.text_input("Repository (owner/repo)", value=init_repo, help="Public GitHub repository (e.g. pallets/flask)")
     with col_type:
         type_options = ["Commit SHA", "Pull Request #"]
         target_type = st.selectbox("Target Type", type_options, index=0 if init_type == "Commit SHA" else 1)
     with col_id:
-        target_id = st.text_input("Commit SHA or PR #", value=init_target)
+        target_id = st.text_input("Commit SHA or PR #", value=init_target, help="Commit hash (e.g. 42dc739) or PR number (e.g. 5000)")
 
     if st.button("Analyze Commit / PR", type="primary"):
         active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
@@ -539,12 +660,12 @@ with tab_github:
 # ==========================================================================
 with tab_compare:
     st.markdown("#### Direct Code Comparison Sandbox")
-    st.caption("Compare original and refactored Python snippets side-by-side to evaluate quality shifts.")
+    st.caption("Compare original and refactored Python snippets side-by-side to evaluate quality shifts without requiring a git commit.")
 
     scenario = st.selectbox(
-        "Load Code Scenario:",
+        "Load Pre-built Code Scenario:",
         [
-            "Custom Snippets",
+            "Custom Snippets (Paste your own)",
             "Refactoring: Nested Loops → List Comprehension (Improves MI)",
             "Degradation: Deep Nesting & Branching Anti-Pattern (High CC)",
             "Documentation: Adding Docstrings & Type Hints (Boosts Documentation Density)",
@@ -641,7 +762,7 @@ with tab_compare:
 # ==========================================================================
 with tab_patch:
     st.markdown("#### Unified Patch Inspector")
-    st.caption("Paste standard unified diff chunks from git diff or pull request review tools.")
+    st.caption("Paste standard unified diff chunks from `git diff` or pull request reviews to evaluate patch quality.")
 
     default_diff = """@@ -1,5 +1,9 @@
  def calculate(a, b):
