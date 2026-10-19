@@ -1,13 +1,8 @@
 """
 src/dashboard/app.py
 ====================
-Interactive Streamlit Dashboard for the AI Code Change Quality Analyzer.
-Provides:
-1. Live GitHub Commit / Pull Request Analysis
-2. Before-and-After Code Editor Analysis
-3. Git Diff / Patch Analysis
-4. Model Performance & SHAP Feature Insights
-5. Comprehensive Customer User Guide & Metric Glossaries
+Production-grade developer dashboard for the AI Code Change Quality Analyzer.
+Crafted with high data density, minimal marketing fluff, and developer-first aesthetics.
 """
 
 from __future__ import annotations
@@ -21,7 +16,6 @@ from typing import Any
 from dotenv import load_dotenv
 from github import Auth, Github
 import pandas as pd
-import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 
@@ -30,7 +24,7 @@ PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-# Load environment variables from .env
+# Load environment variables
 for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
     if p.exists():
         load_dotenv(p, override=True)
@@ -47,262 +41,175 @@ from src.models.predictor import QualityPredictor
 # Page configuration
 # --------------------------------------------------------------------------
 st.set_page_config(
-    page_title="AI Code Quality Analyzer | Predictive Refactoring Guardrail",
-    page_icon="🛡️",
+    page_title="Code Quality Guard | Engineering Dashboard",
+    page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
 # --------------------------------------------------------------------------
-# Modern Premium Custom CSS
+# Clean Developer Aesthetics (Linear / Vercel / GitHub Theme)
 # --------------------------------------------------------------------------
 st.markdown("""
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
+    /* Global Typography */
     html, body, [class*="css"] {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #18181b;
     }
 
-    code, pre, .stCodeBlock {
-        font-family: 'JetBrains Mono', monospace !important;
+    code, pre, .stCodeBlock, [data-testid="stMarkdownContainer"] code {
+        font-family: 'JetBrains Mono', ui-monospace, monospace !important;
+        font-size: 0.88em;
     }
 
-    /* Main Container Padding */
-    .block-container {
-        padding-top: 2rem;
-        padding-bottom: 3rem;
-    }
-
-    /* Hero Header Card */
-    .hero-card {
-        background: linear-gradient(135deg, #1e1b4b 0%, #312e81 45%, #0f172a 100%);
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        border-radius: 16px;
-        padding: 28px 32px;
-        margin-bottom: 24px;
-        color: #ffffff;
-        box-shadow: 0 12px 30px -10px rgba(79, 70, 229, 0.35);
-    }
-
-    .hero-title {
-        font-size: 2.2rem;
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        margin-bottom: 8px;
-        background: linear-gradient(90deg, #ffffff 0%, #c7d2fe 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-        font-size: 1.05rem;
-        color: #cbd5e1;
-        line-height: 1.5;
-        max-width: 850px;
-        margin-bottom: 16px;
-    }
-
-    .badge-pill-container {
+    /* Minimalist Header Strip */
+    .top-navbar {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        background: #ffffff;
+        border: 1px solid #e4e4e7;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .brand-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: #09090b;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
         gap: 8px;
     }
 
-    .badge-pill {
-        display: inline-flex;
+    .brand-tag {
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: #f4f4f5;
+        border: 1px solid #e4e4e7;
+        color: #71717a;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .system-status {
+        display: flex;
         align-items: center;
-        padding: 4px 12px;
-        border-radius: 9999px;
+        gap: 16px;
         font-size: 0.8rem;
-        font-weight: 600;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #e2e8f0;
-        backdrop-filter: blur(8px);
+        color: #71717a;
     }
 
-    .badge-pill.highlight {
-        background: rgba(16, 185, 129, 0.2);
-        border-color: rgba(16, 185, 129, 0.4);
-        color: #6ee7b7;
-    }
-
-    /* Workflow Cards */
-    .guide-step-card {
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 20px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        height: 100%;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .guide-step-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-    }
-
-    .step-number {
+    .status-dot {
         display: inline-block;
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
-        text-align: center;
-        background: #4f46e5;
-        color: white;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
-        font-weight: 700;
-        font-size: 0.85rem;
-        margin-bottom: 10px;
+        background: #10b981;
+        margin-right: 6px;
     }
 
-    .step-title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: #1e293b;
-        margin-bottom: 6px;
-    }
-
-    .step-desc {
-        font-size: 0.88rem;
-        color: #64748b;
-        line-height: 1.45;
-    }
-
-    /* Metric Cards Grid */
-    .metric-box {
+    /* Metric Cards */
+    .stat-card {
         background: #ffffff;
-        border-radius: 12px;
-        padding: 18px 20px;
-        border: 1px solid #e2e8f0;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 12px;
+        border: 1px solid #e4e4e7;
+        border-radius: 8px;
+        padding: 16px 18px;
+        margin-bottom: 14px;
     }
 
-    .metric-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #4f46e5, #06b6d4);
-    }
-
-    .metric-box.accent-green::before {
-        background: linear-gradient(90deg, #10b981, #34d399);
-    }
-
-    .metric-box.accent-red::before {
-        background: linear-gradient(90deg, #ef4444, #f87171);
-    }
-
-    .metric-box-title {
-        font-size: 0.82rem;
+    .stat-label {
+        font-size: 0.78rem;
         font-weight: 600;
+        color: #71717a;
         text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #64748b;
+        letter-spacing: 0.04em;
         margin-bottom: 4px;
     }
 
-    .metric-box-val {
-        font-size: 1.8rem;
-        font-weight: 800;
-        color: #0f172a;
+    .stat-value {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: #09090b;
         font-family: 'JetBrains Mono', monospace;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
-    .metric-box-delta {
-        font-size: 0.85rem;
+    .stat-delta {
+        font-size: 0.8rem;
         font-weight: 600;
         display: inline-block;
-        margin-top: 4px;
-        padding: 2px 8px;
+        margin-top: 6px;
+        font-family: 'JetBrains Mono', monospace;
+    }
+
+    .stat-delta.positive { color: #10b981; }
+    .stat-delta.negative { color: #ef4444; }
+    .stat-delta.neutral { color: #71717a; }
+
+    /* Verdict Card */
+    .verdict-banner-safe {
+        background: #f0fdf4;
+        border: 1px solid #bbf7d0;
+        border-left: 4px solid #16a34a;
         border-radius: 6px;
+        padding: 16px 20px;
+        margin: 16px 0;
     }
 
-    .delta-pos {
-        background: #ecfdf5;
-        color: #059669;
-    }
-
-    .delta-neg {
+    .verdict-banner-risk {
         background: #fef2f2;
-        color: #dc2626;
+        border: 1px solid #fecaca;
+        border-left: 4px solid #dc2626;
+        border-radius: 6px;
+        padding: 16px 20px;
+        margin: 16px 0;
     }
 
-    .delta-neutral {
-        background: #f1f5f9;
-        color: #475569;
-    }
-
-    /* Prediction Result Banner */
-    .prediction-card-safe {
-        background: linear-gradient(135deg, #064e3b 0%, #065f46 100%);
-        border: 1px solid #059669;
-        border-radius: 14px;
-        padding: 24px;
-        color: #ffffff;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 25px -5px rgba(5, 150, 105, 0.3);
-    }
-
-    .prediction-card-risk {
-        background: linear-gradient(135deg, #881337 0%, #9f1239 100%);
-        border: 1px solid #e11d48;
-        border-radius: 14px;
-        padding: 24px;
-        color: #ffffff;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 25px -5px rgba(225, 29, 72, 0.3);
-    }
-
-    .verdict-header {
-        font-size: 1.4rem;
-        font-weight: 800;
-        margin-bottom: 6px;
+    .verdict-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 4px;
         display: flex;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
     }
 
-    .verdict-sub {
-        font-size: 0.95rem;
-        opacity: 0.9;
-        line-height: 1.4;
+    .verdict-safe-text { color: #166534; }
+    .verdict-risk-text { color: #991b1b; }
+
+    .verdict-meta {
+        font-size: 0.85rem;
+        color: #52525b;
+        display: flex;
+        gap: 20px;
+        margin-top: 8px;
+        font-family: 'JetBrains Mono', monospace;
     }
 
-    /* Progress Bar Container */
-    .confidence-bar-bg {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 9999px;
-        height: 12px;
-        width: 100%;
-        overflow: hidden;
-        margin: 12px 0 6px 0;
-    }
-
-    .confidence-bar-fill {
-        height: 100%;
-        border-radius: 9999px;
-        background: #ffffff;
+    /* Preset Buttons */
+    .preset-chip {
+        font-size: 0.8rem;
+        color: #3f3f46;
+        border: 1px solid #e4e4e7;
+        border-radius: 6px;
+        padding: 4px 10px;
+        background: #fafafa;
     }
 </style>
 """, unsafe_allow_html=True)
 
 
 # --------------------------------------------------------------------------
-# Secure Authentication & Backend Helpers
+# Backend Token & Service Loaders
 # --------------------------------------------------------------------------
 def get_server_token() -> str:
-    """Retrieve backend GITHUB_TOKEN securely without exposing it to the UI client."""
-    # 1. Streamlit Community Cloud secrets
     try:
         if "GITHUB_TOKEN" in st.secrets:
             tok = str(st.secrets["GITHUB_TOKEN"]).strip()
@@ -311,7 +218,6 @@ def get_server_token() -> str:
     except Exception:
         pass
 
-    # 2. Local or Docker .env file
     for p in [PROJECT_ROOT / ".env", Path.cwd() / ".env"]:
         if p.exists():
             load_dotenv(p, override=True)
@@ -319,7 +225,6 @@ def get_server_token() -> str:
             if tok:
                 return tok
 
-    # 3. Process environment variable
     return os.getenv("GITHUB_TOKEN", "").strip()
 
 
@@ -327,7 +232,7 @@ def get_github_fetcher(token: str | None = None) -> tuple[GitHubChangeFetcher | 
     try:
         active_token = (token.strip() if token and token.strip() else get_server_token())
         if not active_token:
-            return None, "GITHUB_TOKEN is missing. Please set GITHUB_TOKEN on the server or provide one in the sidebar."
+            return None, "No GITHUB_TOKEN configured. Provide one in the sidebar or set GITHUB_TOKEN on the server."
         auth = Auth.Token(active_token)
         client = Github(auth=auth, per_page=100)
         return GitHubChangeFetcher(github_client=client), None
@@ -354,213 +259,106 @@ predictor, explainer = load_ml_services()
 
 
 # --------------------------------------------------------------------------
-# UI Components & Visualizations
+# UI Helpers & Visualizations
 # --------------------------------------------------------------------------
-def render_hero_banner():
-    st.markdown("""
-    <div class="hero-card">
-        <div class="hero-title">🛡️ AI Code Quality & Refactoring Guardrail</div>
-        <div class="hero-subtitle">
-            Prevent technical debt before merge. This system extracts AST, Cyclomatic Complexity, and Halstead metrics across code diffs to forecast whether a pull request improves software maintainability or injects structural degradation.
+def render_navbar(token_configured: bool):
+    tok_badge = '<span style="color:#10b981;">● Active (Secure)</span>' if token_configured else '<span style="color:#f59e0b;">● Unset</span>'
+    st.markdown(f"""
+    <div class="top-navbar">
+        <div class="brand-title">
+            <span>Code Quality Guard</span>
+            <span class="brand-tag">v1.2.0</span>
+            <span class="brand-tag">XGBoost Engine</span>
         </div>
-        <div class="badge-pill-container">
-            <span class="badge-pill highlight">✨ XGBoost 98.5% Accuracy</span>
-            <span class="badge-pill highlight">🎯 0.996 ROC-AUC</span>
-            <span class="badge-pill">⚡ Real-Time AST & Radon Analysis</span>
-            <span class="badge-pill">💡 SHAP TreeExplainer Attribution</span>
-            <span class="badge-pill">🔒 Zero-Leak Token Architecture</span>
+        <div class="system-status">
+            <span><span class="status-dot"></span>Inference Ready</span>
+            <span>GitHub Auth: {tok_badge}</span>
+            <span class="brand-tag">25 Delta Metrics</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
 
-def render_user_guide():
-    with st.expander("📖 Interactive Customer Guide & Walkthrough (Click to open)", expanded=False):
-        st.markdown("### How to Use the AI Code Quality Analyzer")
-        st.markdown(
-            "Welcome! Follow this simple 4-step workflow to analyze code quality and predict maintainability risks in real time."
-        )
-
-        c1, c2, c3, c4 = st.columns(4)
-        with c1:
-            st.markdown("""
-            <div class="guide-step-card">
-                <div class="step-number">1</div>
-                <div class="step-title">Choose Analysis Mode</div>
-                <div class="step-desc">
-                    Pick your workflow from the sidebar:
-                    <br>• <b>GitHub Commit / PR</b>: Analyze live commits or pull requests directly.
-                    <br>• <b>Direct Code Compare</b>: Compare Before & After scripts side-by-side.
-                    <br>• <b>Git Diff / Patch</b>: Inspect standard unified diffs.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with c2:
-            st.markdown("""
-            <div class="guide-step-card">
-                <div class="step-number">2</div>
-                <div class="step-title">Select or Load Presets</div>
-                <div class="step-desc">
-                    Don't have code ready?
-                    <br>Use our built-in <b>1-Click Demo Presets</b> available in every tab (e.g. Flask refactoring, Nested spaghetti traps, or docstring improvements) to see instant results.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with c3:
-            st.markdown("""
-            <div class="guide-step-card">
-                <div class="step-number">3</div>
-                <div class="step-title">Inspect Verdict & Score</div>
-                <div class="step-desc">
-                    The AI generates a definitive verdict:
-                    <br>• <b>Safe Refactor (Green)</b>: Code complexity is low, maintainability is preserved.
-                    <br>• <b>Degradation Risk (Red)</b>: Control flow complexity, deep nesting, or high churn detected.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        with c4:
-            st.markdown("""
-            <div class="guide-step-card">
-                <div class="step-number">4</div>
-                <div class="step-title">Understand with SHAP</div>
-                <div class="step-desc">
-                    Transparent, explainable AI:
-                    <br>The <b>SHAP Decision Chart</b> highlights the top features driving the verdict. Red bars increase risk, while green bars promote healthy code maintainability.
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
-
-        st.markdown("---")
-        st.markdown("### 📊 Metrics Reference & Interpretation Cheat Sheet")
-        glossary_df = pd.DataFrame([
-            {
-                "Metric": "Maintainability Index (MI)",
-                "Healthy Benchmark": "85 to 100",
-                "High Risk Range": "< 65",
-                "What It Measures": "Overall structural maintainability based on Halstead volume, cyclomatic complexity, and documentation density.",
-            },
-            {
-                "Metric": "Cyclomatic Complexity (CC)",
-                "Healthy Benchmark": "1 to 10 per function",
-                "High Risk Range": "> 15",
-                "What It Measures": "The number of linearly independent paths through the code. High CC indicates difficult testing and defect proneness.",
-            },
-            {
-                "Metric": "Max Nesting Depth",
-                "Healthy Benchmark": "1 to 3 levels",
-                "High Risk Range": ">= 5 levels",
-                "What It Measures": "The maximum indentation depth of nested loops, conditionals, and try/except blocks ('arrowhead anti-pattern').",
-            },
-            {
-                "Metric": "Code Churn & SLOC",
-                "Healthy Benchmark": "Targeted, minimal diff",
-                "High Risk Range": "> 500 lines churned",
-                "What It Measures": "The sum of lines added and deleted. Large PRs exponentially increase bug insertion rates.",
-            },
-        ])
-        st.dataframe(glossary_df, width="stretch", hide_index=True)
-
-
-def render_prediction_verdict(pred_label: str, prob_deg: float, risk_level: str):
+def render_verdict(pred_label: str, prob_deg: float, risk_level: str):
     is_safe = "Improvement" in pred_label or prob_deg < 0.50
     prob_safe = 1.0 - prob_deg
-    card_class = "prediction-card-safe" if is_safe else "prediction-card-risk"
-    icon = "✅" if is_safe else "⚠️"
-    status_title = "SAFE REFACTOR / LIKELY IMPROVEMENT" if is_safe else "MAINTAINABILITY RISK DETECTED"
-    
-    advice = (
-        "Safe to merge without extra review. Code maintainability metrics show positive or stable trends."
-        if is_safe
-        else "Review carefully before merging. Excessive branching, high nesting, or large churn was detected."
-    )
 
+    if is_safe:
+        st.markdown(f"""
+        <div class="verdict-banner-safe">
+            <div class="verdict-title verdict-safe-text">
+                ✓ No Degradation Detected • Likely Safe Refactor
+            </div>
+            <div style="font-size:0.88rem; color:#15803d;">
+                The code diff preserves or improves maintainability. Complexity remains within bounds and documentation density is healthy.
+            </div>
+            <div class="verdict-meta">
+                <span>Model Confidence: <b>{prob_safe * 100:.1f}%</b></span>
+                <span>Degradation Risk: <b>{prob_deg * 100:.1f}%</b></span>
+                <span>Risk Tier: <b>{risk_level}</b></span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    else:
+        st.markdown(f"""
+        <div class="verdict-banner-risk">
+            <div class="verdict-title verdict-risk-text">
+                ▲ Maintainability Degradation Risk Detected
+            </div>
+            <div style="font-size:0.88rem; color:#b91c1c;">
+                Significant increase in cyclomatic complexity, nesting depth, or control flow branching detected in this diff.
+            </div>
+            <div class="verdict-meta">
+                <span>Degradation Probability: <b>{prob_deg * 100:.1f}%</b></span>
+                <span>Risk Tier: <b>{risk_level}</b></span>
+                <span>Status: <b>Review Recommended</b></span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+
+def render_stat_box(title: str, value: str, delta: str, delta_class: str = "neutral"):
     st.markdown(f"""
-    <div class="{card_class}">
-        <div class="verdict-header">
-            <span>{icon} Verdict: {status_title}</span>
-            <span style="font-size: 0.9rem; font-weight: 600; background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 9999px;">
-                Risk Tier: {risk_level}
-            </span>
-        </div>
-        <div class="verdict-sub">{advice}</div>
-        <div class="confidence-bar-bg">
-            <div class="confidence-bar-fill" style="width: {prob_safe * 100 if is_safe else prob_deg * 100:.1f}%;"></div>
-        </div>
-        <div style="display: flex; justify-content: space-between; font-size: 0.85rem; font-weight: 600; opacity: 0.95; margin-top: 6px;">
-            <span>Confidence: {prob_safe * 100 if is_safe else prob_deg * 100:.1f}%</span>
-            <span>Degradation Risk: {prob_deg * 100:.1f}% | Safe Probability: {prob_safe * 100:.1f}%</span>
-        </div>
+    <div class="stat-card">
+        <div class="stat-label">{title}</div>
+        <div class="stat-value">{value}</div>
+        <div class="stat-delta {delta_class}">{delta}</div>
     </div>
     """, unsafe_allow_html=True)
 
 
-def render_metric_card(title: str, current_val: str, delta_val: str, delta_type: str = "pos"):
-    delta_class = f"delta-{delta_type}"
-    accent_class = "accent-green" if delta_type == "pos" else ("accent-red" if delta_type == "neg" else "")
-    st.markdown(f"""
-    <div class="metric-box {accent_class}">
-        <div class="metric-box-title">{title}</div>
-        <div class="metric-box-val">{current_val}</div>
-        <div class="metric-box-delta {delta_class}">{delta_val}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
-def render_metrics_cards(old_m: dict[str, Any], new_m: dict[str, Any], delta_m: dict[str, Any]):
+def render_metrics_row(old_m: dict[str, Any], new_m: dict[str, Any], delta_m: dict[str, Any]):
     c1, c2, c3, c4 = st.columns(4)
 
-    # 1. Maintainability Index
+    # Maintainability Index
     mi_new = new_m.get("maintainability_index", 0.0)
     mi_delta = delta_m.get("delta_maintainability_index", 0.0)
-    mi_type = "pos" if mi_delta >= 0 else "neg"
+    mi_class = "positive" if mi_delta >= 0 else "negative"
     with c1:
-        render_metric_card(
-            "Maintainability Index (0-100)",
-            f"{mi_new:.1f}",
-            f"{mi_delta:+.1f} shift",
-            mi_type,
-        )
+        render_stat_box("Maintainability Index", f"{mi_new:.1f}", f"{mi_delta:+.1f} pts", mi_class)
 
-    # 2. Cyclomatic Complexity
+    # Cyclomatic Complexity
     cc_new = new_m.get("total_complexity", 0)
     cc_delta = delta_m.get("delta_total_complexity", 0)
-    cc_type = "pos" if cc_delta <= 0 else "neg"
+    cc_class = "positive" if cc_delta <= 0 else "negative"
     with c2:
-        render_metric_card(
-            "Cyclomatic Complexity",
-            f"{cc_new}",
-            f"{cc_delta:+d} paths",
-            cc_type,
-        )
+        render_stat_box("Cyclomatic Complexity", f"{cc_new}", f"{cc_delta:+d} paths", cc_class)
 
-    # 3. Max Nesting Depth
+    # Max Nesting
     nest_new = new_m.get("max_nesting_depth", 0)
     nest_delta = delta_m.get("delta_max_nesting_depth", 0)
-    nest_type = "pos" if nest_delta <= 0 else "neg"
+    nest_class = "positive" if nest_delta <= 0 else "negative"
     with c3:
-        render_metric_card(
-            "Max Nesting Depth",
-            f"{nest_new} levels",
-            f"{nest_delta:+d} levels",
-            nest_type,
-        )
+        render_stat_box("Max Nesting Depth", f"{nest_new}", f"{nest_delta:+d} levels", nest_class)
 
-    # 4. Source Lines (SLOC)
+    # SLOC
     sloc_new = new_m.get("sloc", 0)
     sloc_delta = delta_m.get("delta_sloc", 0)
     with c4:
-        render_metric_card(
-            "Source Lines (SLOC)",
-            f"{sloc_new}",
-            f"{sloc_delta:+d} lines",
-            "neutral",
-        )
+        render_stat_box("Source Lines (SLOC)", f"{sloc_new}", f"{sloc_delta:+d} lines", "neutral")
 
 
-def render_shap_chart(contributions: list[dict[str, Any]]):
+def render_shap_figure(contributions: list[dict[str, Any]]):
     top_items = contributions[:10]
     df = pd.DataFrame(top_items)
     df["color"] = df["shap_value"].apply(lambda v: "#ef4444" if v > 0 else "#10b981")
@@ -571,103 +369,99 @@ def render_shap_chart(contributions: list[dict[str, Any]]):
         orientation="h",
         marker=dict(
             color=df["color"],
-            line=dict(width=1, color="rgba(0,0,0,0.1)"),
+            line=dict(width=0),
         ),
         text=[f"{v:+.3f}" for v in df["shap_value"]],
         textposition="auto",
     ))
     fig.update_layout(
-        title="<b>Top SHAP Feature Influences on Maintainability Risk</b>",
-        xaxis_title="SHAP Value (Positive = Increases Degradation Risk, Negative = Supports Healthy Refactor)",
+        title=dict(
+            text="SHAP Feature Attribution (TreeExplainer)",
+            font=dict(size=14, color="#18181b", family="Inter"),
+        ),
+        xaxis_title="SHAP Value (Positive = Increases Risk, Negative = Supports Health)",
         yaxis=dict(autorange="reversed"),
-        height=380,
-        margin=dict(l=10, r=10, t=50, b=30),
-        plot_bgcolor="rgba(248, 250, 252, 0.8)",
+        height=340,
+        margin=dict(l=10, r=10, t=40, b=30),
+        plot_bgcolor="#f8fafc",
         paper_bgcolor="rgba(0,0,0,0)",
-        font=dict(family="Plus Jakarta Sans, sans-serif", size=12),
+        font=dict(family="Inter, sans-serif", size=11),
     )
     st.plotly_chart(fig, width="stretch")
 
 
 # --------------------------------------------------------------------------
-# Hero Header & Customer Guide Rendering
+# Main Top Navbar
 # --------------------------------------------------------------------------
-render_hero_banner()
-render_user_guide()
-
-# --------------------------------------------------------------------------
-# Sidebar Navigation & Authentication
-# --------------------------------------------------------------------------
-st.sidebar.title("🛡️ Code Quality AI")
-st.sidebar.caption("Intelligent Technical Debt & Refactoring Guardrail")
-
 server_token_present = bool(get_server_token())
-st.sidebar.markdown("---")
-st.sidebar.subheader("🔒 Authentication")
-
-if server_token_present:
-    st.sidebar.success("Server Token: Configured Securely ✅")
-    st.sidebar.caption("The backend server token is active and hidden. You may optionally enter a personal token below to override it.")
-else:
-    st.sidebar.warning("No Server Token Detected ⚠️")
-    st.sidebar.caption("Please enter your Personal Access Token below to analyze GitHub repositories.")
-
-custom_token = st.sidebar.text_input(
-    "Custom GitHub Token (Optional)",
-    value="",
-    type="password",
-    placeholder="Leave blank to use server token...",
-    help="Your token is kept strictly in-memory during this session and never stored.",
-)
-st.sidebar.markdown("---")
-
-st.sidebar.subheader("📌 Navigation")
-mode = st.sidebar.radio(
-    "Select Workflow Mode:",
-    [
-        "GitHub Commit / PR",
-        "Direct Code Compare",
-        "Git Diff / Patch",
-        "Model Performance",
-    ],
-)
-
-st.sidebar.markdown("---")
-st.sidebar.markdown("""
-<div style="font-size: 0.8rem; color: #64748b; line-height: 1.5;">
-    <b>Model:</b> XGBoost Classifier<br>
-    <b>Features:</b> 25 delta metrics<br>
-    <b>Explainability:</b> SHAP TreeExplainer<br>
-    <b>Status:</b> Production Ready 🚀
-</div>
-""", unsafe_allow_html=True)
-
+render_navbar(server_token_present)
 
 # --------------------------------------------------------------------------
-# Mode 1: GitHub Commit / PR
+# Minimalist Sidebar (Strictly Developer Controls & Auth)
 # --------------------------------------------------------------------------
-if mode == "GitHub Commit / PR":
-    st.header("🔍 GitHub Commit & Pull Request Quality Analyzer")
-    st.markdown(
-        "Analyze any public GitHub repository change to detect potential maintainability regressions before merging."
+with st.sidebar:
+    st.markdown("### Authentication")
+    if server_token_present:
+        st.success("Server Token: Configured Securely")
+        st.caption("Backend token is active in server memory. You may optionally enter a custom token below to override.")
+    else:
+        st.warning("No Server Token")
+        st.caption("Enter a personal GitHub token to query the GitHub API.")
+
+    custom_token = st.text_input(
+        "Custom Token (Optional)",
+        value="",
+        type="password",
+        placeholder="Enter personal token...",
+        help="Optional personal token. Overrides server token for this browser session only.",
     )
 
-    # 1-Click Preset Loaders
-    st.markdown("**⚡ 1-Click Demo Scenarios:**")
-    p_col1, p_col2, p_col3 = st.columns(3)
-    preset_choice = "custom"
-    with p_col1:
-        if st.button("🔥 Flask: Python 3.12 Refactor (42dc739)", help="Clean Python AST refactor in Pallets Flask"):
+    st.markdown("---")
+    st.markdown("### System Specifications")
+    st.markdown("""
+    - **Engine:** XGBoost Classifier
+    - **Dataset:** 450 mined Python commits
+    - **Offline Accuracy:** 98.5%
+    - **ROC-AUC:** 0.996
+    - **Parser:** Radon, Lizard, Python AST
+    - **Explainability:** TreeExplainer SHAP
+    """)
+
+
+# --------------------------------------------------------------------------
+# Main Workspace Tabs (GitHub Inspector, Sandbox, Patch, Model, Docs)
+# --------------------------------------------------------------------------
+tab_github, tab_compare, tab_patch, tab_metrics, tab_docs = st.tabs([
+    "GitHub Inspector",
+    "Code Sandbox",
+    "Patch Inspector",
+    "Model Benchmarks",
+    "Metric Specifications",
+])
+
+
+# ==========================================================================
+# TAB 1: GitHub Commit / PR Inspector
+# ==========================================================================
+with tab_github:
+    st.markdown("#### Inspect Live GitHub Commit or Pull Request")
+    st.caption("Fetches unified diffs, reconstructs file ASTs, and calculates code quality deltas.")
+
+    # Inline Quick Presets
+    st.markdown("**Quick Presets:**")
+    p1, p2, p3 = st.columns(3)
+    with p1:
+        if st.button("pallets/flask @ 42dc739", help="Python 3.12 AST refactor"):
             st.session_state["gh_repo"] = "pallets/flask"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "42dc739"
-    with p_col2:
-        if st.button("⚡ Requests: Response Header Fix (c8a4087)", help="Real bugfix commit in psf/requests"):
+    with p2:
+        if st.button("psf/requests @ c8a4087", help="Bugfix commit in Requests"):
             st.session_state["gh_repo"] = "psf/requests"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "c8a4087"
-    with p_col3:
-        if st.button("🧪 Flask: Recent Release Commit (HEAD~1)", help="Inspect the latest commit on Pallets Flask"):
+    with p3:
+        if st.button("pallets/flask @ HEAD~1", help="Recent Flask repository commit"):
             st.session_state["gh_repo"] = "pallets/flask"
             st.session_state["gh_type"] = "Commit SHA"
             st.session_state["gh_target"] = "HEAD~1"
@@ -676,27 +470,23 @@ if mode == "GitHub Commit / PR":
     init_type = st.session_state.get("gh_type", "Commit SHA")
     init_target = st.session_state.get("gh_target", "42dc739")
 
-    col_repo, col_type, col_id = st.columns([2, 1, 2])
+    col_repo, col_type, col_id = st.columns([3, 2, 3])
     with col_repo:
-        repo_input = st.text_input("Repository (owner/repo)", value=init_repo, help="E.g., pallets/flask or psf/requests")
+        repo_input = st.text_input("Repository (owner/repo)", value=init_repo)
     with col_type:
         type_options = ["Commit SHA", "Pull Request #"]
-        type_index = 0 if init_type == "Commit SHA" else 1
-        target_type = st.selectbox("Target Type", type_options, index=type_index)
+        target_type = st.selectbox("Target Type", type_options, index=0 if init_type == "Commit SHA" else 1)
     with col_id:
-        if target_type == "Commit SHA":
-            target_id = st.text_input("Commit SHA", value=init_target, help="Full or short git commit SHA (e.g. 42dc739 or HEAD~1)")
-        else:
-            target_id = st.text_input("Pull Request #", value="5000", help="Numeric PR number (e.g. 5000)")
+        target_id = st.text_input("Commit SHA or PR #", value=init_target)
 
-    if st.button("🚀 Analyze GitHub Change", type="primary"):
+    if st.button("Analyze Commit / PR", type="primary"):
         active_fetcher, fetcher_err = get_github_fetcher(token=custom_token)
         if not active_fetcher:
-            st.error(f"GitHub client is not configured: {fetcher_err}")
+            st.error(f"GitHub client error: {fetcher_err}")
         elif not predictor:
-            st.error("Model is not trained yet. Run the training pipeline first.")
+            st.error("Predictor model artifact is not loaded.")
         else:
-            with st.spinner("Fetching diffs, reconstructing ASTs, and computing metrics..."):
+            with st.spinner("Fetching changes and computing metrics..."):
                 try:
                     repo_clean = repo_input.strip()
                     target_clean = target_id.strip()
@@ -708,36 +498,15 @@ if mode == "GitHub Commit / PR":
                     py_files = change_data.get("files", [])
                     if not py_files:
                         sha_short = change_data.get("sha", "")[:7] if change_data.get("sha") else target_clean
-                        st.info(
-                            f"Commit `{sha_short}` was retrieved successfully, but no Python (.py) files were modified in this change "
-                            f"(only documentation, markdown, or configs were touched). Try a commit that touches Python files, such as `42dc739`!"
-                        )
+                        st.info(f"Commit `{sha_short}` retrieved, but contains no modified Python files. Try a commit touching `.py` files such as `42dc739`.")
                     else:
-                        st.success(f"Successfully retrieved and parsed {len(py_files)} modified Python file(s).")
                         features = extract_features_from_files(py_files)
                         pred = predictor.predict(features)
 
-                        render_prediction_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Medium Risk"))
+                        render_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Low Risk"))
 
-                        # Commit Details
-                        with st.expander("📋 Change Metadata & Author Notes", expanded=True):
-                            c_a, c_d = st.columns(2)
-                            with c_a:
-                                st.write(f"**Author:** `{change_data.get('author')}`")
-                            with c_d:
-                                st.write(f"**Date:** `{change_data.get('date') or change_data.get('created_at')}`")
-                            msg = change_data.get('message') or change_data.get('title')
-                            st.info(f"**Commit Message / Title:**\n\n{msg}")
-
-                        # SHAP Explanation
-                        if explainer:
-                            exp = explainer.explain_prediction(features)
-                            st.subheader("💡 Why Did the AI Make This Prediction?")
-                            render_shap_chart(exp["contributions"])
-                            st.markdown(exp["narrative"])
-
-                        # Changed Files
-                        st.subheader("📁 Changed Python Files")
+                        # Changed Files Summary
+                        st.markdown(f"**Changed Python Files ({len(py_files)}):**")
                         files_df = pd.DataFrame([
                             {
                                 "Filename": f["filename"],
@@ -749,45 +518,55 @@ if mode == "GitHub Commit / PR":
                         ])
                         st.dataframe(files_df, width="stretch", hide_index=True)
 
+                        # Metadata Strip
+                        with st.expander("Commit Details & Message", expanded=False):
+                            st.markdown(f"**Author:** `{change_data.get('author')}` | **Date:** `{change_data.get('date') or change_data.get('created_at')}`")
+                            msg = change_data.get('message') or change_data.get('title')
+                            st.code(msg, language="text")
+
+                        # SHAP Explanation
+                        if explainer:
+                            exp = explainer.explain_prediction(features)
+                            render_shap_figure(exp["contributions"])
+                            st.markdown(exp["narrative"])
+
                 except Exception as exc:
-                    st.error(f"Failed to analyze GitHub change: {exc}")
+                    st.error(f"Analysis failed: {exc}")
 
 
-# --------------------------------------------------------------------------
-# Mode 2: Direct Code Compare (Before vs After)
-# --------------------------------------------------------------------------
-elif mode == "Direct Code Compare":
-    st.header("📝 Direct Code Comparison & Refactoring Sandbox")
-    st.markdown(
-        "Paste your original Python snippet on the left and the proposed refactoring on the right to evaluate the quality shift."
-    )
+# ==========================================================================
+# TAB 2: Code Comparison Sandbox (Before vs After)
+# ==========================================================================
+with tab_compare:
+    st.markdown("#### Direct Code Comparison Sandbox")
+    st.caption("Compare original and refactored Python snippets side-by-side to evaluate quality shifts.")
 
-    preset = st.selectbox(
-        "Load Preset Scenario:",
+    scenario = st.selectbox(
+        "Load Code Scenario:",
         [
-            "Custom Code (Write / Paste Your Own)",
-            "Scenario 1: Safe Clean Refactoring (Improves Maintainability)",
-            "Scenario 2: Nested Spaghetti Trap (High Complexity Degradation)",
-            "Scenario 3: Adding Docstrings & Type Annotations (Boosts Documentation Density)",
+            "Custom Snippets",
+            "Refactoring: Nested Loops → List Comprehension (Improves MI)",
+            "Degradation: Deep Nesting & Branching Anti-Pattern (High CC)",
+            "Documentation: Adding Docstrings & Type Hints (Boosts Documentation Density)",
         ],
     )
 
-    if preset == "Scenario 1: Safe Clean Refactoring (Improves Maintainability)":
-        default_old = """def process_items(items):
+    if scenario == "Refactoring: Nested Loops → List Comprehension (Improves MI)":
+        s_old = """def process_items(items):
     output = []
     for item in items:
         if item is not None:
             if item.is_valid():
                 output.append(item.value)
     return output"""
-        default_new = """def process_items(items: list) -> list:
+        s_new = """def process_items(items: list) -> list:
     \"\"\"Extract valid values concisely using list comprehension.\"\"\"
     return [item.value for item in items if item and item.is_valid()]"""
 
-    elif preset == "Scenario 2: Nested Spaghetti Trap (High Complexity Degradation)":
-        default_old = """def handle_request(req):
+    elif scenario == "Degradation: Deep Nesting & Branching Anti-Pattern (High CC)":
+        s_old = """def handle_request(req):
     return {"status": "ok"}"""
-        default_new = """def handle_request(req):
+        s_new = """def handle_request(req):
     if req.method == 'POST':
         if req.user:
             if req.user.is_admin:
@@ -801,19 +580,19 @@ elif mode == "Direct Code Compare":
                             pass
     return {"status": "ok"}"""
 
-    elif preset == "Scenario 3: Adding Docstrings & Type Annotations (Boosts Documentation Density)":
-        default_old = """def calculate_mortgage(principal, rate, years):
+    elif scenario == "Documentation: Adding Docstrings & Type Hints (Boosts Documentation Density)":
+        s_old = """def calculate_mortgage(principal, rate, years):
     n = years * 12
     r = rate / 12 / 100
     monthly = principal * (r * (1 + r)**n) / ((1 + r)**n - 1)
     return monthly"""
-        default_new = """def calculate_mortgage(principal: float, rate: float, years: int) -> float:
+        s_new = """def calculate_mortgage(principal: float, rate: float, years: int) -> float:
     \"\"\"
     Calculate fixed monthly mortgage payments.
 
     Args:
         principal: Total loan amount borrowed.
-        rate: Annual interest rate as a percentage (e.g. 5.5 for 5.5%).
+        rate: Annual interest rate as a percentage (e.g. 5.5).
         years: Loan duration in years.
 
     Returns:
@@ -825,98 +604,65 @@ elif mode == "Direct Code Compare":
     return monthly"""
 
     else:
-        default_old = "# Paste original code here\ndef compute(x):\n    return x * 2\n"
-        default_new = "# Paste modified code here\ndef compute(x):\n    return x * 2 + 1\n"
+        s_old = "def compute(x):\n    return x * 2\n"
+        s_new = "def compute(x):\n    return x * 2 + 1\n"
 
-    col_old, col_new = st.columns(2)
-    with col_old:
-        old_code = st.text_area("Original Code (Before)", value=default_old, height=240)
-    with col_new:
-        new_code = st.text_area("Modified Code (After)", value=default_new, height=240)
+    c_left, c_right = st.columns(2)
+    with c_left:
+        code_before = st.text_area("Original Code (Before)", value=s_old, height=220)
+    with c_right:
+        code_after = st.text_area("Modified Code (After)", value=s_new, height=220)
 
-    if st.button("⚡ Analyze Code Quality Shift", type="primary"):
+    if st.button("Evaluate Quality Shift", type="primary"):
         if not predictor:
-            st.error("Model is not trained yet. Run the training pipeline first.")
+            st.error("Predictor model is not available.")
         else:
-            file_change = {"filename": "editor.py", "old_code": old_code, "new_code": new_code}
+            file_change = {"filename": "sandbox.py", "old_code": code_before, "new_code": code_after}
             features = extract_features_from_files([file_change])
 
-            old_m = extract_code_metrics(old_code)
-            new_m = extract_code_metrics(new_code)
+            old_m = extract_code_metrics(code_before)
+            new_m = extract_code_metrics(code_after)
             delta_m = compute_delta_metrics(old_m, new_m)
 
             pred = predictor.predict(features)
-            render_prediction_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Medium Risk"))
+            render_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Low Risk"))
 
-            st.subheader("📊 Metric Shifts & Delta Comparison")
-            render_metrics_cards(old_m.to_dict(), new_m.to_dict(), delta_m.to_dict())
+            st.markdown("##### Metric Deltas")
+            render_metrics_row(old_m.to_dict(), new_m.to_dict(), delta_m.to_dict())
 
             if explainer:
                 exp = explainer.explain_prediction(features)
-                st.subheader("💡 Why Did the Model Make This Prediction?")
-                render_shap_chart(exp["contributions"])
+                render_shap_figure(exp["contributions"])
                 st.markdown(exp["narrative"])
 
 
-# --------------------------------------------------------------------------
-# Mode 3: Git Diff / Patch
-# --------------------------------------------------------------------------
-elif mode == "Git Diff / Patch":
-    st.header("🔀 Unified Diff & Patch Quality Analyzer")
-    st.markdown(
-        "Paste standard unified git diffs generated from `git diff` or PR patch endpoints to inspect quality impact."
-    )
+# ==========================================================================
+# TAB 3: Patch Inspector (Unified Diff)
+# ==========================================================================
+with tab_patch:
+    st.markdown("#### Unified Patch Inspector")
+    st.caption("Paste standard unified diff chunks from git diff or pull request review tools.")
 
-    diff_preset = st.selectbox(
-        "Load Preset Patch Scenario:",
-        [
-            "Preset 1: Defensive Safety Validation (+ branch check)",
-            "Preset 2: Refactoring Dead Code (- churn reduction)",
-            "Preset 3: Deep Nesting Arrowhead Addition (+ risk)",
-        ],
-    )
-
-    if diff_preset == "Preset 1: Defensive Safety Validation (+ branch check)":
-        sample_patch = """@@ -1,5 +1,9 @@
+    default_diff = """@@ -1,5 +1,9 @@
  def calculate(a, b):
 -    return a + b
 +    if b < 0:
 +        raise ValueError("b must be positive")
 +    # Add safety check
 +    return a + b"""
-    elif diff_preset == "Preset 2: Refactoring Dead Code (- churn reduction)":
-        sample_patch = """@@ -1,8 +1,3 @@
- def parse_data(raw):
--    temp = []
--    for x in raw:
--        temp.append(x)
--    result = [i for i in temp]
--    return result
-+    return list(raw)"""
-    else:
-        sample_patch = """@@ -1,4 +1,11 @@
- def sync(user):
--    return True
-+    if user:
-+        if user.is_active:
-+            for role in user.roles:
-+                if role.name == 'ADMIN':
-+                    while True:
-+                        break
-+    return False"""
 
-    patch_input = st.text_area("Unified Git Diff Patch", value=sample_patch, height=220)
+    patch_text = st.text_area("Unified Git Diff", value=default_diff, height=180)
 
-    if st.button("🔍 Inspect Patch Quality Impact", type="primary"):
+    if st.button("Inspect Patch Quality", type="primary"):
         if not predictor:
-            st.error("Model is not trained yet. Run the training pipeline first.")
+            st.error("Predictor model is not available.")
         else:
-            old_code, new_code = reconstruct_code_versions_from_patch(patch_input)
-            diff_m = extract_diff_metrics(patch_input)
+            old_code, new_code = reconstruct_code_versions_from_patch(patch_text)
+            diff_m = extract_diff_metrics(patch_text)
 
             file_change = {
                 "filename": "patch.py",
-                "patch": patch_input,
+                "patch": patch_text,
                 "old_code": old_code,
                 "new_code": new_code,
             }
@@ -926,78 +672,77 @@ elif mode == "Git Diff / Patch":
             delta_m = compute_delta_metrics(old_m, new_m)
 
             pred = predictor.predict(features)
-            render_prediction_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Medium Risk"))
+            render_verdict(pred["prediction"], pred["degradation_probability"], pred.get("risk_level", "Low Risk"))
 
-            st.subheader("📊 Patch Statistics")
-            c1, c2, c3, c4 = st.columns(4)
-            with c1:
-                render_metric_card("Lines Added", f"+{diff_m.lines_added}", "Diff chunk additions", "neutral")
-            with c2:
-                render_metric_card("Lines Deleted", f"-{diff_m.lines_deleted}", "Diff chunk deletions", "neutral")
-            with c3:
-                render_metric_card("Net Lines Churn", f"{diff_m.net_lines:+d}", "Net code volume", "neutral")
-            with c4:
-                b_type = "pos" if diff_m.net_branch_keywords <= 0 else "neg"
-                render_metric_card("Net Branch Keywords", f"{diff_m.net_branch_keywords:+d}", "if/for/while delta", b_type)
+            st.markdown("##### Diff Statistics")
+            d1, d2, d3, d4 = st.columns(4)
+            with d1:
+                render_stat_box("Lines Added", f"+{diff_m.lines_added}", "Diff additions", "neutral")
+            with d2:
+                render_stat_box("Lines Deleted", f"-{diff_m.lines_deleted}", "Diff deletions", "neutral")
+            with d3:
+                render_stat_box("Net Lines", f"{diff_m.net_lines:+d}", "Net code change", "neutral")
+            with d4:
+                b_class = "positive" if diff_m.net_branch_keywords <= 0 else "negative"
+                render_stat_box("Branch Keywords", f"{diff_m.net_branch_keywords:+d}", "Control flow keywords", b_class)
 
             if explainer:
                 exp = explainer.explain_prediction(features)
-                st.subheader("💡 SHAP Explanation for This Patch")
-                render_shap_chart(exp["contributions"])
+                render_shap_figure(exp["contributions"])
                 st.markdown(exp["narrative"])
 
 
-# --------------------------------------------------------------------------
-# Mode 4: Model Performance
-# --------------------------------------------------------------------------
-elif mode == "Model Performance":
-    st.header("📈 Model Benchmarking & Performance Report")
-    st.markdown(
-        "Comprehensive offline evaluation benchmarks comparing candidate classification algorithms across test datasets."
-    )
-
+# ==========================================================================
+# TAB 4: Model Benchmarks & Metrics
+# ==========================================================================
+with tab_metrics:
+    st.markdown("#### Offline Model Evaluation Benchmarks")
     metrics_path = Path("models/metrics.json")
     if not metrics_path.exists():
-        st.info("Model metrics not found. Train the model first using 'src.models.trainer'.")
+        st.info("No metrics file found at models/metrics.json.")
     else:
         with metrics_path.open("r", encoding="utf-8") as fh:
             report = json.load(fh)
 
-        st.subheader(f"🏆 Winning Production Model: `{report.get('best_model_name')}`")
-
         test_m = report.get("test_metrics", {})
         c1, c2, c3, c4, c5 = st.columns(5)
         with c1:
-            render_metric_card("Test Accuracy", f"{test_m.get('accuracy', 0)*100:.1f}%", "Overall correctness", "pos")
+            render_stat_box("Accuracy", f"{test_m.get('accuracy', 0)*100:.1f}%", "Test split", "positive")
         with c2:
-            render_metric_card("Test Precision", f"{test_m.get('precision', 0)*100:.1f}%", "Zero false positives", "pos")
+            render_stat_box("Precision", f"{test_m.get('precision', 0)*100:.1f}%", "Class 1 (Degradation)", "positive")
         with c3:
-            render_metric_card("Test Recall", f"{test_m.get('recall', 0)*100:.1f}%", "Defect sensitivity", "pos")
+            render_stat_box("Recall", f"{test_m.get('recall', 0)*100:.1f}%", "Defect catch rate", "positive")
         with c4:
-            render_metric_card("Test F1-Score", f"{test_m.get('f1', 0):.3f}", "Harmonic mean", "pos")
+            render_stat_box("F1-Score", f"{test_m.get('f1', 0):.3f}", "Harmonic mean", "positive")
         with c5:
-            render_metric_card("Test ROC-AUC", f"{test_m.get('roc_auc', 0):.3f}", "Separation power", "pos")
+            render_stat_box("ROC-AUC", f"{test_m.get('roc_auc', 0):.3f}", "Discrimination power", "positive")
 
-        # Candidate Model Comparison
-        st.subheader("📊 Candidate Model Comparison (Validation Benchmark)")
+        st.markdown("##### Candidate Model Comparison (5-Fold Stratified Validation)")
         val_data = report.get("candidate_val_metrics", {})
         if val_data:
             val_df = pd.DataFrame(val_data).T.reset_index().rename(columns={"index": "Candidate Algorithm"})
             st.dataframe(val_df, width="stretch", hide_index=True)
 
-            # Interactive Plotly Comparison Bar Chart
-            fig = px.bar(
-                val_df,
-                x="Candidate Algorithm",
-                y=["accuracy", "f1", "roc_auc"],
-                barmode="group",
-                title="<b>Validation Metrics Comparison Across Algorithms</b>",
-                color_discrete_sequence=["#4f46e5", "#06b6d4", "#10b981"],
-            )
-            fig.update_layout(
-                height=360,
-                plot_bgcolor="rgba(248, 250, 252, 0.8)",
-                paper_bgcolor="rgba(0,0,0,0)",
-                font=dict(family="Plus Jakarta Sans, sans-serif"),
-            )
-            st.plotly_chart(fig, width="stretch")
+
+# ==========================================================================
+# TAB 5: Metric Specifications & Developer Guide
+# ==========================================================================
+with tab_docs:
+    st.markdown("#### Metric Specifications & Interpretation Guide")
+    st.markdown("""
+    This system applies static code analysis and machine learning to evaluate whether a code change introduces maintainability debt.
+
+    ##### 1. Metric Definitions
+    | Metric | Formula / Source | Normal Range | Interpretation |
+    | :--- | :--- | :--- | :--- |
+    | **Maintainability Index (MI)** | Radon / SEI Formula: $171 - 5.2\\ln(V) - 0.23CC - 16.2\\ln(LOC) + 50\\sin(\\sqrt{2.4 \\cdot r_{comment}})$ | 85 – 100 | Higher is better. Rewards clean modular code and penalizes large unformatted blocks. |
+    | **Cyclomatic Complexity (CC)** | McCabe CC: $E - N + 2P$ (Decision points + 1) | 1 – 10 | Measures independent execution paths. Scores above 15 require refactoring into smaller helper functions. |
+    | **Max Nesting Depth** | AST block traversal | 1 – 3 | Deep nesting ($>4$) indicates arrowhead anti-patterns. Refactor with early return guard clauses. |
+    | **Halstead Volume ($V$)** | $N \\log_2(\\eta)$ (Tokens & Operators) | Scale relative | Measures vocabulary and cognitive size of the code. |
+    | **Code Churn** | Added + Deleted lines | Proportional to PR scope | High churn coupled with low test additions represents elevated defect risk. |
+
+    ##### 2. Interpreting Predictions & Probabilities
+    - **Safe / Likely Improvement (Class 0):** The model is confident that the commit does not increase cyclomatic complexity or degrade the maintainability index.
+    - **Maintainability Risk (Class 1):** Indicates that the changes add significant branching, deep nesting, or unmanaged complexity.
+    - **SHAP Feature Attribution:** Explains each individual prediction by quantifying how much each structural feature raised or lowered the risk score from the baseline.
+    """)
