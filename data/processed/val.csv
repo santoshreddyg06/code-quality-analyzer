@@ -1,0 +1,207 @@
+sha,repo,authored_at,message,msg_is_bugfix,msg_is_revert,msg_is_test,msg_is_docs,files_changed_count,lines_added,lines_deleted,net_lines,churn,deletion_ratio,hunks_count,delta_maintainability_index,delta_total_complexity,delta_avg_complexity,delta_max_complexity,delta_high_complexity_functions,delta_halstead_volume,delta_halstead_effort,delta_max_nesting_depth,delta_classes_count,delta_functions_count,delta_try_except_count,net_branch_keywords,net_error_handlers,net_comments,old_maintainability_index,old_total_complexity,new_maintainability_index,new_total_complexity,label,label_name
+fb32a564ccc6f91d4b7594f5707c62fab0c11c04,django/django,2026-09-17T12:14:05+00:00,"Fixed #37348 -- Reverted ""Fixed #36806 -- Added system check for null kwarg in GeneratedField."".
+
+This reverts commit 6025eab3c509b4de922117e16866bbfe0ee99aa6, includes a
+release note for 6.1.2, and keeps fields.W225 documented as removed.
+
+Thanks to Michal Porteš for the report, and to Jacob Walls and
+Simon Charette for reviews.",False,False,False,False,2,0,39,-39,39,1.0,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,0,0,100.0,0,100.0,0,0,Likely Improvement
+bf24b7d8d17da34be720c19e5978b2d3bf94a53b,psf/requests,2024-05-12T20:08:24+00:00,Use an invalid URI that will not cause httpbin to throw 500,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+315ebc11765ed3b9da8b5271602e89a403376c24,pallets/flask,2025-03-29T22:28:27+00:00,better type checking during deprecation (#5700),False,False,False,False,1,14,13,1,27,0.4815,1,-3.84,0,0.0,0,0,6.86,9.23,1,0,0,0,1,0,0,74.17,2,70.33,2,1,Potential Degradation
+9e06baf2e4dd17834b5deaf3a3e6ae3bff2fcf26,django/django,2026-04-25T14:20:21+00:00,"Fixed #37066 -- Wrapped async iteration sites in (maybe_)aclosing.
+
+Replaced bare `async for` over a not-locally-defined async iterable with
+`async with (maybe_)aclosing(aiter(...)) as it: async for item in it:` at
+every consumption site, so the iterator's aclose() runs deterministically
+when the consumer exits — instead of being deferred to asyncio's asyncgen
+finalizer hook.
+
+Added django.utils.asyncio.maybe_aclosing as a small wrapper that uses
+contextlib.aclosing when the iterator has aclose(",False,False,False,False,13,191,43,148,234,0.1838,29,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,14,0,100.0,2,100.0,2,0,Likely Improvement
+7341690e842a23cf18ded0abd9229765fa88c4e2,psf/requests,2025-06-01T18:07:17+00:00,Merge pull request #6951 from tswast/patch-1,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+08ba4d0e0f62e322c6727596ee7a324465076a76,django/django,2026-09-17T22:34:24+00:00,Modeled a safer mechanism for installing a git hook for backports.,False,False,False,False,1,6,4,2,10,0.4,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,-1,100.0,0,100.0,0,0,Likely Improvement
+c32b046243dcbf0dceb952da1317261109ac45c4,psf/requests,2023-11-16T01:00:28+00:00,Fix missing space in error message,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b37878d3407995e41fd3c160fd04d5d0afda1130,psf/requests,2023-11-28T23:12:22+00:00,Too early definition added to 425 status code type,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+89e82866dc2746383c336c7b10e050b9da3ae1ef,django/django,2026-03-01T20:39:12+00:00,Fixed #29969 -- Omitted inlines without add permission on save-as-new.,False,False,False,False,2,41,0,41,41,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,2,100.0,0,100.0,0,0,Likely Improvement
+8c83e9c0ea39099b213478a893cbebe9faa837ba,django/django,2026-07-30T07:38:41+00:00,"Fixed #37235 -- Added compatibility for sqlparse 0.5.5.
+
+Thank you to Jacob Walls and Nick Pope for the review.",False,False,False,False,1,6,1,5,7,0.1429,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,2,1,100.0,0,100.0,0,0,Likely Improvement
+1dfd7cd5555d9e62a2e198a131c366242e724b35,pallets/flask,2025-08-18T17:26:12+00:00,use IO[bytes] instead of BinaryIO for wider compatibility (#5777),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+53b8f08218796d95764c5252bccd8a50a173a6fb,pallets/flask,2025-08-18T16:41:03+00:00,push preserved contexts in correct order,False,False,False,False,2,12,23,-11,35,0.6571,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,-4,0,100.0,0,100.0,0,0,Likely Improvement
+dcbede0cb00df32e7f1895e19e37d5f40a75d1f6,pallets/flask,2026-05-02T03:58:56+00:00,autoescape selection uses case-insensitive comparison (#6013),False,False,False,False,1,4,1,3,5,0.2,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+145b5399486b56e00250204f033441f3fdf2f3c9,psf/requests,2024-05-24T21:37:06+00:00,Merge pull request #6716 from sigmavirus24/bug/6715,True,False,False,False,1,74,10,64,84,0.119,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,0,0,100.0,0,100.0,0,0,Likely Improvement
+cc933385e75172cabacb49cfb9fe3571845cb216,django/django,2026-08-10T21:47:00+00:00,"Fixed #37271 -- Added calendar version support to django.utils.version.
+
+From Django 2028, feature releases are calendar versioned as YYYY[.N],
+where N is the patch number, as per DEP 20. A version is now read as the
+numbers of the printed version followed by the status and its iteration,
+so calendar versions have four components, (year, patch, status,
+iteration), while the earlier scheme keeps its five.
+
+django.VERSION is now a VersionTuple, providing `.feature`, `.patch`,
+`.status`, and `.iter",False,False,False,False,3,427,15,412,442,0.0339,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,26,0,46,100.0,0,100.0,0,0,Likely Improvement
+0e322af87745eff34caffe4df68456ebc20d9068,psf/requests,2024-05-29T15:36:10+00:00,v2.32.3,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c6be0bf3bb744d234947cefd6def9f31d9655800,django/django,2026-08-13T06:00:32+00:00,"Fixed #37254 -- Added fields.E323 for models referenced by ManyToManyFields.
+
+Thanks Jacob Walls and Sarah Boyce for reviews.",False,False,False,False,2,87,0,87,87,0.0,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,11,0,4,100.0,0,100.0,0,0,Likely Improvement
+c799b8167a13416833ad3b4f3298261a477e826f,psf/requests,2025-05-21T16:08:05+00:00,docs: fix dead links to kenreitz.org,True,False,False,True,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b394a994e6d632643d0061e0e67772f076925951,pallets/flask,2024-11-24T00:03:47+00:00,update `__version__` deprecation,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6a64969009bf1898bd302e6a9633f71942523f7f,pallets/flask,2025-09-19T23:58:48+00:00,pass context through dispatch methods,False,False,False,False,5,162,72,90,234,0.3077,34,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,0,13,100.0,1,100.0,1,0,Likely Improvement
+274df4df0bca7fcfb5c1c1d49567f770df147eeb,django/django,2026-06-28T13:40:00+00:00,"Fixed #37093 -- Clarified pull request instructions and adjusted error messages.
+
+The intention is to reduce the perceived harshness of error messages so
+that they look more like just a friendly list of things in your PR to
+fix, especially for new contributors.",True,False,False,False,3,11,38,-27,49,0.7755,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+c2517faff335f683e1cbe55d9844910b3fb40670,django/django,2026-07-06T13:27:02+00:00,Fixed #37198 -- Fixed content_disposition_header() quoting of filenames ending with newlines.,False,False,False,False,2,3,1,2,4,0.25,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+e45b428960ff3927812fc9b555e2ac627ba95769,psf/requests,2024-04-08T19:47:12+00:00,"Add rfc9110 HTTP status code names
+
+RFC 9110 _HTTP Semantics_ obsoletes some earlier RFCs which defined HTTP
+1.1. It adds some status codes that were previously only used for
+WebDAV to HTTP _proper_ after making the names somewhat more generic.
+
+See https://www.rfc-editor.org/rfc/rfc9110.html#name-changes-from-rfc-7231
+
+This commit adds the http status code names from that RFC.",False,False,False,False,1,4,4,0,8,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+ea303dee45f4b703b31f73ceb235f11742d3c518,django/django,2026-07-31T11:27:28+00:00,Fixed #37236 -- Allowed altering spatial indexes on RasterField.,False,False,False,False,2,42,3,39,45,0.0667,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,0,0,100.0,0,100.0,0,0,Likely Improvement
+089cb86dd22bff589a4eafb7ab8e42dc357623b4,pallets/flask,2026-02-19T03:35:58+00:00,"Merge commit from fork
+
+request context tracks session access",False,False,False,False,5,71,53,18,124,0.4274,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,6,-5,100.0,0,100.0,0,0,Likely Improvement
+18ffe1eaf6c2eeffc898f4e8a590c062c40b30dc,pallets/flask,2024-11-21T03:37:06+00:00,add gettext config for docs,False,False,False,True,1,3,0,3,3,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6669d66a795029add189bebe6f7a7fdcf2c9f9d4,django/django,2026-10-12T12:08:14+00:00,"Skipped 1-element geometry collection tests on all Oracle versions.
+
+Later versions of Oracle 19c produced the same failures described in
+cccc004b46f71b4e54d87b376be691a17de6b903.",False,False,False,False,1,8,15,-7,23,0.6522,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,0,0,100.0,0,100.0,0,0,Likely Improvement
+ccf125bf30102beedafb3ecef72376bfb6c90a4d,pallets/flask,2024-04-23T23:49:42+00:00,fix mypy findings,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9a40d1277807f0a4f26c9a37eea8ec90faa8aadc,psf/requests,2024-05-15T20:07:26+00:00,Avoid reloading root certificates to improve concurrent performance (#6667),False,False,False,False,1,28,18,10,46,0.3913,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,0,4,100.0,0,100.0,0,0,Likely Improvement
+a758915893352f5986c6ee101cdf7e3b7a64fa28,pallets/flask,2025-06-09T21:31:31+00:00,svg logo,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+12e95c93b488725f80753f34b2e0d24838ca4646,pallets/flask,2026-02-12T21:07:50+00:00,fix provide_automatic_options override (#5917),True,False,False,False,5,93,85,8,178,0.4775,8,1.5,2,-0.11,0,0,-1.82,-20.84,0,0,2,0,-1,-12,-3,92.74,7,94.24,9,0,Likely Improvement
+a58d7f2ffb4d00b46dca2d70a3932a0b37e22fac,psf/requests,2024-03-11T11:21:59+00:00,"Merge pull request #6655 from sigmavirus24/fix-tls-floppy
+
+Use TLS settings in selecting connection pool",True,False,False,False,2,64,1,63,65,0.0154,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,5,4,100.0,0,100.0,0,0,Likely Improvement
+d318b683471101618febed18996405ad26462110,pallets/flask,2026-08-16T18:35:31+00:00,explain seek,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+d086db856be187255b8ec61ef409357393020f32,pallets/flask,2026-10-07T14:02:54+00:00,fix typing,True,False,False,False,1,2,1,1,3,0.3333,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+382fc2c0c6c0ef0874bc65bc1175f97c073e5086,psf/requests,2024-02-22T20:27:37+00:00,"Merge pull request #6629 from Tarty/fix-6628-jsondecode-error-not-deserializable
+
+Fix #6628 - JSONDecodeError are not deserializable",True,False,False,False,2,20,0,20,20,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,0,100.0,0,100.0,0,0,Likely Improvement
+5559ef42b5334075cbde82b2870ca725ac606fa4,pallets/flask,2026-01-25T03:00:23+00:00,pre-commit: Add codespell (#5844),False,False,False,False,2,3,3,0,6,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6404f345e562d962abe6700a1c357ec1e7e18232,psf/requests,2026-05-12T17:51:01+00:00,"Fix `prepare_body` stream detection for `__getattr__`-based file wrappers (#7433)
+
+---------
+
+Co-authored-by: Nate Prewitt <nate.prewitt@gmail.com>",True,False,False,False,2,18,3,15,21,0.1429,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,1,1,100.0,0,100.0,0,0,Likely Improvement
+b1d73ddb509a3a2d3e10744e85f9cdebdbde90f0,psf/requests,2024-05-24T16:00:52+00:00,Don't use default SSLContext with custom poolmanager kwargs,False,False,False,False,1,6,2,4,8,0.25,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+07d4f69c94a0e32c583b3aee5daf48fd81b4cd69,django/django,2026-08-08T22:01:34+00:00,"Fixed #37260 -- Made alterations between Python on_delete options noops.
+
+Support for database-level delete options removed ""on_delete"" from
+`Field.non_db_attrs` because changes to or from the new `DB_CASCADE`,
+`DB_SET_DEFAULT`, and `DB_SET_NULL` options require schema changes. As a
+consequence, an `AlterField` changing only a Python-level `on_delete` option
+(such as `CASCADE` to `PROTECT`) performs unnecessary schema changes when it
+was previously a no-op at the database level.
+
+This commit mak",False,False,False,False,3,83,1,82,84,0.0119,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,6,100.0,0,100.0,0,0,Likely Improvement
+62ef9d40cf4ea75f16518436b44b8ab2515340df,django/django,2026-08-20T20:06:18+00:00,"Refs CVE-2026-15830 -- Fixed WKB geometry collection limit bypasses.
+
+The WKB geometry collection limiter could be bypassed by invalid
+byte-order markers, which GEOS tolerates, and recursively invalid
+multi-geometry nesting such as a MULTIPOINT containing another
+MULTIPOINT. Big-endian ISO HEXWKB also bypassed the limiter because
+geometry types were unconditionally byte-swapped.
+
+Replaced byte-pattern scanning with a lightweight structural WKB scan.
+This also avoids rejecting valid inputs whose ",False,False,False,False,6,231,88,143,319,0.2759,13,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,17,6,3,100.0,0,100.0,0,0,Likely Improvement
+d2f6bdecc835475c3cfbb83565ea879d7b2712ca,psf/requests,2026-04-15T15:06:46+00:00,"Clarify decode_unicode behaviour in iter_{content,lines} docstrings (#7365)",False,False,False,False,1,7,2,5,9,0.2222,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+cef2346abf8d6e9e61a5a3599fbcf72163e6a6e5,django/django,2026-07-29T03:37:14+00:00,Fixed #37239 -- Cleared stale db_default when pk comes from related object.,False,False,False,False,3,47,4,43,51,0.0784,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+839a8edec37c81a18ac8332cfbd44f44e1ae6206,psf/requests,2023-10-18T06:08:52+00:00,"Merge pull request #6552 from swims-hjkl/issue/test_header_validation
+
+#6551  - assert statements for test test_header_validation",True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,1,0,100.0,0,100.0,0,0,Likely Improvement
+cceb6969d4dd62a421c483eefb54cbc159afbded,django/django,2026-07-17T13:03:17+00:00,"Refs #32539 -- Fixed flaky facet filter tests.
+
+Because the default admin site was used, UserAdmin was never
+registered, meaning the username ordering was never applied.",False,False,False,False,1,4,1,3,5,0.2,2,-2.38,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,76.42,3,74.04,3,1,Potential Degradation
+36e4a824f340fdee7ed50937ba8e7f6bc7d17f81,pallets/flask,2026-05-31T14:42:46+00:00,Any for  CertParamType type,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+f7822f7c4185b45527f171095c4edf8777efe51b,psf/requests,2026-05-03T19:51:27+00:00,v2.34.0.dev1,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b5388a3a80cafcce2e34196d8e81cf5b48eb33bb,django/django,2026-08-08T21:28:34+00:00,"Fixed #37257, Refs #35738 -- Prevented double-dot deprecation warnings for template literals.
+
+The deprecation warning for double-dot variable lookups checked
+str(filter_expression.var), which for constants is the resolved literal
+value rather than a variable lookup. Templates containing string or translated
+string literals with two consecutive dots, such as {{ ""a..b"" }} or
+{{ 'a..b'|upper }}, therefore incorrectly raised a RemovedInDjango70Warning.
+
+The check now only applies when the filter ex",False,False,False,False,2,15,1,14,16,0.0625,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+f1949c1f9758947ade984c895ff16bef46f56520,django/django,2026-07-09T15:07:28+00:00,"Fixed CVE-2026-15307 -- Blocked raster strings and dicts in spatial lookups.
+
+Spatial lookups optimistically parse values as rasters before retrying
+as geometries. If a malicious value reached the GDALRaster constructor,
+depending on the raster driver, it might write to disk or fetch from the
+network regardless of the constructor's `write=False` default argument.
+
+Although this works as designed for model field assignment, this is
+potentially unexpected for querying, for example, in the admin's
+",False,False,False,False,6,201,38,163,239,0.159,20,0.0,2,-0.02,0,0,0.0,0.0,1,0,2,0,18,10,4,100.0,4,100.0,6,0,Likely Improvement
+026b005f3dc43a98557ce5a546b5e4938d06fed1,django/django,2026-09-03T02:10:47+00:00,Refs #37293 -- Updated deprecation docs for calendar-based warning names.,False,False,False,True,2,5,5,0,10,0.5,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+ed1c9e953e2d67c0994e32e6c8d878291e36d4f7,pallets/flask,2025-08-19T19:36:00+00:00,support call template_filter without parens (#5736),False,False,False,False,4,365,95,270,460,0.2065,15,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,60,0,100.0,0,100.0,0,0,Likely Improvement
+30ebe0001c1d10bebc68567f796d821f7b309f4d,django/django,2026-08-05T18:08:41+00:00,Added missing lang override in translation fetching helper for Serbian (Latin script).,False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+aca5b3f694cdabaee8d9accbb0c6fcd01839e9f3,django/django,2026-09-03T20:42:53+00:00,"Refs #37178 -- Deferred django.middleware import in django.utils.deprecation.
+
+django.utils.deprecation imported django.middleware.MiddlewareMixin at
+module level, solely to serve its deprecated __getattr__ import path.
+That gave the module a hard dependency on asgiref (via django.middleware)
+merely to be imported, which breaks in contexts where Django's own
+runtime dependencies aren't installed yet, such as a PEP 517 build
+backend resolving django.__version__ before installing install_requires.",False,False,False,False,1,8,2,6,10,0.2,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,5,100.0,0,100.0,0,0,Likely Improvement
+fe81969e83d03b61e587a28ddebb92b9fca2b441,django/django,2026-08-08T22:58:50+00:00,"Fixed #37263 -- Fixed changelist __exact search crashes and over-matching.
+
+Search terms for non-text `__exact` `search_fields` entries were validated
+with the model field's `formfield().to_python()`, which failed to reject
+invalid terms for two kinds of fields:
+
+- Fields with choices use `TypedChoiceField`, whose `to_python()` returns
+  the raw string unvalidated, so any non-matching search term (e.g.
+  `""john""` against an `IntegerField` with `choices`) reached the ORM and
+  crashed the changel",False,False,False,False,5,206,14,192,220,0.0636,9,-2.42,17,0.8,5,0,20.9,41.79,3,3,2,2,23,6,10,100.0,1,97.58,18,1,Potential Degradation
+2eab96a32a92ceb4b6947102626f896816a0291d,pallets/flask,2024-11-13T16:27:11+00:00,use generic bases for session (#5638),False,False,False,False,1,7,5,2,12,0.4167,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,-2,100.0,0,100.0,0,0,Likely Improvement
+3ff3ff21dd45957c9e143cd500291959bb15f690,psf/requests,2024-01-31T16:07:35+00:00,"Fix #6628 - JSONDecodeError are not deserializable
+
+requests.exceptions.JSONDecodeError are not deserializable: calling
+`pickle.dumps` followed by `pickle.loads` will trigger an error.
+
+This is particularly a problem in a process pool, as an attempt to
+decode json on an invalid json document will result in the entire
+process pool crashing.
+
+This is due to the MRO of the `requests.exceptions.JSONDecodeError`
+class: the `__reduce__` method called when pickling an instance is not
+the one from the J",True,False,False,False,2,20,0,20,20,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,0,100.0,0,100.0,0,0,Likely Improvement
+5fdce4c331ac530280cc941179d364a07f4a1088,pallets/flask,2023-10-01T15:37:05+00:00,"Don't set the cli attribute in the sansio scaffold
+
+It is (currently) Flask specific and hence cannot be shared in the
+sansio shared code.",False,False,False,False,4,52,12,40,64,0.1875,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,0,6,100.0,0,100.0,0,0,Likely Improvement
+e90852d20c9bc44c465e55234c01432711627d94,psf/requests,2023-03-03T05:32:49+00:00,Make json doc strings consistent (#6368),False,False,False,True,1,3,3,0,6,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7689f98403e2c0b0bc8d1031e60f8cff2620e86a,pallets/flask,2026-10-07T13:47:14+00:00,drop support for Python 3.10,False,False,False,False,7,20,30,-10,50,0.6,13,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-5,-1,-1,100.0,0,100.0,0,0,Likely Improvement
+7522c4bcdb10449dc919e0ffbdebb92fe66822b5,pallets/flask,2024-11-07T19:56:26+00:00,update env file precedence (#5630),False,False,False,False,2,87,47,40,134,0.3507,12,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,6,0,100.0,0,100.0,0,0,Likely Improvement
+3816cfa1abd42dca21b9e837f26c59b246016aaf,psf/requests,2026-05-11T17:33:17+00:00,Parameterize SupportsItems to handle Mapping key invariance (#7426),False,False,False,False,2,9,7,2,16,0.4375,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+be6cf832293779d8aeaeddca8c47a37ba1530898,django/django,2026-08-13T13:33:28+00:00,Fixed #37274 -- Allowed transforms in order_by() after alias().,False,False,False,False,3,15,4,11,19,0.2105,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,0,100.0,0,100.0,0,0,Likely Improvement
+a486b48d4ea0d34babe58cae215b2123748aacbd,django/django,2026-07-09T05:45:01+00:00,Fixed #37210 -- Logged cached_db session cache delete failures.,False,False,False,False,3,48,2,46,50,0.04,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,8,2,100.0,0,100.0,0,0,Likely Improvement
+6f205ff422bccd5e4c4fc0b64c5f3e7df5181db6,psf/requests,2026-06-08T20:52:51+00:00,Fix `_encode_files` detection for `__getattr__`-based file wrappers (#7502),True,False,False,False,2,14,1,13,15,0.0667,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,2,2,100.0,0,100.0,0,0,Likely Improvement
+d44f1c65239c3e33509224aa1931631243dbfa7f,pallets/flask,2025-07-16T09:21:50+00:00,relax type hint for bytes io,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a94e9b5308ffcc3d2913ab873e9810a6601a67da,psf/requests,2024-03-13T20:58:45+00:00,"Add local TLS server
+
+This also adds certificates for testing purposes and files to make it
+easy to generate/regenerate them.
+
+This also replaces an existing test of how we utilize our pool manager
+such that we don't connect to badssl.com
+
+Finally, this adds additional context parameters for our pool manager to
+account for mTLS certificates used by clients to authenticate to a
+server.",False,False,False,False,3,191,9,182,200,0.045,9,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,8,6,100.0,0,100.0,0,0,Likely Improvement
+c34d6e81fd8e405e6d4178bf24b364918811ef17,pallets/flask,2026-02-20T04:00:34+00:00,all teardown callbacks are called despite errors (#5928),False,False,False,False,8,191,79,112,270,0.2926,18,-1.86,10,0.44,7,0,169.08,501.7,3,0,6,0,9,13,0,96.9,3,95.04,13,1,Potential Degradation
+81798b406f97ffe4795d2c9fc18db7db744a96dc,pallets/flask,2026-08-11T18:59:41+00:00,fix typos,True,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+06463d3c11b3ce132075283d5f9368a269d66343,django/django,2026-07-15T19:03:37+00:00,"Fixed #27734 -- Made parallel test workers reuse database clones of exited workers.
+
+This prevents newly spawned workers from attempting to access nonexistent
+clones.
+
+Thanks James Bligh for the review.",False,False,True,False,3,133,16,117,149,0.1074,10,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,16,1,12,100.0,0,100.0,0,0,Likely Improvement

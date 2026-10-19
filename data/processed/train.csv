@@ -1,0 +1,828 @@
+sha,repo,authored_at,message,msg_is_bugfix,msg_is_revert,msg_is_test,msg_is_docs,files_changed_count,lines_added,lines_deleted,net_lines,churn,deletion_ratio,hunks_count,delta_maintainability_index,delta_total_complexity,delta_avg_complexity,delta_max_complexity,delta_high_complexity_functions,delta_halstead_volume,delta_halstead_effort,delta_max_nesting_depth,delta_classes_count,delta_functions_count,delta_try_except_count,net_branch_keywords,net_error_handlers,net_comments,old_maintainability_index,old_total_complexity,new_maintainability_index,new_total_complexity,label,label_name
+f04c5e696400badaa52b3450ded53e9091c2078a,pallets/flask,2025-06-08T16:52:11+00:00,update dev dependencies,False,False,False,False,6,7,7,0,14,0.5,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b7b549b54571d03950b16afd2d01bc6ff0348224,psf/requests,2026-05-13T19:17:24+00:00,v2.34.1,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+211cce038ab6354a15a76b2c7f98fa98bfc9e6a3,pallets/flask,2025-06-09T21:33:44+00:00,Merge branch 'stable',False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9e98a8749a01c12c792833e0e3278763b06c4838,psf/requests,2023-11-16T07:44:49+00:00,Merge pull request #6574 from msea1/matthew/fix_space,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+bc7dd0fc4d56e808bcdd85ac2d797b3107c89259,psf/requests,2026-03-30T15:24:49+00:00,Fix cosmetic header validity parsing regex (#7308),True,False,False,False,2,9,4,5,13,0.3077,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c17f379390731543eea33a570a47bd4ef76a54fa,pallets/flask,2026-02-19T03:02:54+00:00,request context tracks session access,False,False,False,False,5,71,53,18,124,0.4274,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,6,-5,100.0,0,100.0,0,0,Likely Improvement
+ca14173f968cf36115f22d6c6785f738de4391ed,django/django,2026-07-30T06:22:50+00:00,Fixed #37240 -- Fixed simplify_regex() with multiple unnamed groups.,False,False,False,False,2,9,3,6,12,0.25,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,0,1,100.0,0,100.0,0,0,Likely Improvement
+08e4c0d8e7db6343567e7b02e25da8ea2226a7e0,django/django,2026-09-04T21:08:08+00:00,"Fixed #37322 -- Avoided transforms on spatial fields with srid=None.
+
+After adjusting spatial queries to no longer interpolate the SRID param
+into the SQL template, an ""srid=None"" attribute on a spatial field became
+a valid input to the ST_Transform() function on PostGIS & SpatiaLite,
+returning NULL for the entire value. (Before, the string ""None"" was
+interpolated into the SQL, which crashed.)
+
+srid=-1 is the documented way to express an undefined SRID, but it's
+possible that users could experim",False,False,False,False,4,34,14,20,48,0.2917,5,0.0,-1,-0.25,0,0,0.0,0.0,0,-1,0,0,0,1,1,100.0,1,100.0,0,0,Likely Improvement
+2edca11103c1c27dd8b572dab544b7f48cf3b446,psf/requests,2025-07-25T20:42:15+00:00,"Add support for Python 3.14 and drop support for Python 3.8 (#6993)
+
+* Add testing for Python 3.14 preview build
+
+* Add trove classifier for Python 3.14
+
+* Remove support for Python 3.8",False,False,False,False,1,3,3,0,6,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+0c2bbe73982a70623fb81bf16b2507ea0ca80b99,psf/requests,2026-02-06T15:02:46+00:00,Drop support for Python 3.9 (#7196),False,False,False,False,1,2,2,0,4,0.5,1,20.26,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,79.74,0,100.0,0,0,Likely Improvement
+1190afd14fca74292946d62c4c8169880a47ff67,psf/requests,2026-06-04T21:43:21+00:00,Add type annotation for `Request.hooks` (#7498),False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5b4b64c3467fd7a3c03f91ee641aaa348b6bed3b,psf/requests,2025-06-05T14:55:33+00:00,"Add more tests to prevent regression of CVE 2024 47081
+
+Remove workaround not needed since py38 for os.path.expanduser.",True,False,False,False,2,20,8,12,28,0.2857,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,-3,100.0,0,100.0,0,0,Likely Improvement
+9cb2cba6fc7f71ed768aed8cbc32e7447ecb0be8,django/django,2026-03-02T07:45:40+00:00,Fixed typo in django/db/backends/mysql/schema.py.,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+dbd4c2882593f6118103120aa96fa9acdf7deedb,pallets/flask,2025-09-06T16:31:22+00:00,Changed the static annotated type of select_jinja_autoescape method in src/flask/sansio/app.py,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+d2e59b77fe18de318a8272c2a7bbc798d84d1d0d,django/django,2026-07-15T19:39:27+00:00,"Fixed CVE-2026-15830 -- Mitigated potential DoS via nested geometry collections.
+
+Since deeply nested geometry collections can lead to fatal errors in
+GEOS, a new `max_geom_collections` argument on geometry model and form
+fields, passed down to `GEOSGeometry` itself, allows limiting either
+depth (WKT) or total number (WKB) before reaching GEOS.
+
+Thanks Andrew MacPherson and kimchunbok_ for the reports, and Natalia
+Bidart, Simon Charette, and Sarah Boyce for reviews.",False,False,False,False,18,573,32,541,605,0.0529,45,-2.72,23,0.13,5,0,1127.99,3158.38,7,1,16,0,55,8,51,100.0,1,97.28,24,1,Potential Degradation
+6e83187b8feb273ed4c6cdab5efd8d54901dfab3,psf/requests,2026-05-14T19:21:52+00:00,v2.34.2,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7ef2946fb5151b745df30201b8c27790cac53875,pallets/flask,2026-03-24T13:55:57+00:00,remove unicode host test (#5962),False,False,True,False,1,0,21,-21,21,1.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-1,-1,100.0,0,100.0,0,0,Likely Improvement
+38b4c1e19b50494cfcdc9332899e09b7fed34979,pallets/flask,2025-08-19T15:23:51+00:00,refactor stream_with_context for async views (#5799),False,False,False,False,2,62,32,30,94,0.3404,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,3,100.0,0,100.0,0,0,Likely Improvement
+111d2b77790bf49943c0dfa09b365371c24aec7e,psf/requests,2026-03-30T16:07:00+00:00,v2.33.1,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+f2674c5bb4f7a79f836069859a346b81771eeee5,pallets/flask,2024-11-24T01:52:56+00:00,fix type hint for `cli_runner.invoke` (#5647),True,False,False,False,1,2,1,1,3,0.3333,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+52abe52bec23df6523aff492364f4f1b049c9572,django/django,2026-08-20T11:13:59+00:00,"Fixed #37293 -- Renamed RemovedInDjango71Warning to RemovedInDjango2029Warning.
+
+Per DEP 20, Django's version numbers are calendar-based from 2028, so
+deprecation warning classes are now named after the calendar version
+that removes the feature they mark, and the deprecation timeline is
+headed by the same calendar version.
+
+Updated references to RemovedInDjango71Warning to use the new warning,
+and adjusted references to ""Django 7.1"" to ""Django 2029"".",False,False,False,False,6,21,21,0,42,0.5,13,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9efc1ebeeb431769897798cdf8de2c67dcbbc9c0,pallets/flask,2024-06-10T01:55:22+00:00,"add SESSION_COOKIE_PARTITIONED config
+
+co-authored-by: Jose Cespedes <josecespedes@ibm.com>",False,False,False,False,3,15,0,15,15,0.0,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,2,0,100.0,0,100.0,0,0,Likely Improvement
+34a64bc65ee12dbe8d6cfd15e33e9ee632942dd2,psf/requests,2023-08-12T18:51:42+00:00,"Merge pull request #6266 from elprimato/spdx-conform-license
+
+Change to SPDX conform license string",False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+cb2c800518423e0042789ab09f8f6e719428a444,psf/requests,2026-01-31T02:25:55+00:00,Migrate build system to PEP 517 (#7012),False,False,False,False,1,4,100,-96,104,0.9615,1,10.58,0,0.0,0,0,-30.12,-95.25,0,0,0,0,-1,0,-2,67.44,0,78.02,0,0,Likely Improvement
+6baaf6a87706265446c4c7f2e3b96e3c49385b27,django/django,2026-07-06T22:32:25+00:00,"Fixed #37205 -- Asserted exact HttpResponse types in tests.
+
+assertIsInstance passes when the expected is a superclass of the
+returned object.
+
+Thanks James Bligh for the review!",False,False,False,False,4,26,26,0,52,0.5,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+d6dded3f00afcf56a7e866cb0732799045301eb0,psf/requests,2024-05-12T21:33:47+00:00,"Merge pull request #6700 from franekmagiera/update-redirect-to-invalid-uri-test
+
+Use an invalid URI that will not cause httpbin to throw 500",False,False,True,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+2a8a38b051fc248865730bf3511bf2e2ea325e81,pallets/flask,2026-08-11T22:32:49+00:00,support query in methodview,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6e5b15d542a4e85945fd72066bb6cecbc3a82191,psf/requests,2023-05-22T15:36:22+00:00,Fix linting issues,True,False,False,False,2,10,9,1,19,0.4737,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+504d1f12cd5879177295fecd2ba4da1001a0930f,django/django,2026-08-18T15:43:45+00:00,Refs #37260 -- Added missing skip condition to test_fk_alter_on_delete_db_level.,False,False,False,False,1,5,1,4,6,0.1667,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+850e026cbfbe65944a5e0dc50e47c7ac64143708,django/django,2026-06-30T17:19:57+00:00,"Fixed #36809 -- Allowed customizing EmailValidator per-part validation.
+
+`EmailValidator` now includes the invalid `username` or `domain` in the
+`params` of the `ValidationError` it raises, so error messages can
+reference the part that failed.
+
+Address parsing and validation are now split into overridable methods
+(`parse_address()`, `validate()`, `validate_username()`, and
+`validate_domain()`), each receiving the full address being validated.
+Subclasses can customize parsing, an individual part,",False,False,False,False,2,351,10,341,361,0.0277,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,23,17,34,100.0,0,100.0,0,0,Likely Improvement
+60121939f6b225c7a719dd561e372e1d8e5e2c4a,django/django,2026-05-18T19:09:07+00:00,Fixed #36626 -- Preserved milliseconds in DataSource time fields.,False,False,False,False,3,42,10,32,52,0.1923,12,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+5880befcd22490c40f3c63d6178427f7753672c1,pallets/flask,2026-01-25T03:05:26+00:00,Merge branch 'stable',False,False,False,False,3,4,4,0,8,0.5,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+73d6504063bfa00666a92b07a28aaf906c532f09,pallets/flask,2025-05-13T14:46:54+00:00,"Merge commit from fork
+
+Sessions: fix signing key selection when key rotation is enabled",False,False,False,False,2,13,5,8,18,0.2778,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+661970d171d9c3e12e4c789c4768db647d8c4da0,psf/requests,2026-06-08T17:33:26+00:00,Disable commonly ignored Pyright linting rules (#7497),False,False,False,False,9,31,29,2,60,0.4833,22,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7d94ee295df9b2503135158a7f2b55fb686785fc,django/django,2026-09-30T19:20:17+00:00,"Fixed #37386 -- Observed delete_confirmation_max_display=0 for inlines.
+
+0 was being treated equivalently to None, which didn't agree with the
+behavior on ``ModelAdmin`` for the delete actions.
+
+Thanks Natalia Bidart for the review.
+
+Bug in 57c8c8b107248a3358dd26276ac497c577454011.",False,False,False,False,7,102,4,98,106,0.0377,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+a31e6b73469cb2bf7eb8f70b5ff21f710fd2e23c,pallets/flask,2026-04-05T19:31:01+00:00,remove werkzeug host tests,False,False,False,False,1,0,48,-48,48,1.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-3,-2,100.0,0,100.0,0,0,Likely Improvement
+d992705f9eb56199dc474b77af16474e5ce3d2ab,django/django,2026-08-08T21:51:03+00:00,"Fixed #37259 -- Restored support for old-signature Model.from_db() overrides.
+
+The fetch modes feature made all query iteration paths (ModelIterable,
+RawModelIterable, and RelatedPopulator) call Model.from_db() with a
+fetch_mode keyword argument. This crashed with a TypeError for models
+overriding from_db() with the previously documented signature
+from_db(cls, db, field_names, values).
+
+Query iteration now detects, once per query rather than per row, whether
+the model's from_db() accepts the fet",False,False,False,False,3,128,8,120,136,0.0588,11,0.0,7,0.11,1,0,0.0,0.0,1,3,2,0,3,0,18,100.0,1,100.0,8,1,Potential Degradation
+fee1cf726204f7ead542bf86b6647362cbe7a695,django/django,2026-08-12T03:28:43+00:00,"Refs #37127 -- Added a version-aware sourcefile Sphinx role.
+
+Co-authored-by: Tim Schilling <schillingt@better-simple.com>",False,False,False,False,11,157,35,122,192,0.1823,10,-2.96,11,0.23,2,0,9.5,4.76,2,2,7,1,0,2,3,100.0,0,97.04,11,1,Potential Degradation
+a20bcff8dc4e263312cfd74c11e432bfe8c194c1,pallets/flask,2024-11-08T16:16:04+00:00,enable secret key rotation (#5632),False,False,False,False,6,34,5,29,39,0.1282,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,3,3,100.0,0,100.0,0,0,Likely Improvement
+677fbf05dabe34c4b36a8cca54277274d2afe298,django/django,2026-10-08T22:14:44+00:00,"Refs #37271 -- Updated docs/conf.py for calendar versioning.
+
+Resolved RemovedInDjango2028Warning in docs django_release() helper.",False,False,False,True,1,5,1,4,6,0.1667,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+86b378d3f60f828daa13ca50aa82e287ff7b66b4,psf/requests,2026-05-11T19:24:34+00:00,Align Session.get parameters with requests.get (#7429),False,False,False,False,1,9,2,7,11,0.1818,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+703283b5b455a8410b4ce0a2e6ea0e1bde7f3047,django/django,2026-09-20T17:50:05+00:00,Fixed #37358 -- Dropped support for GDAL 3.3 and 3.4.,False,False,False,False,3,9,22,-13,31,0.7097,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-4,0,-3,100.0,0,100.0,0,0,Likely Improvement
+e13373f838ab34027c5a80e16a6cb8262d41eab7,pallets/flask,2024-11-08T16:09:01+00:00,enable secret key rotation,False,False,False,False,6,34,5,29,39,0.1282,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,3,3,100.0,0,100.0,0,0,Likely Improvement
+15585909c3dd3014e4083961c8a404709450151c,psf/requests,2023-01-21T08:44:33+00:00,Support missing SNIMissingWarning in tests (#6336),False,False,False,False,2,14,5,9,19,0.2632,3,0.0,0,0.0,0,0,0.0,0.0,1,0,0,1,0,2,1,100.0,0,100.0,0,0,Likely Improvement
+4ea38d54c10e0f44e189605c217a55cdfe9fdde8,django/django,2026-06-10T21:26:39+00:00,"Fixed #37160 -- Made admin views raise PermissionDenied consistently.
+
+The admin view_on_site and history views now return an HTTP 403 response
+when a staff user lacks view or change permission for the target model,
+consistent with the changeform and autocomplete views.
+
+Thanks Bence Nagy for the report.",False,False,False,False,3,91,9,82,100,0.09,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,3,6,100.0,0,100.0,0,0,Likely Improvement
+96ba401c1296ab1dda74a2365ef36d88f7d144ef,psf/requests,2024-09-25T15:03:20+00:00,Only use hostname to do netrc lookup instead of netloc,False,False,False,False,1,1,7,-6,8,0.875,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-2,100.0,0,100.0,0,0,Likely Improvement
+1d50f12929f8f2d424f0e7cc6b1f693f590f71a2,django/django,2026-08-18T10:37:10+00:00,"Fixed #37258, Refs #36644 -- Documented error when default ordering fields are missing in combined queries.
+
+Thank you Adam Johnson for the report.",True,False,False,False,1,11,0,11,11,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+92e1d9e3619ae5274a64b38f26177064486892f2,django/django,2026-07-27T11:51:11+00:00,Fixed #37233 -- Prevented sort controls for unordered __str__ admin columns.,False,False,False,False,3,30,2,28,32,0.0625,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9014ca519c1cc825709a8fce0934f9919861ffb9,django/django,2026-10-11T09:13:43+00:00,"Fixed #37418 -- Fixed JSONField/HStoreField crash on deeply nested JSON.
+
+json.loads() raises RecursionError rather than JSONDecodeError when the
+input nesting exceeds the interpreter's recursion limit.",True,False,False,False,4,29,3,26,32,0.0938,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,2,100.0,0,100.0,0,0,Likely Improvement
+d5b7a05ab2a053c617149cfd4f7e3379bfd279e5,pallets/flask,2024-11-23T23:59:30+00:00,remove previously deprecated code (#5648),False,False,False,False,1,0,21,-21,21,1.0,2,30.67,-2,-2.0,-2,0,-4.75,-2.38,-2,0,-1,0,-1,-1,0,69.33,2,100.0,0,0,Likely Improvement
+329c32b916938d33fec41f40eb7ed854bf0b3e2b,pallets/flask,2026-10-07T14:01:40+00:00,fix dev,True,False,False,False,2,33,36,-3,69,0.5217,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+adeef108afa7c6c50959cf2c94a4d4efbf1fae91,django/django,2026-10-12T21:20:48+00:00,"Refs #32980 -- Avoided unnecessary router and connection lookups for reverse FKs.
+
+These do not need to be looked up if the value is truthy.",False,False,False,False,3,55,6,49,61,0.0984,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,5,0,0,100.0,1,100.0,1,0,Likely Improvement
+c7da8c2aa3a923fc620ad480a8831a8a0f21ab37,pallets/flask,2024-05-19T20:34:00+00:00,Added python type annotation and return type.,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6c44dd4bb8e4f2ca5f135f172de4725b2cada155,pallets/flask,2024-11-06T17:47:57+00:00,"update helpers.send_from_directory docstring (#5599)
+
+Update helpers.send_from_directory docstring to match werkzeug.utils.send_from_directory docstring on the :param directory: line.",False,False,False,False,1,2,1,1,3,0.3333,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+f0198e6dfc431a2293dc16e1b1e8fcddc910a7f3,psf/requests,2026-03-30T15:27:35+00:00,Fix malformed value parsing for Content-Type (#7309),True,False,False,False,2,10,13,-3,23,0.5652,6,0.56,0,0.0,0,0,15.86,33.56,0,0,0,0,-1,0,0,94.78,4,95.35,4,0,Likely Improvement
+a013c821ea7838a953869615b0bdcfdb298cc09f,django/django,2026-06-19T18:40:37+00:00,"Fixed #37177 -- Reduced per-middleware context switching under ASGI.
+
+Relying on MiddlewareMixin.__acall__() to handle async requests imposed
+per-middleware context switching, defeating BaseHandler's intent
+to transition only once per middleware chain.
+
+To minimize breaking changes, MiddlewareMixin's default value did not
+change: only the values on Django's own subclasses. Use cases where the
+prior behavior is preferable (in order to avoid pinning a thread per
+request) are fleshed out in docs.
+
+",False,False,False,False,18,136,1,135,137,0.0073,21,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,0,9,100.0,15,100.0,15,0,Likely Improvement
+e0d64a5adaaad1cec22a0f909602ea4127c04ad3,django/django,2026-07-16T00:02:39+00:00,Fixed subject/verb agreement in DecimalValidator messages.,False,False,False,False,1,3,3,0,6,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+137b77706e8780764a831ecf246c10a56f800ac2,django/django,2026-09-07T14:45:57+00:00,Refs CVE-2026-15830 -- Increased coverage for WKT depth check in GEOS limiter.,False,False,False,False,1,12,0,12,12,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+a7e1c745dc23c18e836febd672416ed0c5d8d8ae,psf/requests,2025-05-31T16:59:51+00:00,"Update docs/conf.py
+
+Co-authored-by: Nate Prewitt <nate.prewitt@gmail.com>",False,False,False,True,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9e831e915fa875423af0c0de8f53a3780055919e,pallets/flask,2024-08-06T22:46:15+00:00,fix pyright type errors,True,False,False,False,8,18,17,1,35,0.4857,15,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-2,0,0,100.0,0,100.0,0,0,Likely Improvement
+bd1cd8f0f8776fc35c6d2d600c75d1292037ab68,django/django,2026-07-14T15:22:05+00:00,Fixed #25243 -- Added inspectdb regression test for sqlite_schema FK.,True,False,True,False,1,28,0,28,28,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+4e383642a9ebb82a67eaeed199d0fbbb31991e3c,psf/requests,2024-07-18T16:43:49+00:00,Add conditional string encoding based on urllib3 major version,False,False,False,False,3,40,18,22,58,0.3103,6,-0.02,0,0.0,0,0,4.75,2.38,1,0,0,1,0,2,7,100.0,0,99.98,0,0,Likely Improvement
+f2629e9e3c7ce3c3c8c025bcd8db551101cbc773,psf/requests,2023-04-28T19:17:10+00:00,Remove strict parameter (#6434),False,False,False,False,1,0,1,-1,1,1.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+4bd79e397304d46dfccd76f36c07f66c0295ff82,psf/requests,2026-02-22T16:07:16+00:00,Increase chardet upper limit to 7,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+24824ff666e096c4c07d0b75a889088571afe4a6,pallets/flask,2025-08-18T16:56:39+00:00,push preserved contexts in correct order (#5797),False,False,False,False,2,12,23,-11,35,0.6571,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,-4,0,100.0,0,100.0,0,0,Likely Improvement
+ad96d15302c2505bcc6f4699f88ba8236f96e8f2,django/django,2026-10-03T18:26:37+00:00,"Refs #37212 -- Removed unused code in djangodocs Sphinx extension.
+
+`simple_option_desc_re` was added in 4239bb0 for use by
+parse_django_adminopt_node(). That function was removed in e519aab,
+which reworked `django-admin-option` using Sphinx's standard Cmdoption.",False,False,False,False,1,0,4,-4,4,1.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,0,-1,100.0,0,100.0,0,0,Likely Improvement
+6b054f8f3876ff4c31580b014d344c4cf491059d,pallets/flask,2024-11-24T01:54:29+00:00,Merge branch 'stable',False,False,False,False,2,5,1,4,6,0.1667,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+89992954ec71b594b1b911f98977cdc8ad46a057,pallets/flask,2026-08-11T20:15:18+00:00,add app.query route decorator,False,False,False,False,2,13,2,11,15,0.1333,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+f519bbae3346b4bf0ff866e0659b7efbcf016eb1,psf/requests,2024-09-18T18:14:19+00:00,add trove classifier for 3.13,False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7b21d43d4c763b874bc86d4c2d69a48ee492dc22,pallets/flask,2024-11-13T05:03:23+00:00,configure and check `request.trusted_hosts` (#5637),False,False,False,False,2,23,0,23,23,0.0,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,3,1,100.0,0,100.0,0,0,Likely Improvement
+edebd3704437f19b5b137eaffe97130fe817d144,pallets/flask,2025-08-19T19:29:47+00:00,"rewrite docs, clean up typing for template decorators",False,False,False,True,2,186,159,27,345,0.4609,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-18,0,-24,100.0,0,100.0,0,0,Likely Improvement
+b337d210583a3f5f84d0f70b56ae9a82b029dab5,pallets/flask,2024-10-18T17:02:35+00:00,update dev dependencies,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+439b936753e5a679ffcf40cff5918c5637f7c72b,django/django,2026-08-29T14:10:23+00:00,Added test skip for 1-element GeometryCollections on Oracle 23.9.,False,False,True,False,1,2,0,2,2,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a4f9a5999bdb9bf2d6e7c8aa973b28cacb17134f,psf/requests,2026-05-11T19:24:21+00:00,Port bpo-39057 to Requests (#7427),False,False,False,False,2,27,2,25,29,0.069,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,-2,100.0,0,100.0,0,0,Likely Improvement
+b25c87d7cb8d6a18a37fa12442b5f883f9e41741,psf/requests,2025-08-18T20:23:20+00:00,v2.32.5,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+bfffe87d4c2ea255b9a51432bebb3d28741245c4,pallets/flask,2025-03-29T22:57:16+00:00,add ghsa links,False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+0264b4fc364960e83f561fd94154005508bf6dae,django/django,2026-10-02T03:36:06+00:00,Fixed #37387 -- Made admindocs model index table full width.,False,False,False,False,2,35,1,34,36,0.0278,5,-15.01,3,0.17,1,0,4.75,2.38,1,1,1,0,0,0,0,100.0,1,85.0,4,1,Potential Degradation
+fabce94374e166e80e2643db8b85d1e3442427bf,django/django,2026-09-29T08:59:41+00:00,"Fixed #37377 -- Fixed JSONField __in crash/wrong result for Value() primitives.
+
+Refs #36689. 9b8e4c6d7d wrapped every Value() rhs param of a JSONIn lookup
+in JSON_EXTRACT()/JSON_VALUE() assuming it was already JSON-serialized.
+That only holds for Value(..., JSONField()); a bare Value(""primitive"") gets
+an inferred non-JSON output_field (e.g. CharField), so its compiled param
+was a raw primitive, not JSON text.
+
+JSONIn.resolve_expression_parameter() now JSON-encodes the Value's raw
+.value itself ",True,False,False,False,2,62,0,62,62,0.0,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,0,3,100.0,0,100.0,0,0,Likely Improvement
+11c45eeba3b5bcf06b84f4e864862f1019a3faa3,pallets/flask,2025-05-11T12:58:48+00:00,update dev dependencies,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+16a17a3ca7134b0a56c49653165ef37cb6acfece,psf/requests,2023-01-19T05:37:24+00:00,"fix: Remove '<4' from python_requires (#6333)
+
+* As discussed in https://discuss.python.org/t/use-of-less-than-next-major-version-e-g-4-in-python-requires-setup-py/1066
+  and other places by the PyPA, use of upper bounds with python_requires
+  for future versions of Python is unintended use of python_requires and
+  actively discouraged.",True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6a2f545bfd8ed31e19066a299296917e034aca58,pallets/flask,2026-07-30T17:29:33+00:00,Merge branch 'stable',False,False,False,False,5,24,41,-17,65,0.6308,8,-2.34,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-1,93.85,9,91.51,9,1,Potential Degradation
+90fee0876aea97c639b3bf698d83a12876d2f160,psf/requests,2025-06-13T16:42:08+00:00,Revert caching a default SSLContext (#6767),False,True,False,False,1,16,39,-23,55,0.7091,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,-2,-8,100.0,0,100.0,0,1,Potential Degradation
+91c6b3fecf36b1f04554e57cc4060ccb737a445d,pallets/flask,2026-03-24T13:47:30+00:00,remove unicode host test,False,False,True,False,1,0,21,-21,21,1.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-1,-1,100.0,0,100.0,0,0,Likely Improvement
+ce08bc704e24c01582052f5c544fae181d08386f,pallets/flask,2024-11-01T23:26:37+00:00,add SESSION_COOKIE_PARTITIONED config (#5499),False,False,False,False,3,15,0,15,15,0.0,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,2,0,100.0,0,100.0,0,0,Likely Improvement
+4b8bde97d4fa3486e18dce21c3c5f75570d50164,pallets/flask,2026-01-25T03:53:11+00:00,deprecate `should_ignore_error` (#5899),False,False,False,False,2,25,9,16,34,0.2647,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+de6559094e81a55583fd6428b502fa925db8f593,django/django,2026-10-13T09:11:58+00:00,Refs #23424 -- Added tests for existing comment and verbatim behavior.,False,False,False,True,2,58,0,58,58,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,0,0,100.0,0,100.0,0,0,Likely Improvement
+13d892bdbe9a2aa374959a166e8067c35253705d,psf/requests,2024-03-18T14:33:17+00:00,Additional should_bypass_proxies function test cases,False,False,True,False,2,33,1,32,34,0.0294,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,5,1,0,100.0,0,100.0,0,0,Likely Improvement
+2ecdb685619340735fa85d253c4779029957246f,psf/requests,2023-07-30T01:50:43+00:00,"Update reference to ""cookielib"" to ""cookiejar"" in documentation (#6214)",False,False,False,False,1,8,8,0,16,0.5,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+41ec5760a2c55a099c3a1733fdd36fbb1258a02b,pallets/flask,2025-03-29T22:42:58+00:00,remove tests about deprecated pkgutil.get_loader,False,False,False,False,2,3,35,-32,38,0.9211,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,-1,0,100.0,0,100.0,0,0,Likely Improvement
+80c997fc23b08897d8611b5439c1877485a4676f,django/django,2026-10-13T15:34:10+00:00,Fixed #37424 -- Fixed whitespace handling when parsing max-age directives.,False,False,False,False,2,4,1,3,5,0.2,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,89.87,2,89.87,2,0,Likely Improvement
+f14e293cd7444e064b9c9ba471fd5aa7e6132ea6,django/django,2026-09-01T15:23:46+00:00,"Fixed #37312, Refs #36605 -- Fixed annotation preservation and key selection in in_bulk().
+
+Bug in 1820d35b17f0a95f4ce888971b9ca0c7a3697c83.
+
+Thank you to Jacob Walls for the review.",False,False,False,False,2,102,5,97,107,0.0467,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+10bdf61a0f751f3cb000f8f8ac5ac5b4bb535677,pallets/flask,2024-11-12T18:13:39+00:00,setting `SERVER_NAME` does not restrict routing for both `subdomain_matching` and `host_matching` (#5634),False,False,False,False,3,82,39,43,121,0.3223,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,5,3,1,100.0,0,100.0,0,0,Likely Improvement
+165af0a090e229e94ccd93896efc15b9fe0488da,pallets/flask,2025-03-29T21:44:59+00:00,update dev dependencies,False,False,False,False,2,6,6,0,12,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+8cbdd4a814397f81adf0129288f32b615bd1f94f,django/django,2026-08-19T11:54:21+00:00,"Fixed #37286 -- Preserved unique constraints when removing db_index.
+
+Thank you Clifford Gama for the review.",False,False,False,False,2,40,1,39,41,0.0244,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,2,0,100.0,0,100.0,0,0,Likely Improvement
+c7a53888a1a514619b0611fd8b7928592f4ed612,pallets/flask,2024-11-01T20:13:05+00:00,add config and docs for limits,False,False,False,True,4,145,27,118,172,0.157,4,-9.07,15,1.88,13,1,178.41,468.33,2,0,4,0,5,12,3,100.0,0,90.93,15,1,Potential Degradation
+728c5e440af704a786384159184f695cf04ecbe7,pallets/flask,2026-10-07T13:56:05+00:00,drop support for Python 3.10 (#6168),False,False,False,False,7,20,30,-10,50,0.6,13,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-5,-1,-1,100.0,0,100.0,0,0,Likely Improvement
+06ea505ce2b2042af26e96d35ebf159af7c0869d,pallets/flask,2026-05-02T03:17:23+00:00,separate copy per call,False,False,False,False,2,38,66,-28,104,0.6346,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-12,2,100.0,0,100.0,0,0,Likely Improvement
+31ebb8102c00f8cf8b396a6356743cca4362e07b,psf/requests,2024-04-11T19:49:35+00:00,"Merge pull request #6682 from frenzymadness/pytest8
+
+Fix compatibility with pytest 8",False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+cd90742ed94d901759e26766197d0ce7c7bd9c8e,psf/requests,2026-05-18T15:02:35+00:00,docs: indent continuation line in Session.get :param params: (#7460),False,False,False,True,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a2fd25ff34b66ef71b54dfc90e09a4e4152357f6,psf/requests,2025-02-11T15:58:59+00:00,Update models.py,False,False,False,False,1,1,2,-1,3,0.6667,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b78b5a210bde49e7e04b62a2a4f453ca10e0048c,pallets/flask,2025-03-30T20:17:17+00:00,Merge branch 'stable',False,False,False,False,7,16,42,-26,58,0.7241,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-2,-1,0,100.0,0,100.0,0,0,Likely Improvement
+d3b78fd18a8d9e224cb9ef58a23cec9b1ffc9ce9,pallets/flask,2026-02-06T21:22:54+00:00,Merge remote-tracking branch 'origin/stable',False,False,False,False,1,1,4,-3,5,0.8,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,0,100.0,0,100.0,0,0,Likely Improvement
+b720b73dbf490ef4b6452382b9c8f1833e869764,django/django,2026-10-03T23:29:10+00:00,"Refs #37212 -- Fixed console tabs bug on shared doctrees.
+
+Removed a builder-specific optimization from ConsoleDirective. This
+fixes a bug where building with shared doctrees (as docs/Makefile does)
+could result in different output depending on the order of builds. The
+optimization did not noticeably impact Sphinx build time.
+
+This also resolves a RemovedInSphinx11Warning in ConsoleDirective.run()
+that ""'sphinx.environment.BuildEnvironment.app' is deprecated.""
+
+Thanks to @nessita for review (and",True,False,False,False,2,19,7,12,26,0.2692,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-2,0,0,100.0,0,100.0,0,0,Likely Improvement
+b73939095564ec5c088c53e7595b00d174a018f5,pallets/flask,2024-04-07T18:42:24+00:00,support FIPS builds without SHA-1 (#5460),False,False,False,False,1,9,1,8,10,0.1,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+1b7c37ef4e3db003cc52f09da9ab6b947054e245,psf/requests,2025-02-13T16:49:49+00:00,Merge pull request #6529 from anupam-arista/patch-1,True,False,False,False,1,3,1,2,4,0.25,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+25642fd1fd65985fc98f95e64bc2c7ff353d6c2b,pallets/flask,2026-01-25T02:25:31+00:00,fix annotation for select_jinja_autoescape (#5808),True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c88b304cc2d90fc37d3bd1f5f3829706fa6c13bc,django/django,2026-08-19T10:44:41+00:00,"Fixed CVE-2026-77050 -- Prevented memory exhaustion in get_supported_language_variant().
+
+The fix for CVE-2024-39614 limited the length of language codes processed by
+get_supported_language_variant(), but the full language code was retained as
+an lru_cache key before the length check.
+
+Moved caching after language code truncation and validation to prevent
+excessively long language codes from being retained in memory.
+
+Thank you to Gleb Lizunov for the report and Jacob Walls for the review.",False,False,False,False,2,74,38,36,112,0.3393,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,-3,100.0,0,100.0,0,0,Likely Improvement
+4ee04972e7f9163dbdf5a7c36330e3379187e187,django/django,2026-08-14T17:49:32+00:00,"Refs CVE-2026-15307 -- Used a more common lookup in raster lookup tests.
+
+This avoids the need to add `@skipUnlessGISLookup(""contained"")` while
+modeling equally realistic usage.",False,False,False,False,1,4,4,0,8,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+91585625a93a41388ded73b99fc71328bde1e760,django/django,2026-07-10T20:30:46+00:00,"Fixed #37212 -- Improved djangodocs Sphinx extension portability.
+
+* Removed unnecessary `table` and `parameterlist` customizations from
+  the djangodocs Sphinx extension's `DjangoHTMLTranslator`. These were
+  meant to avoid obsolete html from Docutils' html4 writer (`border=1`
+  in `<table>` tags and and `<big>` around parameter list parens).
+
+  Sphinx 2.0 switched to the html5 writer, which doesn't emit that html.
+  These overrides are no longer necessary, rely on Sphinx internals that
+  often",False,False,False,False,3,31,132,-101,163,0.8098,9,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-11,1,-19,100.0,0,100.0,0,0,Likely Improvement
+4e6384da325f5c328526b998d199c6f957f90ea8,pallets/flask,2024-08-23T23:34:57+00:00,Merge branch '3.0.x',False,False,False,False,3,15,3,12,18,0.1667,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+dffadf6dfc1585da2d5822db4b95322f23f39d4b,django/django,2026-09-27T18:09:53+00:00,"Fixed #37350 -- Made distinct(*fields) resolve aliases containing ""__"".
+
+Made Query.get_names_to_join() preserve annotation aliases and used it
+in SQLCompiler.get_distinct() instead of splitting on LOOKUP_SEP.
+
+Thanks Jacob Walls for the report and the suggested approach, and
+Annabelle Wiegart for the groundwork in #36945.",False,False,False,False,3,15,5,10,20,0.25,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+0b4d494192de489701d3a2e32acef8fb5d3f042e,psf/requests,2023-11-22T15:10:47+00:00,"Merge pull request #6581 from EFord36/typo-fix
+
+fix docstring typo: a -> as",True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7d5d1874581209f66ad7bcdfb7f85b2b9a7ca471,pallets/flask,2025-03-29T22:23:34+00:00,better type checking during deprecation,False,False,False,False,1,14,13,1,27,0.4815,1,-3.84,0,0.0,0,0,6.86,9.23,1,0,0,0,1,0,0,74.17,2,70.33,2,1,Potential Degradation
+9332b163a67eabe5bdbf8066b1c5da394be9aa9c,django/django,2026-09-28T14:28:12+00:00,Refs #37136 -- Fixed test skips for Oracle Test Pilot.,False,False,True,False,1,4,4,0,8,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+f1d11117c6a3e227ce7cdd263cf0743f0eb73070,django/django,2026-10-02T09:54:53+00:00,"Fixed #28219 -- Made UnorderedObjectListWarning skip Django frames.
+
+The fixed stacklevel only pointed at user code when Paginator was
+instantiated directly. When pagination happened through ListView, the
+admin, or AsyncPaginator, the warning pointed inside Django.",False,False,False,False,2,4,12,-8,16,0.75,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,-2,100.0,0,100.0,0,0,Likely Improvement
+e9b1217cff710307e5de9fb8ce2fc21eb79acec3,psf/requests,2023-10-31T15:07:59+00:00,added handling for chardet and charset_normalizer imports,False,False,False,False,1,2,0,2,2,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c65c780849563c891f35ffc98d3198b71011c012,psf/requests,2025-05-03T16:39:14+00:00,"Add two more tests exercising the adapter (#6936)
+
+Closes #6935",False,False,False,False,1,26,0,26,26,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,4,2,100.0,0,100.0,0,0,Likely Improvement
+cae38ec9b9bd394f630bdcbffa013c2761e831e9,django/django,2026-07-14T10:17:46+00:00,Refs #36983 -- Fixed race condition in ExceptionReporterTests under free-threading.,False,False,False,False,1,4,1,3,5,0.2,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,3,100.0,0,100.0,0,0,Likely Improvement
+330123258e8c3dc391cbe55ab1ed94891ca83af3,pallets/flask,2025-08-19T21:09:56+00:00,Merge branch 'stable',False,False,False,False,7,79,60,19,139,0.4317,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-4,-4,3,100.0,1,100.0,1,0,Likely Improvement
+479ba6d2812bb0613d1646d445be43f7c6ab7bc7,django/django,2026-09-30T13:20:12+00:00,"Fixed #37378 -- Removed extra empty breadcrumb in admindocs model index.
+
+Regression in bc03f1064e10fa247a46d4e8a98ba9b26aa4790d.
+
+Thanks Jacob Walls for the report.",False,False,False,False,1,13,0,13,13,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+548994ea0c61465574cbfdd636a894a692f54b94,pallets/flask,2026-07-30T17:05:04+00:00,Replace the use of private `monkeypatch` fixture API (#6095),False,False,False,False,2,17,34,-17,51,0.6667,5,-5.85,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-1,84.63,8,78.78,8,1,Potential Degradation
+f49dbfd3e451006a485e81ebce030495131c4454,pallets/flask,2024-11-13T16:22:57+00:00,use generic bases for session,False,False,False,False,1,7,5,2,12,0.4167,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,-2,100.0,0,100.0,0,0,Likely Improvement
+98ae71897600a3162f529b1b30c70b8abdf0961b,pallets/flask,2024-11-02T01:06:34+00:00,fix mypy finding,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+8f6cda9969f4a98c45ea2922f6bcbefc02256202,psf/requests,2026-04-30T17:05:37+00:00,Add tests for hasattr/getattr usage on LookupDict (#7401),False,False,False,False,1,13,0,13,13,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,4,0,100.0,0,100.0,0,0,Likely Improvement
+260d136920acf27dbd3cae9bc80eba2a43b44bba,django/django,2026-06-25T21:11:56+00:00,"Refs #37187 -- Implemented warn_about_implementation() deprecation utility.
+
+Created warn_about_implementation() for issuing warnings about
+particular code that isn't currently on the call stack.",False,False,False,False,2,284,0,284,284,0.0,3,-27.3,28,0.7,4,0,138.3,207.45,5,11,35,1,20,7,9,100.0,0,72.7,28,1,Potential Degradation
+0790ea4250bce844734f625a1a8b37d5581fd8cd,psf/requests,2024-04-11T14:10:57+00:00,"Merge pull request #6680 from mbeijen/rfc9110
+
+Add rfc9110 HTTP status code names",False,False,False,False,1,4,4,0,8,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+809d5a8869d4ffe8656680b2438b10f7c8845613,pallets/flask,2026-01-25T01:18:35+00:00,redirect defaults to 303 (#5898),False,False,False,False,2,8,2,6,10,0.2,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b684dcb9bbf3aa557d1238e72062c4a29737dd1c,psf/requests,2026-05-11T16:14:13+00:00,sessions: fix hooks type (#7425),True,False,False,False,2,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+8285adf5a4f572dbf7a0a3b8f3a96ca0b19c50a4,pallets/flask,2026-06-10T18:03:21+00:00,update dev dependencies,False,False,False,False,2,4,4,0,8,0.5,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+4e652d3f68b90d50aa2301d3b7e68c3fafd9251d,pallets/flask,2026-01-28T15:43:00+00:00,Abort if the instance folder cannot be created (#5903),False,False,False,False,1,1,4,-3,5,0.8,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,0,100.0,0,100.0,0,0,Likely Improvement
+6f66281a1d6326b1b9c4ac09ca30de0fc4e6ef43,psf/requests,2026-06-09T15:45:59+00:00,Add hasattr checks for remaining protocol isinstance checks (#7505),False,False,False,False,3,24,7,17,31,0.2258,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,3,-2,100.0,0,100.0,0,0,Likely Improvement
+147c8511ddbfa5e8f71bbf5c18ede0c4ceb3bba4,psf/requests,2023-05-22T15:10:32+00:00,v2.31.0,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+258d68b6ff5e2244386540f48b48bab90d6ab827,pallets/flask,2026-04-05T19:32:14+00:00,Merge branch 'stable',False,False,False,False,1,0,28,-28,28,1.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,-1,100.0,0,100.0,0,0,Likely Improvement
+185f587a78e2d2df31ae8af8c95d97a012213df7,psf/requests,2026-04-11T19:39:24+00:00,Cleanup docs and add i18n wrappers (#7354),False,False,False,True,1,8,9,-1,17,0.5294,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+1b4d021b6525bff6439b9d3b8d5388a1a1906ecd,django/django,2026-10-06T18:42:45+00:00,"Fixed #37403 -- Fixed JSONField __in crash on SQLite with Value(None) expressions.
+
+Regression in 9b8e4c6d7d47f7b2e96817ba334e9fd53c10a0df.",True,False,False,False,2,16,6,10,22,0.2727,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,4,100.0,0,100.0,0,0,Likely Improvement
+d98eb69a354158252854ed4a5c9778e03d089191,pallets/flask,2026-02-12T21:11:01+00:00,revert cli test change,False,True,True,False,1,2,7,-5,9,0.7778,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,-1,0,100.0,0,100.0,0,1,Potential Degradation
+d73fa1cdcbd8b1465c151db8924ba58b1dd14e35,pallets/flask,2026-09-08T16:40:33+00:00,fix docs ref,True,False,False,True,1,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+eca5fd1dfdc614c2df876cc32018a7d71f84ea82,pallets/flask,2026-01-25T00:50:54+00:00,redirect defaults to 303,False,False,False,False,2,8,2,6,10,0.2,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+daf1510a4bda652ac2cfca03ec5567b03ddf8bf1,pallets/flask,2025-05-17T04:17:18+00:00,use template_filter without parens,False,False,False,False,4,265,22,243,287,0.0767,16,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,21,60,24,100.0,0,100.0,0,0,Likely Improvement
+47914226c2968802f2cdee3f6f0f6e06e4472f64,psf/requests,2026-02-13T02:07:05+00:00,Fix empty netrc entry usage (#7205),True,False,False,False,2,11,1,10,12,0.0833,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,1,0,100.0,0,100.0,0,0,Likely Improvement
+f00270d05e3510f2edc8ae012418d1dfe34d99f5,django/django,2026-07-23T15:41:56+00:00,"Refs #36735 -- Added DatabaseFeatures.supports_uuid4_function_in_default feature flag.
+
+Oracle 23.9 supported UUID() in SELECT contexts, but use in column defaults
+fails until 23.26.2.0 with:
+
+django.db.utils.DatabaseError: ORA-04044: procedure, function, package, or type is not allowed here",False,False,False,False,7,20,3,17,23,0.1304,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c9ff757a55392b1f50968eb89fe775f6155168d8,django/django,2026-07-27T09:48:33+00:00,"Fixed #37234 -- Fixed bulk_create() for late-saved related primary keys.
+
+Objects with a primary key supplied by a late-saved related instance
+were partitioned before their related fields were prepared. This
+caused an assertion failure on backends returning rows from bulk
+inserts.
+
+Regression in 7d9aab8da0a06787d649762a702e1a518d843a63.",False,False,False,False,2,8,1,7,9,0.1111,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+52df9eed45d0b19c588662ed8492d8fbaa0e7098,pallets/flask,2025-05-13T15:31:54+00:00,drop end of life python versions,False,False,False,False,5,31,45,-14,76,0.5921,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-4,100.0,0,100.0,0,0,Likely Improvement
+954f5684e4841aad84a8eec7ace7b81a0d3f6831,pallets/flask,2026-05-18T23:35:44+00:00,update dev dependencies,False,False,False,False,1,3,3,0,6,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+d8eaaba824655046958d1a97f11780de460c3271,pallets/flask,2026-08-11T20:19:14+00:00,add `app.query` route decorator (#6133),False,False,False,False,2,13,2,11,15,0.1333,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+cccc004b46f71b4e54d87b376be691a17de6b903,django/django,2026-08-19T15:57:21+00:00,"Skipped tests involving 1-element GeometryCollections on Oracle 23.9.
+
+Because these Oracle versions unpack 1-element collections, LayerMapping
+unexpectedly received single geometries and failed when saving:
+
+  File ""/django/source/django/contrib/gis/utils/layermapping.py"", line 663, in _save
+    geom.add(g)
+    ^^^^^^^^
+AttributeError: 'Polygon' object has no attribute 'add'
+
+https://forums.oracle.com/ords/apexds/post/23ai-sdo-geometry-converts-1-element-multipolygon-to-polygo-3474",False,False,False,False,1,13,0,13,13,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+5f0293b3ab546f86d666524f07d17304ac785506,django/django,2026-09-07T14:11:17+00:00,Fixed #37136 -- Added test skips for Oracle Test Pilot.,False,False,True,False,1,9,0,9,9,0.0,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+2e48636c54910e435eb31e1b7d8a8089c84233ad,django/django,2026-06-25T21:19:36+00:00,"Fixed #37187, #37190 -- Pointed ModelAdmin warnings to the deprecated code.
+
+Used warn_about_implementation() for ModelAdmin deprecation warnings on
+get_list_select_related() return value and missing action_location
+parameters in get_actions() and get_action_choices(). Fixes a problem
+where the warnings would point to wsgiref rather than the ModelAdmin
+subclass using deprecated functionality.",False,False,False,False,3,20,11,9,31,0.3548,10,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+d64ecfb244d38b5f31d6dd8f6a9f55731038c093,pallets/flask,2024-05-06T17:24:44+00:00,Bump the python-requirements group across 1 directory with 6 updates (#5476),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+50c2b7c83661a61da48f78dd0130fc3cbf8ed39f,django/django,2026-07-23T15:32:18+00:00,Refs #36694 -- Skipped GIS test needing spatial index on Oracle.,False,False,True,False,1,2,0,2,2,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+e7d301b06a1752d648675702d4db0fe110031906,django/django,2026-09-05T18:22:16+00:00,Fixed Playwright test flakiness in admin collapse filter tests.,False,False,True,False,1,15,5,10,20,0.25,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+8112fcc7beb15e1cdc66180c10a3290174866828,psf/requests,2023-08-12T19:03:10+00:00,Pre commit update (#6498),False,False,False,False,6,5,25,-20,30,0.8333,24,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+0c030f78d24f29a459dbf39b28b4cc765e2153d7,psf/requests,2024-05-15T00:15:19+00:00,"Merge pull request #6702 from nateprewitt/no_char_detection
+
+Allow optional char detection dependencies in post-packaging",False,False,False,False,4,40,23,17,63,0.3651,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,5,-3,4,100.0,0,100.0,0,0,Likely Improvement
+fc4eaaabf419508ea39d750ca5ca801d933e0b16,django/django,2026-09-03T19:59:07+00:00,"Fixed #37289 -- Avoided deleting network rasters.
+
+GDALRaster.__del__() issues an unlink call to GDAL to remove temporary
+files from the in-memory virtual filesystem. When #32670 allowed using
+any virtual filesystem, including commercial storage ones like vsis3 for
+Amazon S3, this meant network rasters could be unintentionally deleted.
+
+Thanks ""garden_"" for the report and Sarah Boyce for the review.",False,False,False,False,2,24,5,19,29,0.1724,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a5f9742398c9429ef84ac8a57b0f3eb418394d9e,pallets/flask,2025-05-13T15:35:41+00:00,drop end of life python versions (#5731),False,False,False,False,5,31,45,-14,76,0.5921,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-4,100.0,0,100.0,0,0,Likely Improvement
+7f48e266a83110d62ffb4663d72c9e347db75a9b,django/django,2026-08-27T15:08:54+00:00,"Refs #37297 -- Prevented crash on JSONField __isnull lookups on Oracle when a key is outside its integer range.
+
+Oracle's JSON_EXISTS() rejects an array-subscript literal this long
+with ORA-40598/JZN-00211.",True,False,False,False,2,43,0,43,43,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,2,7,100.0,0,100.0,0,0,Likely Improvement
+7ff7fcc0508864a4bc39693128ace38b1e95a890,django/django,2026-09-01T18:17:57+00:00,"Fixed CVE-2026-84429 -- Simplified parse_header_parameters by leveraging stdlib's Message.
+
+The `parse_header_parameters` function historically used Python's `cgi`
+module (now deprecated). In 34e2148fc725e7200050f74130d7523e3cd8507a,
+the logic was inlined to work around this deprecation (#33173). Later,
+in d4d5427571b4bf3a21c902276c2a00215c2a37cc, the header parsing logic
+was further cleaned up to align with multipartparser.py (#33697). It was
+then replaced with Python's email.message.Message AP",False,False,False,False,2,34,39,-5,73,0.5342,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-5,0,3,100.0,0,100.0,0,0,Likely Improvement
+99ce7ed0e40686ec2583f90bd1cca37a207b4ea7,pallets/flask,2024-10-31T19:32:10+00:00,drop support for Python 3.8 (#5623),False,False,False,False,5,17,29,-12,46,0.6304,10,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,-2,100.0,0,100.0,0,0,Likely Improvement
+b3f4d83aad7f589f165a6d8b020b7acba4936f35,django/django,2026-09-04T21:24:26+00:00,"Fixed #37013 -- Deprecated Trunc/Extract in migrations with USE_TZ=True and no tzinfo.
+
+In Django 2029, the current timezone will be stored in the migration.",False,False,False,False,2,59,0,59,59,0.0,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,0,11,100.0,0,100.0,0,0,Likely Improvement
+8dd3b26bf59808de24fd654699f592abf6de581e,psf/requests,2024-03-18T21:38:16+00:00,"Merge pull request #6302 from flysee/main
+
+Fix the proxy_bypass_registry function all returning true in some cases.",False,False,False,False,2,34,0,34,34,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,1,1,100.0,0,100.0,0,0,Likely Improvement
+6f2014d353d514e404c1f40e8f0a24e2bf62b941,pallets/flask,2024-11-01T20:21:35+00:00,add config and docs for limits (#5626),False,False,False,True,4,145,27,118,172,0.157,4,-9.07,15,1.88,13,1,178.41,468.33,2,0,4,0,5,12,3,100.0,0,90.93,15,1,Potential Degradation
+7847227a3fecde4b2a169552b84c60c6286b6025,django/django,2026-09-22T17:35:10+00:00,"Fixed #37361 -- Fixed permission renames for chained RenameModel operations.
+
+rename_permissions_after_model_rename() previously queried the database
+for permissions during each rename step before saving the planned changes.
+For chained RenameModel operations (e.g. A -> B -> C), intermediate
+permissions (e.g. add_b) were not yet written to the database, causing
+subsequent rename steps to not detect permissions.
+
+rename_permissions_after_model_rename() now tracks permission codename
+updates in me",False,False,False,False,3,152,47,105,199,0.2362,5,0.0,1,0.33,1,0,0.0,0.0,1,1,0,0,3,0,9,100.0,0,100.0,1,0,Likely Improvement
+6df8fe3bc1879265958b8e59c637a4145995e93c,django/django,2026-08-10T20:21:42+00:00,Fixed #24580 -- Tested FK values with __html__() in ModelAdmin.list_display.,False,False,False,False,2,15,0,15,15,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,3,100.0,3,0,Likely Improvement
+66d21cb07bd6255b1280291c4fafb71803cdb3b7,psf/requests,2026-03-25T14:57:56+00:00,Merge commit from fork,False,False,False,False,1,7,6,1,13,0.4615,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,2,-1,100.0,0,100.0,0,0,Likely Improvement
+22c48a738b5fb5b5cf09fb77270139f116069748,pallets/flask,2024-11-13T16:43:48+00:00,Merge remote-tracking branch 'origin/stable',False,False,False,False,3,7,2,5,9,0.2222,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+50eef95591b1e5d8c47b2e8c96066cb0c516753a,django/django,2026-08-20T11:33:01+00:00,"Fixed #37291 -- Prevented tuple lookups from hanging on F() expressions.
+
+The underlying unsafety with iterating F() expressions will be handled
+later (#37384), to allow time to consider backward compatibility.
+
+The underlying query should also not raise a ValueError (#37383), but
+that likely will not be backported.
+
+Thanks Pravin Kamble for the review.
+
+Co-authored-by: Jacob Walls <jacobtylerwalls@gmail.com>",False,False,False,False,3,43,1,42,44,0.0227,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,2,2,100.0,0,100.0,0,0,Likely Improvement
+85cc71046475f9cb3efd17d496356795961249f9,pallets/flask,2025-06-12T20:46:49+00:00,svg logo,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c07486b98b2dfc1dab2e97db83a95ed0ac645e1b,django/django,2026-10-12T21:19:55+00:00,"Fixed #32980 -- Optimized ManyRelatedManager.__init__().
+
+Many attributes did not vary with the instance, so they did not need
+to be calculated during __init__().
+
+Thanks Tim Kedmenec for raising the issue at:
+https://forum.djangoproject.com/t/46178",False,False,False,False,1,26,23,3,49,0.4694,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,1,100.0,0,100.0,0,0,Likely Improvement
+28d5a4d71824ff5823ae310e3fd014b48b33d583,pallets/flask,2024-07-10T14:37:32+00:00,"add encoding parameter to open_resource
+
+co-authored-by: mark <lopkophacked@protonmail.com>",False,False,False,False,3,78,52,26,130,0.4,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,1,0,100.0,0,100.0,0,0,Likely Improvement
+2a5da9d00555beef8e5f6307cfcbfc029d45491e,django/django,2026-07-08T14:38:10+00:00,Fixed #37203 -- Used normalized field names for composite pks in inspectdb.,False,False,False,False,3,35,5,30,40,0.125,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+58cea7a7282999adafdc19a4e82e2d09207ab568,psf/requests,2024-02-20T23:22:20+00:00,Drop support for CPython 3.7,False,False,False,False,1,3,4,-1,7,0.5714,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+cf63ff2186852ee1aac4a802b0ff6a93f6e08891,django/django,2026-10-08T19:13:15+00:00,"Fixed #37411 -- Added compatibility for oracledb 26.0.0+.
+
+oracledb 26.0.0 introduced the requirement that large parameter values
+be provided via a temporary LOB when calling PL/SQL functions. We noticed
+when GIS test fixtures failed to load, as the Multipolygon WKT for Texas
+was a string well over the 4000 characters that trigger the LOB path.
+
+https://github.com/oracle/python-oracledb/issues/618
+
+Thanks Mariusz Felisiak for the review.",False,False,False,False,1,21,6,15,27,0.2222,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+5e7cb71cd719394f8fc56ea55da3f58bb22ae2b6,psf/requests,2026-02-13T19:30:59+00:00,Bump version to dev for test publish,False,False,True,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+93d7e82b6a67aa56a2d9dababfefb8bda543786e,django/django,2026-10-02T17:20:48+00:00,"Fixed #37382, Refs #29303 -- Made @non_atomic_requests recognize async views.
+
+Regression in bdbda29c3e126754c3ae04ceb5c5d35d49aae01c.
+
+Co-authored-by: Jacob Walls <jacobtylerwalls@gmail.com>",False,False,False,False,4,27,3,24,30,0.1,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,2,0,100.0,0,100.0,0,0,Likely Improvement
+dfe46c1b7f55c9377caecba2119be14d3cce74e5,psf/requests,2023-07-30T01:55:18+00:00,refactor: prefer dictionary comphrension to loop (#6187),False,False,False,False,1,1,5,-4,6,0.8333,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+389eea58dfb2f2ee096421a812e3af29c0298951,psf/requests,2026-03-30T15:21:38+00:00,Cleanup extracted file after extract_zipped_path test (#7305),False,False,True,False,1,6,3,3,9,0.3333,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,2,0,100.0,0,100.0,0,0,Likely Improvement
+082b3df4067c3899dd4d57e8c2eca5baea9d07bb,django/django,2026-08-10T20:22:11+00:00,Fixed #37270 -- Fixed incorrect values for second-degree relations in ModelAdmin.list_display.,False,False,False,False,3,37,4,33,41,0.0976,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,3,100.0,3,100.0,3,0,Likely Improvement
+c98e4d133ef29c46a9b68cd783087218a8075e05,psf/requests,2024-05-21T16:41:18+00:00,"Merge pull request #6710 from nateprewitt/api_rename
+
+Move _get_connection to get_connection_with_tls_context",False,False,False,False,1,31,6,25,37,0.1622,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,0,-3,100.0,0,100.0,0,0,Likely Improvement
+7dee35f5eea131ddf807788c533da1264e571c61,django/django,2026-07-29T21:27:32+00:00,"Refs #28586 -- Renamed RAISE fetch mode to FETCH_RAISE.
+
+This aims for consistency in the django.db.models namespace.
+
+Thanks Natalia Bidart and Simon Charette for the idea.",False,False,False,False,10,30,28,2,58,0.4828,19,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,4,100.0,4,0,Likely Improvement
+25340ebad09a38e0748aeb26232102022a03ec94,psf/requests,2026-05-11T02:05:15+00:00,Clear proxy env vars before every test run (#7423),False,False,True,False,1,9,0,9,9,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+64edef37e7b419dd584307d84650a192fb47dc4c,django/django,2026-03-01T19:04:31+00:00,"Fixed #36947 -- Avoided altering column type when only db_comment changes.
+
+Backends that allow altering column comments without altering the column
+type should set supports_independent_comment_alteration=True.
+
+Thanks Alex Fischer for the report.
+
+Co-authored-by: Adam Johnson <me@adamj.eu>",False,False,False,False,5,58,2,56,60,0.0333,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,0,0,100.0,0,100.0,0,0,Likely Improvement
+b2a1d33f571518ca9a6148e7da787cc5827f897a,psf/requests,2026-03-02T22:49:19+00:00,"Increase chardet upper limit to 8
+
+Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>",False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+e18879932287c2bf4bcee4ddf6ccb8a69b6fc656,psf/requests,2024-05-29T15:23:39+00:00,Don't create default SSLContext if ssl module isn't present (#6724),False,False,False,False,1,19,5,14,24,0.2083,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,2,4,100.0,0,100.0,0,0,Likely Improvement
+eeafb6ab3a54ab01cbf864d452ea30f5fdb67ce8,psf/requests,2024-03-14T11:25:24+00:00,"Merge pull request #6662 from sigmavirus24/fix-tls-floppy
+
+Add local TLS server",True,False,False,False,3,191,9,182,200,0.045,9,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,8,6,100.0,0,100.0,0,0,Likely Improvement
+d7490c9d2dc967f68c6ca38b73aa099bc888a04e,psf/requests,2023-10-31T17:06:39+00:00,"Update src/requests/packages.py
+
+Co-authored-by: Ian Stapleton Cordasco <graffatcolmingov@gmail.com>",False,False,False,False,1,4,3,1,7,0.4286,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+8a162076e1988ddf9453edfb8329d5df1573dc38,django/django,2026-07-17T17:00:18+00:00,Improved wording in PR quality check messages.,False,False,False,False,3,6,6,0,12,0.5,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5c4a36f81752025e1d8bd0eefafafd2206e02f10,django/django,2026-07-22T22:40:03+00:00,Refs #28586 -- Added coverage for from_queryset's fetch mode in refresh_from_db().,False,False,False,False,1,21,0,21,21,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,100.0,0,100.0,0,0,Likely Improvement
+410e5ab7ed0ef326fa8b5164a633863f137ffff5,pallets/flask,2024-11-18T18:55:14+00:00,Accept `AsyncIterable` for responses,False,False,False,False,1,3,0,3,3,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+ea08f155d8d37d515559534bbe0f80ef5185466c,pallets/flask,2024-11-24T00:06:37+00:00,update `__version__` deprecation (#5649),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+daca74d93a0edc458e618136de7d14803f06bc28,pallets/flask,2026-02-19T05:56:24+00:00,Merge branch 'stable',False,False,False,False,5,56,48,8,104,0.4615,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,5,-5,100.0,2,100.0,2,0,Likely Improvement
+2144213c307691710c9d665700860fc4993c3035,psf/requests,2026-05-13T14:42:42+00:00,Constrain Response.reason to str (#7437),False,False,False,False,1,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5e621a2801daf95be6d208da9dcc287bb251f63c,pallets/flask,2026-02-03T18:19:45+00:00,update domain matching tests for Werkzeug 3.2,False,False,False,False,1,27,22,5,49,0.449,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,10,3,-2,100.0,0,100.0,0,0,Likely Improvement
+9465349120ef8a0b0689e12bcbfd05f3d173ebdf,django/django,2026-07-28T21:57:55+00:00,"Fixed #37238 -- Prevented fallback to python default for a pk with a db_default.
+
+Regression in a2348c85fc6c20087935c74cd99340dd4ef2dcdc.",False,False,False,False,3,31,1,30,32,0.0312,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,6,100.0,0,100.0,0,0,Likely Improvement
+0751d5fed159fd9ff7edba522ece13c8c9d2a0d0,django/django,2026-09-01T09:20:43+00:00,"Fixed #37311 -- Prevented consumption of rhs iterators in annotation lookups.
+
+Regression in 7b54ddd5e64c96c641b70bb5f0e958a9e2035fb2.
+
+Thank you Oleksandr Tatarinov for the report and Clifford Gama for the review.",False,False,False,False,2,28,3,25,31,0.0968,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,0,1,100.0,0,100.0,0,0,Likely Improvement
+c0813a2d910ea6b4f8438b91d315b8d181302356,psf/requests,2024-03-03T13:00:49+00:00,"Use TLS settings in selecting connection pool
+
+Previously, if someone made a request with `verify=False` then made a
+request where they expected verification to be enabled to the same host,
+they would potentially reuse a connection where TLS had not been
+verified.
+
+This fixes that issue.",False,False,False,False,2,64,1,63,65,0.0154,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,5,4,100.0,0,100.0,0,0,Likely Improvement
+b294b08fe3b08df9f646f64d1250f96193dab066,psf/requests,2026-04-20T16:24:32+00:00,Consider urllib3 version has 3 numbers at most (#7375) (#7376),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,2,100.0,2,0,Likely Improvement
+2ad18e0e10e7d7ecd5384c378f25ec8821a10a29,psf/requests,2023-05-03T15:39:44+00:00,v2.30.0,False,False,False,False,3,7,7,0,14,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,-1,0,100.0,0,100.0,0,0,Likely Improvement
+1d610e44b396d11113bb6a5d168cc5e996a6dfb9,pallets/flask,2024-10-31T19:28:46+00:00,drop support for Python 3.8,False,False,False,False,5,17,29,-12,46,0.6304,10,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,-2,100.0,0,100.0,0,0,Likely Improvement
+3709c4a9a87e6ce8c26dc4a951e1df52ac9ecad0,pallets/flask,2026-01-25T02:58:45+00:00,"update ruff hook and noqa
+
+co-authored-by: Christian Clauss <cclauss@me.com>",False,False,False,False,2,3,3,0,6,0.5,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+2c3160304278d323da8485057770926d1b582579,pallets/flask,2024-11-07T19:27:51+00:00,update env file precedence,False,False,False,False,2,87,47,40,134,0.3507,12,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,6,0,100.0,0,100.0,0,0,Likely Improvement
+92470ad3742524902b29769d2c822dbe791630db,django/django,2026-07-26T11:35:02+00:00,"Fixed #37230 -- Fixed a crash for second-degree relations in ModelAdmin.list_display.
+
+Thanks Rob Kuipers for the report.
+
+Regression in 4b2b4bf0ac2707dc9c4d51cabfa72168eaea95fe.
+
+Co-authored-by: Jacob Walls <jacobtylerwalls@gmail.com>",True,False,False,False,4,11,4,7,15,0.2667,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,2,0,100.0,3,100.0,3,0,Likely Improvement
+d58d8aa2f45c3575268d6d5250745ef69f9cf8b7,psf/requests,2025-07-18T02:09:19+00:00,docs: clarify timeout parameter uses seconds in Session.request (#6994),False,False,False,True,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+26bea1e498d6e234fbc9ce8e07c0389bac73810b,psf/requests,2023-04-22T23:32:51+00:00,"Use urllib3 native chunking ability (#6226)
+
+* Fix #3844 
+* Use urllib for chunked 
+
+---------
+
+Co-authored-by: James Pickering <james.pickering@xml-solutions.com>
+Co-authored-by: Leon Verrall <LVerrall@slb.com>",False,False,False,False,1,13,58,-45,71,0.8169,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-5,-4,-4,100.0,0,100.0,0,0,Likely Improvement
+15e1f17bb6f3f978787dd23da0268388148bc3d5,psf/requests,2024-07-29T03:49:48+00:00,remove setuptools test command,False,False,True,False,1,0,26,-26,26,1.0,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,0,100.0,0,100.0,0,0,Likely Improvement
+5e32c82a5a896e1d942cfc9dd9a2ebbe86741258,django/django,2026-07-27T22:25:12+00:00,"Refs #22712 -- Restored django.contrib.staticfiles.finders.BaseFinder.find().
+
+This was overzealously removed in a146fe293099d7f860ba13e4b3a571bbda55af22.",False,False,False,False,2,25,0,25,25,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,0,100.0,0,100.0,0,0,Likely Improvement
+bca18041b055102857a7e8a12f8694fddda9571b,pallets/flask,2024-10-18T17:03:09+00:00,Merge branch '3.0.x',False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+84d10f0be83e8f6aeca8a05230c52216431c4d0b,psf/requests,2026-05-14T16:16:25+00:00,Move Request.headers back to Mapping (#7441),False,False,False,False,2,2,3,-1,5,0.6,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7b0088693ece1bd3a9238a6fdf56ed8df7a4d43b,pallets/flask,2026-02-19T16:42:33+00:00,fix typing,True,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+31c3e4cf7544597600141d9be60bd919371114c9,django/django,2026-09-27T07:25:52+00:00,"Refs #37372 -- Simplified NULL handling logic in sql.Query.build_filter().
+
+Reorganizing its logic to branch of `lookup_type` at an earlier layer should
+simplify its upcoming adjustment to adequately handle __in=[None] lookups and
+should make it easier to reason about eventually replacing it by Expression
+flags and methods refs #24267.",False,False,False,False,1,38,38,0,76,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,3,100.0,0,100.0,0,0,Likely Improvement
+6126f5d2fe0f22c0d2d4888de8c94b91a9795bb6,django/django,2026-09-01T19:59:58+00:00,"Refs #37309 -- Used _is_pk_set() in the XML serializer.
+
+Unsaved composite and db_default primary keys are not None, so the old
+pk is None check emitted a dummy pk attribute in XML dumps.",False,False,False,False,2,6,2,4,8,0.25,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+cc23d1c6445d61c1e6905cae4861d6e3c3244274,psf/requests,2024-04-11T19:10:36+00:00,"Fix compatibility with pytest 8
+
+`pytest.warns(None)` has been deprecated in pytest 7.0.0
+and it's no longer working in pytest 8.
+
+Resolves: https://github.com/psf/requests/issues/6679",True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+12862617df7391a87f30d5bc30fffbcfd8fa3761,psf/requests,2023-09-14T08:59:37+00:00,Update models.Response.json docstring clearer,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+92075b330a30b9883f466a43d3f7566ab849f91b,psf/requests,2024-05-21T16:28:30+00:00,Add deprecation warning,False,False,False,False,1,10,0,10,10,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+616e8c52ded7f4c7b00cae5a95f5a5d12a6a39b9,django/django,2026-08-08T23:11:32+00:00,"Fixed #37264 -- Handled further malformed _source_model values in admin popups.
+
+`ModelAdmin.response_add()` unpacked the `_source_model` `POST` parameter with
+`source_model_name.split(""."", 1)` before any error handling, so a value
+without a dot separator, like `_source_model=foo`, raised `ValueError` and
+returned an HTTP 500 after the object had already been saved.
+
+This fix handles the `ValueError` together with the existing `LookupError` branch for invalid values.
+
+Follow-up to b1ffa9a9d78b0c",False,False,False,False,2,24,18,6,42,0.4286,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,1,100.0,0,100.0,0,0,Likely Improvement
+f7610bda78afb13ee395dfee2445805d8c7ad0f6,django/django,2026-08-14T21:24:49+00:00,Fixed #37250 -- Allowed nesting GEOS GeometryCollection objects.,False,False,False,False,2,5,0,5,5,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,100.0,0,100.0,0,0,Likely Improvement
+54c3f87af9f6c0d6622cec2c3d9695b0229fb8fa,pallets/flask,2024-11-23T00:23:09+00:00,fix type hint for `cli_runner.invoke`,True,False,False,False,1,2,1,1,3,0.3333,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+3b5978fc5d1c121d70e83ddf59379cf36418b4ce,psf/requests,2023-12-16T20:24:02+00:00,"Merge pull request #6592 from atatuzuner61/bug/6584
+
+""TOO_EARLY"" type definition for status code 425",True,False,False,False,2,16,1,15,17,0.0588,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,6,0,100.0,0,100.0,0,0,Likely Improvement
+c62b03bcfd6e6440f8195e02f4678488e16121ac,pallets/flask,2024-11-02T01:06:11+00:00,fix example and tutorial compatibility and update metadata (#5627),True,False,False,False,2,5,1,4,6,0.1667,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+99d56e5cf15839995f62f24294584f1e2976b1ea,django/django,2026-08-08T22:19:07+00:00,"Fixed #37262 -- Restored rendering of html-safe strings in form media.
+
+`Media.__init__()` normalized every string js/css entry into `Script` or
+`Stylesheet` objects. `SafeString` is a `str` subclass, so html-safe strings
+such as `mark_safe(""<script defer src=...></script>"")`, a previously-documented
+idiom for including complete asset tags, were treated as asset paths,
+run through `static()`, and percent-encoded instead of being rendered
+verbatim.
+
+Leave objects providing `__html__()` un-normali",False,False,False,False,2,53,2,51,55,0.0364,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+ce285ce0e755abbdd991e707b7aaf4d3c636e944,django/django,2026-10-07T08:40:51+00:00,Added a 24 hour grace period for automated PR quality checks.,False,False,False,False,2,517,63,454,580,0.1086,17,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,25,2,5,100.0,0,100.0,0,0,Likely Improvement
+aa1461b68aa73e2f6ec0e78c8853b635c76fd099,psf/requests,2024-05-21T12:40:52+00:00,Move _get_connection to get_connection_with_tls_context,False,False,False,False,1,21,6,15,27,0.2222,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,5,0,-3,100.0,0,100.0,0,0,Likely Improvement
+bf5e73c576c8c7d8b3ef1c03a22cf724dbb2f306,django/django,2026-07-14T15:14:45+00:00,Closed temporary files in GDALRasterTests.,False,False,False,False,1,7,0,7,7,0.0,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+53a0562331c4a825036a347e77984d68b310fcf3,psf/requests,2022-10-23T18:35:43+00:00,change to SPDX conform license string,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+b639e66c816514e40604d46f0088fbceec1a5149,psf/requests,2023-05-13T14:10:56+00:00,"test on py3.12 (#6448)
+
+* test on py3.12
+
+* update to pytest-httpbin==2.0.0",False,False,True,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5691f596134c2feb121e595c77a0178921fcce61,psf/requests,2026-05-13T14:43:16+00:00,Update JsonType containers to read-based collections (#7436),False,False,False,False,1,8,2,6,10,0.2,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+f8bec2f7ca9d7c03981a12ff8866a9b3923f1699,psf/requests,2026-01-30T21:10:27+00:00,"Fix CI and build failures (#7190)
+
+* Migrate linting from various tooling to Ruff
+
+* Run ruff over codebase
+
+* Drop support for pypy-3.10",True,False,False,False,15,43,43,0,86,0.5,22,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,1,100.0,1,0,Likely Improvement
+74ea7cf7a6a27a4eeb2ae24e162bcc942a6706d5,psf/requests,2023-05-22T15:08:57+00:00,Merge pull request from GHSA-j8r2-6x86-q33q,False,False,False,False,2,23,1,22,24,0.0417,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,2,100.0,0,100.0,0,0,Likely Improvement
+0398417c503e9f32674b36865abc54e575e8bcd7,django/django,2026-09-03T13:34:36+00:00,"Fixed #36523 -- Added django.utils.module_loading.qualname() helper.
+
+Thanks Jake Howard for the reivew.",False,False,False,False,7,105,18,87,123,0.1463,15,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,8,7,0,100.0,0,100.0,0,0,Likely Improvement
+da600394865c06a4772c433c1a560453dcf4f868,pallets/flask,2025-01-30T03:22:52+00:00,"Handle help arg by itself the same as no args
+
+When the 'flask' command is used with only the '--help' parameter, this
+change will make sure to try and load the app before the help callback
+is run. This was previously only being done when the 'flask' command was
+used by itself. This meant when passing in '--help', any custom commands
+were not getting shown in the help message. With this change, custom
+commands will be included in the help message when running 'flask' on
+the command line by itsel",False,False,False,False,1,3,1,2,4,0.25,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+005571d1180835eb5266a3fdbdbe8fdae57d90c2,psf/requests,2023-08-13T23:08:21+00:00,Remove pytest-mock requirement (#6505),False,False,False,False,3,28,26,2,54,0.4815,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+7a13c041dbef42f9f3feb14110f02626f6892e9a,psf/requests,2024-02-20T23:44:43+00:00,"Merge pull request #6642 from nateprewitt/drop_python_37
+
+Drop support for CPython 3.7",False,False,False,False,1,3,4,-1,7,0.5714,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+73ce26c3e822cdc2ccf99625619a50c91f163f8d,pallets/flask,2025-03-29T22:45:11+00:00,remove tests about deprecated pkgutil.get_loader (#5702),False,False,False,False,2,3,35,-32,38,0.9211,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,-1,0,100.0,0,100.0,0,0,Likely Improvement
+7203feabf723edae0286ae5dc64fec8ac4c91735,pallets/flask,2026-07-14T14:42:09+00:00,Fix IPv6 server name parsing,True,False,False,False,2,8,4,4,12,0.3333,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+3d03098a97ddc6a908aa4a50c2ef7381f8297d0a,pallets/flask,2026-01-20T13:16:17+00:00,"Abort if the instance folder cannot be created
+
+According to the comment, the instance folder should exist in any case.
+But a PermissionError was ignored silently.
+
+Since Python 3.9 is the minimum required version, it is safe to use
+""exist_ok"" added in Python 3.2 and avoid exception handling.",False,False,False,False,1,1,4,-3,5,0.8,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,-2,0,100.0,0,100.0,0,0,Likely Improvement
+ec84f2c539d952499e0207849dfd3f73e2c11324,psf/requests,2023-11-29T17:27:18+00:00,Fixes to test,False,False,True,False,1,2,0,2,2,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,2,0,100.0,0,100.0,0,0,Likely Improvement
+2f7f30c320b6517d31fb8852db1875ad3a6a774f,django/django,2026-09-29T15:39:45+00:00,"Fixed #36496 -- Ensured the parent path to a sqlite file exists.
+
+Ensured a sqlite db path's parent directories are created if missing
+before attempting to connect. OSErrors are reraised as InterfaceError.",False,False,False,False,2,76,1,75,77,0.013,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,3,1,100.0,0,100.0,0,0,Likely Improvement
+76e1bca1311ae7073a1fa4add6f9d19d709f0f09,django/django,2026-01-15T14:57:59+00:00,"Fixed #36694 -- Restored missing Index options in PostGISSchemaEditor._create_spatial_index_sql().
+
+Thanks Luciano de la Iglesia for the report, and Simon Charette and David Smith
+for the reviews.",False,False,False,False,2,103,12,91,115,0.1043,3,-20.6,9,0.0,0,0,38.04,38.04,0,0,6,0,4,0,1,100.0,3,79.4,12,1,Potential Degradation
+941efd4a36ed0f27e13758874f95e3aa1d3ee163,pallets/flask,2025-05-12T01:04:35+00:00,use uv (#5727),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+87d63de8739263bbe17034fba2285c79780da7e8,psf/requests,2023-04-26T15:19:11+00:00,v2.29.0,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+3f07f990ac74f1e1691ba17ef8c14007f05846ab,psf/requests,2024-10-04T13:18:45+00:00,Fix typo in documentation for verify,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+ebcb13b327301f28cbc6cd5e4988a719f00575aa,django/django,2026-09-03T14:23:27+00:00,"Fixed CVE-2026-87890 -- Blocked bytes in spatial lookups.
+
+Even though raster values provided via bytes write to the in-memory
+virtual filesystem, that does not prevent network fetches when resolving
+references.
+
+Thank you to sicksec for the report, and Jacob Walls, Jake Howard, and
+David Smith for reviews.",False,False,False,False,3,35,28,7,63,0.4444,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,-2,-1,100.0,0,100.0,0,0,Likely Improvement
+d718ecf6d3dfc4656d262154c59672437c1ea075,pallets/flask,2024-06-05T12:23:18+00:00,"Provide a configuration option to control automatic option responses
+
+By default Flask will provide responses to OPTIONS requests that are
+automatically generated. These responses list the valid methods in the
+response headers. Whilst this is useful, it can be frowned on by
+auditors hence an ability to disable it wholesale is useful.",False,False,False,False,2,2,1,1,3,0.3333,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+06d2a384418ed86effa2d804d32d4705b91c37eb,psf/requests,2024-07-01T05:16:41+00:00,Merge branch 'psf:main' into patch-1,True,False,False,False,14,531,55,476,586,0.0939,36,-1.57,2,0.14,2,0,4.75,2.38,1,0,1,0,44,24,20,100.0,0,98.43,2,1,Potential Degradation
+5637bec7a033d67407694316bdda74304449488e,django/django,2026-07-31T16:28:40+00:00,"Fixed #36770 -- Fixed incomplete mocking in SQLiteInMemoryTestDbs.
+
+Without also mocking the global settings, there was pollution of the
+test database name, since create_test_db() writes like so:
+
+    self.connection.settings_dict[""NAME""] = test_database_name
+
+This caused other tests that explicitly reopen database connections to
+fail under parallel test execution (in forkserver mode) because at the
+moment of reopening, the db name was `memorydb_default` rather than the
+suffixed version `memoryd",False,False,False,False,2,6,2,4,8,0.25,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+22db55a8896b69e53d0a3cc2764c27b832c81478,psf/requests,2023-06-26T17:09:23+00:00,Fix doc typo (#6467),True,False,False,True,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c77a5203438fe772d41f6a47303ad3f57a4efe6d,pallets/flask,2026-01-25T03:50:30+00:00,deprecate should_ignore_error,False,False,False,False,2,25,9,16,34,0.2647,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+73cc09f14f13fedddc14d6ba5b287cb33c24e4a4,django/django,2026-08-19T16:47:21+00:00,"Fixed #36945 -- Made .values() and .order_by() resolve FilteredRelation aliases correctly.
+
+Made Query.add_fields(), Query.add_ordering() and
+SQLCompiler.find_ordering_name() look up FilteredRelation aliases
+before splitting field names to relationship traversals. Added
+.test_alias_values() and .test_alias_order_by() to
+FilteredRelationTests.
+
+Thanks Pravin Kamble for the review.",False,False,False,False,3,35,3,32,38,0.0789,5,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,0,0,100.0,0,100.0,0,0,Likely Improvement
+27137e655e442e81095f1f8f77ff3870d9fdf169,django/django,2026-07-10T21:30:21+00:00,"Fixed CVE-2026-15337 -- Mitigated potential DoS in check_for_language().
+
+Language codes longer than 500 characters are now rejected before the
+cached lookup, so they are no longer retained as cache keys consuming
+memory from each process.
+
+Thanks Jaeyoung Jang for the report, and Sarah Boyce for reviews.",False,False,False,False,3,43,10,33,53,0.1887,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,3,0,4,100.0,0,100.0,0,0,Likely Improvement
+d63e94f552ebf77ccf45d97e5863ac46500fa2c7,psf/requests,2023-08-13T21:46:13+00:00,Move to src directory (#6506),False,False,False,False,19,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a269574f1bcf4716502b9ba8c3492abf15dc93eb,django/django,2026-10-06T21:06:47+00:00,"Fixed #37405 -- Fixed crash if sort_keys option is used with YAML serializer.
+
+Regression in 7142667340f78403cbbcaa8f33703c494282b7b7.",True,False,False,False,2,7,2,5,9,0.2222,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,100.0,0,100.0,0,0,Likely Improvement
+1ae6fc3137a11e11565ed22436aa1e77277ac98c,psf/requests,2024-09-19T11:19:03+00:00,"Merge pull request #6802 from graingert/3.13
+
+start testing on 3.13rc",False,False,False,False,1,2,1,1,3,0.3333,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+561e4b6889f53584c39a67f8794c53a414f68481,psf/requests,2026-05-03T19:38:48+00:00,Add inline types to Requests (#7272),False,False,False,False,17,1267,525,742,1792,0.293,227,-2.75,15,0.08,3,0,1569.4,4185.06,2,8,3,0,44,6,13,100.0,0,97.25,15,1,Potential Degradation
+b653d80ded3680dc3780557ded01e23074f7e6a4,psf/requests,2024-12-12T23:38:45+00:00,Merge branch 'psf:main' into patch-1,True,False,False,False,4,42,45,-3,87,0.5172,10,-0.02,0,0.0,0,0,4.75,2.38,1,0,0,1,0,0,7,100.0,0,99.98,0,0,Likely Improvement
+be6a149de8f85fb8f858680f721dbaadd182f1d8,django/django,2026-08-22T11:05:22+00:00,Fixed #37145 -- Made ModelFormSet respect custom Form.add_prefix().,False,False,False,False,2,61,1,60,62,0.0161,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,0,2,100.0,0,100.0,0,0,Likely Improvement
+a272e554b85b3f977d7f01c1ab2bce57b094eb56,django/django,2026-10-09T13:46:46+00:00,Fixed GeoQuerySetTest.test_unionagg_tolerance() to accept either merged point.,False,False,False,False,1,15,7,8,22,0.3182,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+a7b67c99f922f26b1071a90994e14261dc0a6df2,pallets/flask,2025-06-09T21:33:26+00:00,svg logo (#5757),False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+1267767ccd86ae9a57b78cab1558d3e985e6820d,django/django,2026-10-06T08:35:38+00:00,Fixed passing of pagination data as params to github_request().,False,False,False,False,2,31,7,24,38,0.1842,7,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+15849947ec4b8b7c3c136a47e950499edfd36921,psf/requests,2023-11-22T11:31:53+00:00,fix docstring typo: a -> as,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+eea3bbf9ac635f465ee6c9903dc57c677952dafd,psf/requests,2024-02-23T12:26:38+00:00,"Merge pull request #6562 from amkarn258/issue-6223
+
+every chardet package maps to requests.packages.chardet.* package respectively",True,False,False,False,1,4,2,2,6,0.3333,1,-5.94,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,99.26,0,93.32,0,1,Potential Degradation
+2cace96be6d64b7dde7eb66d3ffc2c7f08ef644f,django/django,2026-07-31T20:43:51+00:00,"Fixed #37242 -- Fixed reading null time fields in LayerMapping.
+
+Follow-up to 75d627888bf42f8de6064a0bd665c98c0df66c55.",False,False,False,False,2,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+e50e5945294f79ee9ab4ec69de24d14f9b26a7ae,psf/requests,2026-06-04T17:20:33+00:00,"Improve static typing of 3rd party imports  (#7496)
+
+* Add missing `typecheck` dependencies
+
+* Fix static typing of `compat.chardet`
+
+* Remove unused `# type: ignore` comments",False,False,False,False,4,16,14,2,30,0.4667,11,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,-1,100.0,0,100.0,0,0,Likely Improvement
+b8be93a721792deeadd2f498b8f77cf610e7765f,psf/requests,2024-02-23T00:53:25+00:00,"Merge pull request #6589 from bruceadams/super_len_str_utf-8
+
+Enhance `super_len` to count encoded bytes for str",False,False,False,False,2,20,0,20,20,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,2,0,100.0,0,100.0,0,0,Likely Improvement
+e9741288637e0d9abe95311247b4842a017f7d5c,pallets/flask,2025-06-08T16:54:32+00:00,Merge branch 'stable',False,False,False,False,6,7,7,0,14,0.5,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+82f34e2f7290d98ae2d1fe80919b2f0e21b18369,django/django,2026-09-19T20:32:57+00:00,Refs #36947 -- Added supports_comments skip to test_alter_generated_field_base_field_comment.,False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+89cde235bec9374273281c1b4c9277c409246a6c,psf/requests,2023-11-04T17:50:21+00:00,checkstyle,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5f3ff9b9e4d3d44960467e7877e06e9efa22f20b,psf/requests,2026-04-19T18:34:20+00:00,Fix typos discovered by codespell (#7371),True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+274a1d494d11d87a1b767340d1f398f197810f93,django/django,2026-02-26T18:45:13+00:00,Refs #12227 -- Added test for PREPEND_WWW redirect following in test client.,False,False,True,False,1,10,0,10,10,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+fb54159861708558b5f5658ebdc14709d984361c,pallets/flask,2025-03-10T16:34:12+00:00,"secret key rotation: fix key list ordering
+
+The `itsdangerous` serializer interface[1] expects keys to be
+provided with the oldest key at index zero and the active signing key
+at the end of the list.
+
+We document[2] that `SECRET_KEY_FALLBACKS` should be configured with
+the most recent first (at index zero), so to achieve the expected
+behaviour, those should be inserted in reverse-order at the head of
+the list.
+
+[1] - https://itsdangerous.palletsprojects.com/en/stable/serializer/#itsdangerous.ser",True,False,False,False,2,13,5,8,18,0.2778,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+935edaa91b756325352ca70d5eba49a64b70d28c,django/django,2026-09-19T14:06:12+00:00,"Fixed #37357 -- Handled out-of-range year in admin date_hierarchy.
+
+ChangeList.get_filters() only caught ValueError around the datetime()
+construction, leaving the to_date computation outside the try. An
+out-of-range year query parameter (e.g. ?date__year=9999, where
+to_date's year + 1 == 10000) or a value too large for a C long
+(OverflowError) escaped as an unhandled exception (HTTP 500) instead of
+IncorrectLookupParameters. Catch both exceptions and compute to_date
+inside the try, matching the",False,False,False,False,2,25,9,16,34,0.2647,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,2,100.0,0,100.0,0,0,Likely Improvement
+a461af8ce48762d7ec602260aaff81014ddccbcb,django/django,2026-10-03T13:49:02+00:00,Fixed decimal comparison in RelatedGeoModelTest.test_related_union_aggregate().,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+9b6c62e235429eeaa059544d1516d5e0c58c9a7f,psf/requests,2023-08-12T18:37:15+00:00,Merge branch 'main' into spdx-conform-license,False,False,False,False,11,124,105,19,229,0.4585,29,0.0,0,0.0,0,0,0.0,0.0,1,0,0,1,1,1,-1,100.0,0,100.0,0,0,Likely Improvement
+88dce9d854797c05d0ff296b70e0430535ef8aaf,psf/requests,2024-05-21T18:49:22+00:00,v2.32.2,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+446d9cf602a5c42862da118b714a5679bb61cf27,django/django,2026-09-13T10:53:01+00:00,Fixed #37114 -- Dropped support for PostgreSQL 15 and PostGIS 3.2.,False,False,False,False,5,11,36,-25,47,0.766,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,0,100.0,0,100.0,0,0,Likely Improvement
+9822a0351574790cb66c652fcc396ad7aa2b09d8,pallets/flask,2025-08-19T15:18:55+00:00,refactor stream_with_context for async views,False,False,False,False,2,62,32,30,94,0.3404,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,3,100.0,0,100.0,0,0,Likely Improvement
+e9fa2e2da3076e4f55f18b3f4a169c7b3916b272,psf/requests,2023-08-13T19:56:18+00:00,Add 3.12 classifier and tox configuration (#6503),False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+812c08bd4e9da7b74ab9ee0db83da58a6da48d19,django/django,2026-08-13T10:04:15+00:00,Fixed #37273 -- Allowed F() expressions on the RHS of CompositePK lookups.,False,False,False,False,2,7,1,6,8,0.125,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+db461112c70d5f2bf93c7a6ac27eeb665c232dd0,pallets/flask,2024-04-07T18:30:30+00:00,access sha1 lazily,False,False,False,False,1,9,1,8,10,0.1,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,2,0,0,100.0,0,100.0,0,0,Likely Improvement
+83cbd21be57483e6b3eb6e4688a561c841aff75e,django/django,2026-09-02T19:49:28+00:00,"Fixed CVE-2026-87975 -- Prevented forging actions in model formsets with editable PKs.
+
+Deleting instances outside a `ModelFormSet`'s queryset was possible by
+forging POST data for an editable primary key. In the same way, creating
+instances was possible for edit-only model formsets.
+
+An object outside the queryset is represented by a newly constructed
+instance, but its PK can still be populated: `BaseInlineFormSet` sets
+the parent link when it's also the primary key, and
+`construct_instance()` ",False,False,False,False,2,64,4,60,68,0.0588,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,3,100.0,0,100.0,0,0,Likely Improvement
+8b4fd5d18611e63080b826ecfefe8659dba7d2e4,pallets/flask,2026-08-10T23:45:01+00:00,use header properties,False,False,False,False,2,6,10,-4,16,0.625,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+fd628095d7b9ddbf3e987d8a4bf0e6062768916f,psf/requests,2026-05-10T21:41:25+00:00,"Preserve leading slashes in request path_url (#7315)
+
+
+---------
+
+Co-authored-by: Nate Prewitt <nate.prewitt@gmail.com>",False,False,False,False,2,2,4,-2,6,0.6667,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-1,0,0,89.01,2,89.01,2,0,Likely Improvement
+eb1182a10e757b5e76009c69fdf3a88a5afc6840,pallets/flask,2024-05-06T17:12:32+00:00,fix mypy finding,True,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+80ea222c8af501031b2eae4f7d9fdbf16cb507a7,django/django,2026-07-10T16:16:16+00:00,"Fixed #37167 -- Allowed email.headerregistry.Address objects as email addresses.
+
+Address is the safe way to build an email address with a display name
+from variable parts (see #34753), but `ADMINS` and `MANAGERS` rejected
+non-string values, so it could not be used there. This branch allows
+`Address` instances in those settings, documents, and tests the support
+already present in `DEFAULT_FROM_EMAIL`, `SERVER_EMAIL`, `send_mail()`,
+`send_mass_mail()`, and `EmailMessage`.
+
+Co-authored-by: Natalia",False,False,False,False,3,107,5,102,112,0.0446,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,0,3,100.0,0,100.0,0,0,Likely Improvement
+aee16df63bbd7f6a7479fcd01b509f5ebaca3a0d,pallets/flask,2024-04-07T19:28:51+00:00,Merge branch '3.0.x',False,False,False,False,5,61,13,48,74,0.1757,8,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,6,0,6,100.0,0,100.0,0,0,Likely Improvement
+79b74ef704dc0d804937c0d015c5e9c3b02b79bd,psf/requests,2024-07-30T01:44:13+00:00,Merge pull request #6757 from nateprewitt/urllib-1.x-tests,False,False,False,False,3,40,18,22,58,0.3103,6,-0.02,0,0.0,0,0,4.75,2.38,1,0,0,1,0,2,7,100.0,0,99.98,0,0,Likely Improvement
+8d1c673466bcabff500edc6c7724e5a20f6df3de,django/django,2026-09-01T19:59:50+00:00,"Fixed #37309 -- Used _is_pk_set() in Model.__eq__.
+
+Composite and db_default primary keys are not None when unset, so the
+old pk is None check treated distinct unsaved instances as equal.",False,False,False,False,3,18,3,15,21,0.1429,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,100.0,0,100.0,0,0,Likely Improvement
+3587a5f869ea7ae2ba6b20d281d810b65aa2418e,psf/requests,2024-02-23T00:49:42+00:00,"Merge pull request #6644 from sigmavirus24/bug/6643
+
+Trim excess leading path separators",True,False,False,False,2,11,0,11,11,0.0,2,-10.99,2,1.0,2,0,4.75,2.38,1,0,1,0,1,1,0,100.0,0,89.01,2,1,Potential Degradation
+4f42c642036e6fdd915dd492b263c3b887cdb2d9,pallets/flask,2024-05-06T17:13:35+00:00,Merge branch '3.0.x',False,False,False,False,2,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5d31ddbf7b3f512dd3c61952d2c16e980a2b7dc1,psf/requests,2025-02-12T12:28:07+00:00,"Update src/requests/models.py
+
+Co-authored-by: Ian Stapleton Cordasco <graffatcolmingov@gmail.com>",False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+e7851665071cb93b3c70b1e7103f82d1e6d01f5d,pallets/flask,2025-03-30T20:15:54+00:00,Async Iterable Response (#5659),False,False,False,False,1,3,0,3,3,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+d6ebc4a2f1f68b7e355fb7e4dd5ffc0845547f9f,psf/requests,2024-05-20T15:46:49+00:00,v2.32.0,False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+3fd309a5c14e4cfbd96bea6c8e71b4958fe090bb,psf/requests,2023-11-28T18:17:49+00:00,"Enhance `super_len` to count encoded bytes for str
+
+This fixes issue #6586",False,False,False,False,1,3,0,3,3,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+60a17fccf4f2fa31b823b0f938005897f2f3ef16,django/django,2026-08-26T08:34:57+00:00,"Fixed #37300 -- Preserved parent instance hints on custom Prefetch querysets.
+
+Regression in 821619aa8771ef211c4c4922001efdf914201ca3.
+
+Thanks Norbert Kwizera for the report.",False,False,False,False,2,34,0,34,34,0.0,3,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+27e0981962d355b9532256f4dcb3d42f64b04d9c,psf/requests,2026-04-30T14:35:13+00:00,Fix remaining typos (#7395),True,False,False,False,2,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+dffe3034825edc4f84aded013fc9c6590e545ed5,pallets/flask,2024-10-18T20:04:35+00:00,fix mypy findings,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+6d126e1013dd9966dc510612a4b97f8f15fca2c4,pallets/flask,2024-05-25T18:32:15+00:00,Added python type annotation and return type. (#5485),False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+8abacfc36d755d8e762a4d2074601b8dc412bfee,django/django,2026-10-02T21:27:24+00:00,Refs #37386 -- Tailored error messages for the delete_confirmation_max_display=0 case.,True,False,False,False,4,18,13,5,31,0.4194,4,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,1,0,100.0,0,100.0,0,0,Likely Improvement
+a62a2d35d918baa8e793f7aa4fb41527644dfca5,psf/requests,2024-05-22T11:51:48+00:00,"Allow for overriding of specific pool key params
+
+This re-enables the use case of providing a custom SSLContext via a
+Transport Adapter as broken in #6655 and reported in #6715
+
+Closes #6715",False,False,False,False,1,69,9,60,78,0.1154,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,7,0,0,100.0,0,100.0,0,0,Likely Improvement
+ff6fa22f4d961a28567db11430208b964620f511,pallets/flask,2026-07-30T17:25:54+00:00,update dependencies,False,False,False,False,2,6,6,0,12,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,1,100.0,1,0,Likely Improvement
+8aa161a43731795841fa2678d3dff0559cee527e,pallets/flask,2024-11-02T00:18:52+00:00,add sqlite datetime converter,False,False,False,False,1,4,0,4,4,0.0,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+abb9c04bd6f4a1be893d40b2e1afe098e1beecf0,django/django,2026-08-17T05:55:28+00:00,"Fixed #36629 -- Added missing ""Choose all"" and ""Remove all"" buttons in admin m2m filter_vertical widget.
+
+Co-authored-by: Md. Miftahul Kabir <miftahul1999530@gmail.com>",False,False,False,False,1,14,43,-29,57,0.7544,12,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,-7,0,-4,100.0,0,100.0,0,0,Likely Improvement
+ad761abcdd2f1b5e4fcba549676b2ea52bd325cd,psf/requests,2023-10-30T19:20:10+00:00,every chardet package maps to requests.packages.chardet.* package respectively,False,False,False,False,1,2,3,-1,5,0.6,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+5babd2e21ac0877d66c5452da17b97608b337fba,django/django,2026-08-01T02:34:30+00:00,"Fixed #37237 -- Improved RelatedIn lookup preparation performance.
+
+Thanks Simon Charette for the implementation idea.",False,False,False,False,1,1,0,1,1,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+0109e496f6ca68de29480fe6413e81b1d3f86aa9,pallets/flask,2025-05-12T00:45:03+00:00,use uv,False,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a29f88ce6f2f9843bd6fcbbfce1390a2071965d6,pallets/flask,2026-03-04T15:36:09+00:00,document that headers must be set before streaming,False,False,False,False,2,32,6,26,38,0.1579,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,1,0,0,100.0,0,100.0,0,0,Likely Improvement
+514fc6b3e8402e4c646d5284e97a4f0ab50a7c4b,pallets/flask,2026-08-11T19:43:58+00:00,Merge branch 'stable',False,False,False,False,1,2,2,0,4,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+e511bc72777a94c45d004e010c597925092e1efe,psf/requests,2026-05-13T19:16:50+00:00,Fix mutability issues with headers input types (#7431),True,False,False,False,3,6,6,0,12,0.5,6,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+c72f5fb4793f2cac66d76e3cbd590499ad85b89e,django/django,2026-08-14T23:05:40+00:00,Fixed #37279 -- Rejected null characters in URLValidator.,False,False,False,False,2,5,1,4,6,0.1667,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,1,100.0,0,100.0,0,0,Likely Improvement
+5ea0ab8ea21b0c11ee6098e6b052463687af602a,pallets/flask,2025-03-29T22:15:04+00:00,Handle help arg by itself the same as no args (#5674),False,False,False,False,1,3,1,2,4,0.25,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement
+a8e9c1b436e9a35c271d8b690eefbc0d3d18df0f,psf/requests,2023-10-18T02:10:50+00:00,added assert statements into tests/test_requests/test_header_validation in regards to the issue #6551,True,False,False,False,1,1,1,0,2,0.5,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,1,0,100.0,0,100.0,0,0,Likely Improvement
+d8259eb11900285af9b80b0fa47f841174c054e3,pallets/flask,2025-08-19T17:43:16+00:00,use Jinja name consistently,False,False,False,False,2,2,2,0,4,0.5,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,1,100.0,1,0,Likely Improvement
+5ce121dd841e2dc2594d0ed3954278f4101d3521,pallets/flask,2026-07-14T10:07:37+00:00,Replace the use of private `monkeypatch` fixture API,False,False,False,False,2,17,34,-17,51,0.6667,5,-5.85,0,0.0,0,0,0.0,0.0,0,0,0,0,-3,0,-1,84.63,8,78.78,8,1,Potential Degradation
+c2705ffd9ce1dc8476cb29eaf5ff5d4c719852d9,pallets/flask,2025-09-12T21:52:03+00:00,merge app and request context,False,False,False,False,16,456,414,42,870,0.4759,57,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,4,5,-21,100.0,0,100.0,0,0,Likely Improvement
+f6707042d8b18d2a3737380bf58ff020872fb07b,psf/requests,2023-11-27T22:27:43+00:00,"Unit test for string containing multi-byte UTF-8
+
+There are two tests here. One demonstrating existing, correct
+behavior for `data=bytes`, and another, failing, test for the case
+where `data=string` and the string contains multi-byte UTF-8.",False,False,True,False,1,17,0,17,17,0.0,1,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,2,0,100.0,0,100.0,0,0,Likely Improvement
+d8cedcab5241725003eef059dd76c533f24c5430,django/django,2026-07-08T14:38:46+00:00,Refs #37203 -- Escaped introspection error comments in inspectdb.,True,False,False,False,2,22,2,20,24,0.0833,2,0.0,0,0.0,0,0,0.0,0.0,0,0,0,0,0,0,0,100.0,0,100.0,0,0,Likely Improvement

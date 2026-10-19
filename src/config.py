@@ -1,3 +1,4 @@
+ï»¿# -*- coding: utf-8 -*-
 """
 src/config.py
 =============
@@ -27,7 +28,7 @@ from dotenv import load_dotenv
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 # ---------------------------------------------------------------------------
-# Load .env  (no error if file is absent – env vars may be set externally)
+# Load .env (no error if file is absent - env vars may be set externally)
 # ---------------------------------------------------------------------------
 load_dotenv(PROJECT_ROOT / ".env")
 
@@ -72,7 +73,6 @@ class Settings:
     def log_level(self) -> str:
         return os.getenv("LOG_LEVEL", "INFO").upper()
 
-    # Convenience path properties
     @property
     def data_raw_dir(self) -> Path:
         return PROJECT_ROOT / "data" / "raw"
