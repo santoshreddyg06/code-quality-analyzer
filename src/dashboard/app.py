@@ -1013,21 +1013,29 @@ with st.sidebar:
     ''', unsafe_allow_html=True)
 
     # 2. Navigation: Clean Lucide icons, no circular radio indicators, active purple indicator
-    if "nav_selection" not in st.session_state:
-        st.session_state["nav_selection"] = "Dashboard"
+    NAV_PAGES = [
+        "Dashboard",
+        "Analyze Changes",
+        "Analysis History",
+        "Model Performance",
+        "About",
+    ]
+    if "active_page" not in st.session_state:
+        st.session_state["active_page"] = "Dashboard"
+
+    default_idx = (
+        NAV_PAGES.index(st.session_state["active_page"])
+        if st.session_state["active_page"] in NAV_PAGES
+        else 0
+    )
 
     nav_selection = st.radio(
         "Navigation",
-        [
-            "Dashboard",
-            "Analyze Changes",
-            "Analysis History",
-            "Model Performance",
-            "About",
-        ],
-        key="nav_selection",
+        NAV_PAGES,
+        index=default_idx,
         label_visibility="collapsed",
     )
+    st.session_state["active_page"] = nav_selection
 
     # 3. System Status: Compact frosted card, green indicators only when available
     server_token_present = bool(get_server_token())
@@ -1163,7 +1171,7 @@ if nav_selection == "Dashboard":
     col_btn_wrap, _ = st.columns([3, 5])
     with col_btn_wrap:
         if st.button("Launch Analysis Workspace ➔", type="primary", use_container_width=True, key="btn_goto_analyze"):
-            st.session_state["nav_selection"] = "Analyze Changes"
+            st.session_state["active_page"] = "Analyze Changes"
             st.rerun()
 
     st.markdown('<div style="height: 16px;"></div>', unsafe_allow_html=True)
